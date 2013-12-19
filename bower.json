@@ -1,0 +1,15 @@
+{
+  "name": "adapt-contrib-mcq",
+  "version": "0.0.1",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
+  "authors": [
+    "Daryl Hedley <darylhedley@hotmail.com>"
+  ],
+  "description": "Please enter a description about your component here. This is what will get shown when registered with the Adapt registry so make it good",
+  "main": "/js/adapt-contrib-mcq.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "license": "GPLv3"
+}

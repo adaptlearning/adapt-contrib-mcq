@@ -13,7 +13,7 @@
         </div>
     </div>
     {{/if}}
-    <div class="component-widget mcq-widget {{#unless _isEnabled}} disabled {{#if complete}} complete submitted user {{#if correct}}correct{{/if}} {{/if}} {{/unless}}">
+    <div class="component-widget mcq-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#if _isEnabled}}
             {{#each items}}
             <div class="item item-{{@index}}">
@@ -29,9 +29,9 @@
             </div>
             {{/each}}
         {{else}}
-            {{#if complete}}
+            {{#if _isComplete}}
                 {{#each items}}
-                <div class="item disabled {{#if correct}}correct{{else}}incorrect{{/if}} item-{{@index}}">
+                <div class="item disabled {{#if _isCorrect}}correct{{else}}incorrect{{/if}} item-{{@index}}">
                     <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
                         <div class="state">
                             <div class="icon radio"></div>

@@ -18,12 +18,18 @@ define(function(require) {
 
         postRender: function() {
             QuestionView.prototype.postRender.apply(this);
+
+            this.setResetButtonEnabled(false);
     
             this.setReadyStatus();
         },
         
         canSubmit: function() {
             return !!this.model.get("_selectedItems")[0];
+        },
+
+        canReset: function() {
+            return !this.$('.widget, .button.reset').hasClass('disabled');
         },
 
         forEachAnswer: function(callback) {
@@ -56,6 +62,10 @@ define(function(require) {
                 $itemLabel.toggleClass('disabled', !enabled);
                 $itemInput.prop('disabled', !enabled);
             });
+        },
+
+        setResetButtonEnabled: function(enabled) {
+            this.$('.button.reset').toggleClass('disabled', !enabled);
         },
 
         onItemFocus: function(event) {
@@ -103,10 +113,22 @@ define(function(require) {
             this.model.set('_selectedItems', selectedItems);
         },
 
+        onResetClicked: function(event) {
+
+            if (this.canReset()) {
+                QuestionView.prototype.onResetClicked.apply(this, arguments);
+            }
+            else {
+                if(event) event.preventDefault(); 
+            }
+        },
+
         onSubmitClicked: function(event) {
             QuestionView.prototype.onSubmitClicked.apply(this, arguments);
 
             this.setAllItemsEnabled(false);
+
+            this.setResetButtonEnabled(!this.model.get('_isComplete'));
         }
     });
     

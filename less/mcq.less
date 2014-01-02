@@ -22,8 +22,8 @@
             
             &.selected {
             
-                color:@light-color;
-                background-color:@secondary-color;
+                color:@item-text-selected-color;
+                background-color:@item-selected-color;
 
                 .icon {
                     &:before {
@@ -61,7 +61,6 @@
                 top: 50%;
                 margin-top: -12px;
                 margin-left: 12px;
-                color:@dark-color;
                 
                 &:before {
                     content:"c";
@@ -134,37 +133,37 @@
         .button.user:hover,
         .button.model:hover {
             background-color:@button-hover-color;
-            color:@light-color;
+            color:@button-text-hover-color;
         }
 
         .mcq-widget {
 
             .item label:hover {
-                color:@light-color;
-                background-color:@tertiary-color;
+                color:@item-text-hover-color;
+                background-color:@item-hover-color;
             }
         }
 
         .mcq-widget.disabled {
 
             .item label:hover {
-                background-color:@secondary-color;
-                color:@light-color
+                color:@item-text-disabled-color;
+                background-color:@item-disabled-color;
             }
 
             .item label.selected:hover {
-                background-color:@secondary-color;
+                background-color:@item-disabled-color
             }
         }
 
         .mcq-widget.disabled.model {
 
             .item label.selected:hover {
-                background-color:@primary-color;
+                background-color:@item-disabled-color;
             }
 
             .item.correct label:hover {
-                background-color:@secondary-color;
+                background-color:@item-disabled-color;
             }
         }
     }

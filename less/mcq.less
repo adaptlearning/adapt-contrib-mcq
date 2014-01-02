@@ -1,0 +1,171 @@
+.mcq-component {
+    
+    .mcq-title h4 {
+    }
+
+    .mcq-widget {
+
+        .item {
+            position: relative;
+        }
+
+        .item label {
+            
+            color:@button-text-color;
+            display:block;
+            border:1px solid #b9b9b9;
+            margin-bottom: 2px;
+            position: relative;
+            z-index: 1;
+            background-color: #fff;
+            overflow:hidden;
+            
+            &.selected {
+            
+                color:@light-color;
+                background-color:@secondary-color;
+
+                .icon {
+                    &:before {
+                        content:"C";
+                    }
+
+                    &.radio:before {
+                        content:"R";
+                    }
+                }
+            }
+
+            .inner {
+                padding:14px;
+                margin-left: 38px;
+                padding-top:19px;
+            }
+        }
+
+        .item input {
+            position:absolute;
+            top:14px;
+            left:14px;
+        }
+
+        .state {
+
+            float:left;
+            width:48px;
+            height:48px;
+
+           .icon {
+
+                position: absolute;
+                top: 50%;
+                margin-top: -12px;
+                margin-left: 12px;
+                color:@dark-color;
+                
+                &:before {
+                    content:"c";
+                }
+
+                &.radio:before {
+                    content:"r";
+                }
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: @button-color;
+            border: 1px solid #000;
+            text-decoration: none;
+        }
+
+        .button.submit,
+        .button.reset,
+        .button.user,
+        .button.model {
+            border: 1px solid #B9B9B9;
+            color:#ffffff;
+        }
+    }
+
+    .mcq-widget.disabled {
+
+        .item label.selected {
+            background-color:@secondary-color;
+        }
+
+        .item.correct .selected .state {
+            color:#5abd5e;
+        }
+
+        .item.incorrect .selected .state {
+            color:#db214f;
+        }
+    }
+
+    .mcq-widget.disabled.model {
+
+        .item label.selected {
+            background-color:@primary-color;
+        }
+
+        .item.correct label {
+            background-color:@secondary-color;
+        }
+
+        .item.correct .state {
+            color:#5abd5e;
+        }
+
+        .item.incorrect .state {
+            color:#db214f;
+        }
+    }
+}
+
+.no-touch {
+
+    .mcq-component {
+
+        .button.submit:hover,
+        .button.reset:hover,
+        .button.user:hover,
+        .button.model:hover {
+            background-color:@button-hover-color;
+            color:@light-color;
+        }
+
+        .mcq-widget {
+
+            .item label:hover {
+                color:@light-color;
+                background-color:@tertiary-color;
+            }
+        }
+
+        .mcq-widget.disabled {
+
+            .item label:hover {
+                background-color:@secondary-color;
+                color:@light-color
+            }
+
+            .item label.selected:hover {
+                background-color:@secondary-color;
+            }
+        }
+
+        .mcq-widget.disabled.model {
+
+            .item label.selected:hover {
+                background-color:@primary-color;
+            }
+
+            .item.correct label:hover {
+                background-color:@secondary-color;
+            }
+        }
+    }
+}

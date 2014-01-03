@@ -2,7 +2,7 @@ define(function(require) {
   var QuestionView = require('coreViews/QuestionView');
   var Adapt = require('coreJS/adapt');
 
-    var mcq = QuestionView.extend({
+    var Mcq = QuestionView.extend({
 
         events: {
             'click .button.submit':'onSubmitClicked',
@@ -132,6 +132,6 @@ define(function(require) {
         }
     });
     
-    Adapt.register("mcq", mcq);
+    Adapt.register("mcq", Mcq);
     
 });

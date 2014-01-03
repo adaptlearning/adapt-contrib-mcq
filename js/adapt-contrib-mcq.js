@@ -13,6 +13,7 @@ define(function(require) {
         },
 
         preRender:function(){
+            QuestionView.prototype.preRender.apply(this);
             if(this.model.get('_isRandom') && this.model.get('_isEnabled')) this.model.set("items", _.shuffle(this.model.get("items")));
         },
 

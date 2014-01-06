@@ -4,6 +4,7 @@
   "_type":"component",
   "_component":"mcq",
   "_classes":"",
+  "_layout":"left",
   "_attempts":1,
   "_questionWeight":1,
   "_isEnabledOnRevisit":true,

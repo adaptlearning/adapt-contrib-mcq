@@ -9,31 +9,19 @@
             position: relative;
         }
 
-        .item label {
-            
-            color:@button-text-color;
+        .item label {            
+            color:@item-text-color;
             display:block;
             border:1px solid #b9b9b9;
             margin-bottom: 2px;
             position: relative;
             z-index: 1;
-            background-color: #fff;
+            background-color: @item-color;
             overflow:hidden;
             
-            &.selected {
-            
+            &.selected {            
                 color:@item-text-selected-color;
                 background-color:@item-selected-color;
-
-                .icon {
-                    &:before {
-                        content:"C";
-                    }
-
-                    &.radio:before {
-                        content:"R";
-                    }
-                }
             }
 
             .inner {
@@ -56,19 +44,11 @@
             height:48px;
 
            .icon {
-
+                color: @item-text-color;
                 position: absolute;
                 top: 50%;
                 margin-top: -12px;
                 margin-left: 12px;
-                
-                &:before {
-                    content:"c";
-                }
-
-                &.radio:before {
-                    content:"r";
-                }
             }
         }
 
@@ -92,7 +72,7 @@
     .mcq-widget.disabled {
 
         .item label.selected {
-            background-color:@secondary-color;
+            background-color:@item-selected-color;
         }
 
         .item.correct .selected .state {

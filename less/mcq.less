@@ -6,6 +6,7 @@
     .mcq-widget {
 
         .item {
+            background-color:@item-color;
             position: relative;
         }
 
@@ -15,9 +16,7 @@
             display:block;
             border:1px solid #b9b9b9;
             margin-bottom: 2px;
-            position: relative;
-            z-index: 1;
-            background-color: #fff;
+            
             overflow:hidden;
             
             &.selected {
@@ -72,20 +71,90 @@
             }
         }
 
-        .button {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: @button-color;
-            border: 1px solid #000;
-            text-decoration: none;
+        .mcq-correct-icon {
+            color: #0FB300;
+            display: none;
         }
 
-        .button.submit,
-        .button.reset,
-        .button.user,
-        .button.model {
-            border: 1px solid #B9B9B9;
-            color:#ffffff;
+        .mcq-incorrect-icon {
+            color: #FF4A4A;
+            display: none;
+        }
+
+        .mcq-item-state {
+            background: none;
+            position: absolute;
+            right: 10px;
+            width: @icon-size;
+            height: @icon-size;
+            top: 50%;
+            margin-top: -(@icon-size/2);
+            z-index: 0;
+        }
+
+        .button {
+            outline: none;
+            text-decoration: none;
+            padding: @button-padding;
+            color: @button-text-color;
+            background-color: @button-color;
+            display: none;
+
+            &.submit {
+                display: inline-block;
+            }
+        }
+
+        &.submitted {
+            .button.submit {
+                display: none;
+            }
+            .button.reset {
+                display: inline-block;
+            }
+        }
+
+        &.user {
+            .button.model {
+                display: inline-block;
+            }
+            .mcq-item-icon {
+                display: none;
+            }
+            .incorrect {
+                .mcq-incorrect-icon {
+                    display: block;
+                }
+            }
+            .correct {
+                .mcq-correct-icon {
+                    display: block;
+                }
+            }
+        }
+
+        &.model {
+            .button.user {
+                display: inline-block;
+            }
+            .mcq-item-icon {
+                display: none;
+            }
+            .mcq-correct-icon {
+                display: block;
+            }
+        }
+
+        &.disabled {
+            .button.reset {
+                display: none;
+            }
+        }
+
+        &.correct {
+            .button {
+                visibility: hidden;
+            }
         }
     }
 

@@ -27,6 +27,14 @@ define(function(require) {
     
             this.setReadyStatus();
         },
+
+
+        resetQuestion: function(properties) {
+        	QuestionView.prototype.resetQuestion.apply(this, arguments);
+
+        	_.each(this.model.get('items'), function(item) {item.selected = false;});
+        },
+
         
         canSubmit: function() {
             return this.getNumberOfOptionsSelected() > 0;

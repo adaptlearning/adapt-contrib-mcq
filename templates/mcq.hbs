@@ -1,51 +1,34 @@
-<div class="component-inner mcq-inner">
+<div class="mcq-inner component-inner">
     {{#if title}}
-    <div class="component-title mcq-title">
-        <h4 class="component-title-inner mcq-title-inner">
+    <div class="mcq-title component-title">
+        <h4 class="mcq-title-inner component-title-inner">
             {{{title}}}
         </h4>
     </div>
     {{/if}}
     {{#if body}}
-    <div class="component-body mcq-body">
-        <div class="component-body-inner mcq-body-inner">
+    <div class="mcq-body component-body">
+        <div class="mcq-body-inner component-body-inner">
             {{{body}}}
         </div>
     </div>
     {{/if}}
-    <div class="component-widget mcq-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#if _isEnabled}}
-            {{#each items}}
-            <div class="mcq-item item item-{{@index}}">
-                <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
-                    <div class="mcq-item-state">
-                        <div class="icon icon-home"></div>
-                    </div>
-                    <h5 class="mcq-item-inner">
-                        {{{text}}}
-                    </h5>
-                </label>
-                <input type="checkbox" id="{{../_id}}-{{@index}}"/>
-            </div>
-            {{/each}}
-        {{else}}
-            {{#if _isComplete}}
-                {{#each items}}
-                <div class="mcq-item item disabled {{#if _isCorrect}}correct{{else}}incorrect{{/if}} item-{{@index}}">
-                    <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
-                        <div class="mcq-item-state">
-                            <div class="icon icon-home"></div>
-                        </div>
-                        <h5 class="mcq-item-inner">
-                            {{{text}}}
-                        </h5>
-                    </label>
-                    <input type="checkbox" id="{{../_id}}-{{@index}}"/>
+    <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+        {{#each items}}
+        <div class="mcq-item item {{#unless ../_isEnabled}} {{#if _isCorrect}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
+            <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
+                <div class="mcq-item-state">
+                    <div class="mcq-item-icon icon icon-home"></div>
+                    <div class="mcq-item-icon mcq-correct-icon icon icon-tick"></div>
+                    <div class="mcq-item-icon mcq-incorrect-icon icon icon-cross"></div>
                 </div>
-                {{/each}}
-            {{/if}}
-        {{/if}}
-        {{#if _isEnabled}}
+                <h5 class="mcq-item-inner">
+                    {{{text}}}
+                </h5>
+            </label>
+            <input type="checkbox" id="{{../_id}}-{{@index}}"/>
+        </div>
+        {{/each}}
         <a href="#" class="button submit">
             <h6>  
                 {{{buttons.submit}}} 
@@ -56,7 +39,6 @@
                 {{{buttons.reset}}} 
             </h6>
         </a> 
-        {{/if}}
         <a href="#" class="button model">
             <h6> 
                 {{{buttons.showCorrectAnswer}}} 

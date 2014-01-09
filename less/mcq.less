@@ -69,89 +69,88 @@
         }
     }
 
-    &.submitted {
-        .button.submit {
-            display: none;
-        }
-        .button.reset {
-            display: inline-block;
-        }
-    }
+    .mcq-widget {
 
-    &.user {
-        .button.model {
-            display: inline-block;
-        }
-        .mcq-item-icon {
-            display: none;
-        }
-        .incorrect {
-            .mcq-incorrect-icon {
-                display: block;
+        &.submitted {
+            .button.submit {
+                display: none;
+            }
+            .button.reset {
+                display: inline-block;
             }
         }
-        .correct {
+
+        &.user {
+            .button.model {
+                display: inline-block;
+            }
+            .mcq-item-icon {
+                display: none;
+            }
+            .incorrect {
+                .mcq-incorrect-icon {
+                    display: block;
+                }
+            }
+            .correct {
+                .mcq-correct-icon {
+                    display: block;
+                }
+            }
+        }
+
+        &.model {
+            .button.user {
+                display: inline-block;
+            }
+            .mcq-item-icon {
+                display: none;
+            }
             .mcq-correct-icon {
                 display: block;
             }
         }
-    }
 
-    &.model {
-        .button.user {
-            display: inline-block;
-        }
-        .mcq-item-icon {
-            display: none;
-        }
-        .mcq-correct-icon {
-            display: block;
-        }
-    }
+        &.disabled {
+            .button.reset {
+                display: none;
+            }
+            .mcq-item label.selected {
+                background-color:@item-selected-color;
+            }
 
-    &.disabled {
-        .button.reset {
-            display: none;
-        }
-    }
+            .mcq-item.correct .selected .state {
+                color:#5abd5e;
+            }
 
-    &.correct {
-        .button {
-            visibility: hidden;
-        }
-    }
-
-    .disabled {
-
-        .mcq-item label.selected {
-            background-color:@item-selected-color;
+            .mcq-item.incorrect .selected .state {
+                color:#db214f;
+            }
         }
 
-        .mcq-item.correct .selected .state {
-            color:#5abd5e;
+        &.correct {
+            .button {
+                visibility: hidden;
+            }
         }
 
-        .mcq-item.incorrect .selected .state {
-            color:#db214f;
-        }
-    }
+        &.disabled.model {
 
-    .disabled.model {
+            .mcq-item label.selected {
+                background-color:@primary-color;
+            }
 
-        .mcq-item label.selected {
-            background-color:@primary-color;
-        }
+            .mcq-item.correct label {
+                background-color:@secondary-color;
+            }
 
-        .mcq-item.correct label {
-            background-color:@secondary-color;
-        }
+            .mcq-item.correct .state {
+                color:#5abd5e;
+            }
 
-        .mcq-item.correct .state {
-            color:#5abd5e;
-        }
-
-        .mcq-item.incorrect .state {
-            color:#db214f;
+            .mcq-item.incorrect .state {
+                color:#db214f;
+            }
         }
     }
 }

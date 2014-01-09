@@ -1,193 +1,156 @@
 .mcq-component {
-    
-    .mcq-title h4 {
+
+    .mcq-item {
+        background-color:@item-color;
+        position: relative;
     }
 
-    .mcq-widget {
-
-        .item {
-            background-color:@item-color;
-            position: relative;
+    .mcq-item label {            
+        color:@item-text-color;
+        display:block;
+        border:1px solid #b9b9b9;
+        margin-bottom: 2px;
+        position: relative;
+        z-index: 1;
+        background-color: @item-color;
+        overflow:hidden;
+        
+        &.selected {            
+            color:@item-text-selected-color;
+            background-color:@item-selected-color;
         }
 
-        .item label {
-            
-            color:@button-text-color;
-            display:block;
-            border:1px solid #b9b9b9;
-            margin-bottom: 2px;
-            
-            overflow:hidden;
-            
-            &.selected {
-            
-                color:@item-text-selected-color;
-                background-color:@item-selected-color;
+        
+    }
 
-                .icon {
-                    &:before {
-                        content:"C";
-                    }
+    .mcq-item-inner {
+        padding:14px;
+        margin-left: 38px;
+        padding-top:19px;
+    }
 
-                    &.radio:before {
-                        content:"R";
-                    }
-                }
-            }
+    .mcq-item input {
+        position:absolute;
+        top:14px;
+        left:14px;
+    }
 
-            .inner {
-                padding:14px;
-                margin-left: 38px;
-                padding-top:19px;
-            }
+    .mcq-correct-icon {
+        color: #0FB300;
+        display: none;
+    }
+
+    .mcq-incorrect-icon {
+        color: #FF4A4A;
+        display: none;
+    }
+
+    .mcq-item-state {
+        background: none;
+        position: absolute;
+        right: 10px;
+        width: @icon-size;
+        height: @icon-size;
+        top: 50%;
+        margin-top: -(@icon-size/2);
+        z-index: 0;
+    }
+
+    .button {
+        outline: none;
+        text-decoration: none;
+        padding: @button-padding;
+        color: @button-text-color;
+        background-color: @button-color;
+        display: none;
+
+        &.submit {
+            display: inline-block;
         }
+    }
 
-        .item input {
-            position:absolute;
-            top:14px;
-            left:14px;
-        }
-
-        .state {
-
-            float:left;
-            width:48px;
-            height:48px;
-
-           .icon {
-
-                position: absolute;
-                top: 50%;
-                margin-top: -12px;
-                margin-left: 12px;
-                
-                &:before {
-                    content:"c";
-                }
-
-                &.radio:before {
-                    content:"r";
-                }
-            }
-        }
-
-        .mcq-correct-icon {
-            color: #0FB300;
+    &.submitted {
+        .button.submit {
             display: none;
         }
+        .button.reset {
+            display: inline-block;
+        }
+    }
 
-        .mcq-incorrect-icon {
-            color: #FF4A4A;
+    &.user {
+        .button.model {
+            display: inline-block;
+        }
+        .mcq-item-icon {
             display: none;
         }
-
-        .mcq-item-state {
-            background: none;
-            position: absolute;
-            right: 10px;
-            width: @icon-size;
-            height: @icon-size;
-            top: 50%;
-            margin-top: -(@icon-size/2);
-            z-index: 0;
-        }
-
-        .button {
-            outline: none;
-            text-decoration: none;
-            padding: @button-padding;
-            color: @button-text-color;
-            background-color: @button-color;
-            display: none;
-
-            &.submit {
-                display: inline-block;
+        .incorrect {
+            .mcq-incorrect-icon {
+                display: block;
             }
         }
-
-        &.submitted {
-            .button.submit {
-                display: none;
-            }
-            .button.reset {
-                display: inline-block;
-            }
-        }
-
-        &.user {
-            .button.model {
-                display: inline-block;
-            }
-            .mcq-item-icon {
-                display: none;
-            }
-            .incorrect {
-                .mcq-incorrect-icon {
-                    display: block;
-                }
-            }
-            .correct {
-                .mcq-correct-icon {
-                    display: block;
-                }
-            }
-        }
-
-        &.model {
-            .button.user {
-                display: inline-block;
-            }
-            .mcq-item-icon {
-                display: none;
-            }
+        .correct {
             .mcq-correct-icon {
                 display: block;
             }
         }
+    }
 
-        &.disabled {
-            .button.reset {
-                display: none;
-            }
+    &.model {
+        .button.user {
+            display: inline-block;
         }
-
-        &.correct {
-            .button {
-                visibility: hidden;
-            }
+        .mcq-item-icon {
+            display: none;
+        }
+        .mcq-correct-icon {
+            display: block;
         }
     }
 
-    .mcq-widget.disabled {
+    &.disabled {
+        .button.reset {
+            display: none;
+        }
+    }
 
-        .item label.selected {
-            background-color:@secondary-color;
+    &.correct {
+        .button {
+            visibility: hidden;
+        }
+    }
+
+    .disabled {
+
+        .mcq-item label.selected {
+            background-color:@item-selected-color;
         }
 
-        .item.correct .selected .state {
+        .mcq-item.correct .selected .state {
             color:#5abd5e;
         }
 
-        .item.incorrect .selected .state {
+        .mcq-item.incorrect .selected .state {
             color:#db214f;
         }
     }
 
-    .mcq-widget.disabled.model {
+    .disabled.model {
 
-        .item label.selected {
+        .mcq-item label.selected {
             background-color:@primary-color;
         }
 
-        .item.correct label {
+        .mcq-item.correct label {
             background-color:@secondary-color;
         }
 
-        .item.correct .state {
+        .mcq-item.correct .state {
             color:#5abd5e;
         }
 
-        .item.incorrect .state {
+        .mcq-item.incorrect .state {
             color:#db214f;
         }
     }
@@ -207,31 +170,33 @@
 
         .mcq-widget {
 
-            .item label:hover {
-                color:@item-text-hover-color;
-                background-color:@item-hover-color;
-            }
+            
         }
 
-        .mcq-widget.disabled {
+        .mcq-item label:hover {
+            color:@item-text-hover-color;
+            background-color:@item-hover-color;
+        }
 
-            .item label:hover {
+        .disabled {
+
+            .mcq-item label:hover {
                 color:@item-text-disabled-color;
                 background-color:@item-disabled-color;
             }
 
-            .item label.selected:hover {
+            .mcq-item label.selected:hover {
                 background-color:@item-disabled-color
             }
         }
 
-        .mcq-widget.disabled.model {
+        .disabled.model {
 
-            .item label.selected:hover {
+            .mcq-item label.selected:hover {
                 background-color:@item-disabled-color;
             }
 
-            .item.correct label:hover {
+            .mcq-item.correct label:hover {
                 background-color:@item-disabled-color;
             }
         }

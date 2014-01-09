@@ -5,9 +5,9 @@ define(function(require) {
     var Mcq = QuestionView.extend({
 
         events: {
-            'focus .item input':'onItemFocus',
-            'blur .item input':'onItemBlur',
-            'change .item input':'onItemSelected',
+            'focus .mcq-item input':'onItemFocus',
+            'blur .mcq-item input':'onItemBlur',
+            'change .mcq-item input':'onItemSelected',
             "click .mcq-widget .button.submit": "onSubmitClicked",
 			"click .mcq-widget .button.reset": "onResetClicked",
 			"click .mcq-widget .button.model": "onModelAnswerClicked",
@@ -33,7 +33,7 @@ define(function(require) {
         },
 
         canReset: function() {
-            return !this.$('.widget, .button.reset').hasClass('disabled');
+            return !this.$('.mcq-widget, .button.reset').hasClass('disabled');
         },
 
         forEachAnswer: function(callback) {
@@ -54,7 +54,7 @@ define(function(require) {
         },
 
         resetItems: function() { 
-            this.$('.item label').removeClass('selected');
+            this.$('.mcq-item label').removeClass('selected');
             this.$('input').prop('checked', false);
             this.deselectAllItems();
             this.setAllItemsEnabled(true);
@@ -115,7 +115,7 @@ define(function(require) {
         },
         
         onItemSelected: function(event) {
-            var selectedItemObject = this.model.get('items')[$(event.currentTarget).parent('.item').index()];
+            var selectedItemObject = this.model.get('items')[$(event.currentTarget).parent('.mcq-item').index()];
             
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
                 this.toggleItemSelected(selectedItemObject, event);

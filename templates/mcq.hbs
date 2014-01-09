@@ -19,7 +19,7 @@
             <div class="item item-{{@index}}">
                 <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
                     <div class="state">
-                        <div class="icon radio"></div>
+                        <div class="icon icon-home"></div>
                     </div>
                     <h5 class="inner">
                         {{{text}}}
@@ -47,41 +47,25 @@
         {{/if}}
         {{#if _isEnabled}}
         <a href="#" class="button submit">
-            <h6>
-                {{#if button.submit}}    
-                    {{{button.submit}}} 
-                {{else}}
-                    Submit
-                {{/if}}
+            <h6>  
+                {{{buttons.submit}}} 
             </h6>
         </a>
         <a href="#" class="button reset">
             <h6>
-                {{#if button.reset}}    
-                    {{{button.reset}}} 
-                {{else}}
-                    Reset
-                {{/if}}
+                {{{buttons.reset}}} 
             </h6>
         </a> 
         {{/if}}
         <a href="#" class="button model">
-            <h6>
-                {{#if button.model}}    
-                    {{{button.model}}} 
-                {{else}}
-                    Model Answer
-                {{/if}}
+            <h6> 
+                {{{buttons.showCorrectAnswer}}} 
             </h6>
         </a>
 
         <a href="#" class="button user">
             <h6>
-                {{#if button.user}}    
-                    {{{button.user}}} 
-                {{else}}
-                    My Answer
-                {{/if}}
+                {{{buttons.hideCorrectAnswer}}} 
             </h6>
         </a>
     </div>

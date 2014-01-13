@@ -1,19 +1,22 @@
 define(function(require) {
-  var QuestionView = require('coreViews/QuestionView');
-  var Adapt = require('coreJS/adapt');
+    var QuestionView = require('coreViews/QuestionView');
+    var Adapt = require('coreJS/adapt');
 
     var Mcq = QuestionView.extend({
 
         events: {
-            'click .button.submit':'onSubmitClicked',
-            'click .button.reset':'onResetClicked',
-            'focus .item input':'onItemFocus',
-            'blur .item input':'onItemBlur',
-            'change .item input':'onItemSelected'
+            'focus .mcq-item input':'onItemFocus',
+            'blur .mcq-item input':'onItemBlur',
+            'change .mcq-item input':'onItemSelected',
+            "click .mcq-widget .button.submit": "onSubmitClicked",
+			"click .mcq-widget .button.reset": "onResetClicked",
+			"click .mcq-widget .button.model": "onModelAnswerClicked",
+			"click .mcq-widget .button.user": "onUserAnswerClicked"
         },
 
         preRender:function(){
             QuestionView.prototype.preRender.apply(this);
+
             if(this.model.get('_isRandom') && this.model.get('_isEnabled')) this.model.set("items", _.shuffle(this.model.get("items")));
         },
 
@@ -24,28 +27,55 @@ define(function(require) {
     
             this.setReadyStatus();
         },
+
+
+        resetQuestion: function(properties) {
+        	QuestionView.prototype.resetQuestion.apply(this, arguments);
+
+        	_.each(this.model.get('items'), function(item) {item.selected = false;});
+        },
+
         
         canSubmit: function() {
-            return !!this.model.get("_selectedItems")[0];
+            return this.getNumberOfOptionsSelected() > 0;
         },
 
         canReset: function() {
-            return !this.$('.widget, .button.reset').hasClass('disabled');
+            return !this.$('.mcq-widget, .button.reset').hasClass('disabled');
         },
 
         forEachAnswer: function(callback) {
             _.each(this.model.get('items'), function(item, index) {
-                var correctSelection = item.selected && item.correct;
-                if(correctSelection) this.model.set('_isAtLeastOneCorrectSelection', true);
-                callback(!!item.selected == item.correct, item);
+                var correctSelection = item.selected == item.shouldBeSelected;
+                if(item.selected && correctSelection) {
+                	this.model.set('_isAtLeastOneCorrectSelection', true);
+                }
+                callback(correctSelection, item);
             }, this);
         },
 
+        markQuestion: function() {
+        	this.forEachAnswer(function(correct, item) {
+        		item.correct = correct;
+        	});
+        	QuestionView.prototype.markQuestion.apply(this);
+        },
+
         resetItems: function() { 
-            this.$('.item label').removeClass('selected');
+            this.$('.mcq-item label').removeClass('selected');
             this.$('input').prop('checked', false);
             this.deselectAllItems();
             this.setAllItemsEnabled(true);
+        },
+
+        getNumberOfOptionsSelected:function() {
+        	var count = 0;
+
+        	_.each(this.model.get('items'), function(item) {
+        		if (item.selected) count++;
+        	});
+
+        	return count;
         },
         
         deselectAllItems: function() {
@@ -54,7 +84,6 @@ define(function(require) {
             });
         },
 
-        // TODO: consider moving to super
         setAllItemsEnabled: function(enabled) {
             _.each(this.model.get('items'), function(item, index){
                 var $itemLabel = this.$('label').eq(index);
@@ -69,6 +98,22 @@ define(function(require) {
             this.$('.button.reset').toggleClass('disabled', !enabled);
         },
 
+        setOptionSelected:function(index, selected) {
+        	var $itemLabel = this.$('label').eq(index);
+            var $itemInput = this.$('input').eq(index);
+
+            $itemLabel.toggleClass('selected', selected);
+            $itemInput.prop('checked', selected);
+        },
+
+        storeUserAnswer:function() {
+        	var userAnswer = [];
+        	_.each(this.model.get('items'), function(item, index) {
+        		userAnswer.push(item.selected);
+        	}, this);
+        	this.model.set('_userAnswer', userAnswer);
+        },
+
         onItemFocus: function(event) {
             $(event.currentTarget).prev('label').addClass('highlighted');
         },
@@ -78,7 +123,7 @@ define(function(require) {
         },
         
         onItemSelected: function(event) {
-            var selectedItemObject = this.model.get('items')[$(event.currentTarget).parent('.item').index()];
+            var selectedItemObject = this.model.get('items')[$(event.currentTarget).parent('.mcq-item').index()];
             
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
                 this.toggleItemSelected(selectedItemObject, event);
@@ -86,32 +131,26 @@ define(function(require) {
         },
 
         toggleItemSelected:function(item, clickEvent) {
-            var selectedItems = this.model.get('_selectedItems'),
-                itemIndex = _.indexOf(this.model.get('items'), item),
+            var itemIndex = _.indexOf(this.model.get('items'), item),
                 $itemLabel = this.$('label').eq(itemIndex),
                 $itemInput = this.$('input').eq(itemIndex),
                 selected = !$itemLabel.hasClass('selected');
             
             if(selected) {
-                if(this.model.get('_isSelectable') === 1){
+                if(this.model.get('_selectable') === 1){
                     this.$('label').removeClass('selected');
                     this.$('input').prop('checked', false);
                     this.deselectAllItems();
-                    selectedItems[0] = item;
-                } else if(selectedItems.length < this.model.get('_isSelectable')) {
-                    selectedItems.push(item);
-                } else {
+                } else if (this.getNumberOfOptionsSelected() >= this.model.get('_selectable')) {
                     clickEvent.preventDefault();
                     return;
                 }
                 $itemLabel.addClass('selected');
             } else {
-                selectedItems.splice(_.indexOf(selectedItems, item), 1);
                 $itemLabel.removeClass('selected');
             }
             $itemInput.prop('checked', selected);
             item.selected = selected;
-            this.model.set('_selectedItems', selectedItems);
         },
 
         onResetClicked: function(event) {
@@ -125,11 +164,23 @@ define(function(require) {
         },
 
         onSubmitClicked: function(event) {
-            QuestionView.prototype.onSubmitClicked.apply(this, arguments);
+        	QuestionView.prototype.onSubmitClicked.apply(this, arguments);
 
-            this.setAllItemsEnabled(false);
+        	this.setAllItemsEnabled(false);
 
-            this.setResetButtonEnabled(!this.model.get('_isComplete'));
+        	this.setResetButtonEnabled(!this.model.get('_isComplete'));
+        },
+
+        onModelAnswerShown: function() {
+        	_.each(this.model.get('items'), function(item, index) {
+        		this.setOptionSelected(index, item.shouldBeSelected);
+        	}, this);
+        },
+
+        onUserAnswerShown: function(event) {
+        	_.each(this.model.get('items'), function(item, index) {
+        		this.setOptionSelected(index, this.model.get('_userAnswer')[index]);
+        	}, this);
         }
     });
     

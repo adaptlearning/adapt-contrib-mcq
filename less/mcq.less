@@ -15,12 +15,21 @@
         background-color: @item-color;
         overflow:hidden;
         
+        .mcq-answer-icon{
+            &:before {
+                content: "\e65e";
+            }
+        }
+
         &.selected {            
             color:@item-text-selected-color;
             background-color:@item-selected-color;
-        }
-
-        
+            .mcq-answer-icon{
+                &:before {
+                    content: "\e65d";
+                }
+            }
+        }        
     }
 
     .mcq-item-inner {

@@ -14,6 +14,12 @@ define(function(require) {
 			"click .mcq-widget .button.user": "onUserAnswerClicked"
         },
 
+        initialize:function() {
+            QuestionView.prototype.initialize.apply(this, arguments);
+
+            this.model.set('_selectedItems', []);
+        },
+
         preRender:function(){
             QuestionView.prototype.preRender.apply(this);
 
@@ -131,26 +137,32 @@ define(function(require) {
         },
 
         toggleItemSelected:function(item, clickEvent) {
+            var selectedItems = this.model.get('_selectedItems');
             var itemIndex = _.indexOf(this.model.get('items'), item),
                 $itemLabel = this.$('label').eq(itemIndex),
                 $itemInput = this.$('input').eq(itemIndex),
                 selected = !$itemLabel.hasClass('selected');
             
-            if(selected) {
-                if(this.model.get('_selectable') === 1){
-                    this.$('label').removeClass('selected');
-                    this.$('input').prop('checked', false);
-                    this.deselectAllItems();
-                } else if (this.getNumberOfOptionsSelected() >= this.model.get('_selectable')) {
+                if(selected) {
+                    if(this.model.get('_selectable') === 1){
+                        this.$('label').removeClass('selected');
+                        this.$('input').prop('checked', false);
+                        this.deselectAllItems();
+                        selectedItems[0] = item;
+                    } else if(selectedItems.length < this.model.get('_selectable')) {
+                     selectedItems.push(item);
+                 } else {
                     clickEvent.preventDefault();
                     return;
                 }
                 $itemLabel.addClass('selected');
             } else {
+                selectedItems.splice(_.indexOf(selectedItems, item), 1);
                 $itemLabel.removeClass('selected');
             }
             $itemInput.prop('checked', selected);
             item.selected = selected;
+            this.model.set('_selectedItems', selectedItems);
         },
 
         onResetClicked: function(event) {
@@ -185,5 +197,6 @@ define(function(require) {
     });
     
     Adapt.register("mcq", Mcq);
-    
+
+    return Mcq;
 });

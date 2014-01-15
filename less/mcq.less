@@ -73,6 +73,7 @@
         color: @button-text-color;
         background-color: @button-color;
         display: none;
+        margin-top:8px;
 
         &.submit {
             display: inline-block;
@@ -125,16 +126,19 @@
             .button.reset {
                 display: none;
             }
-            .mcq-item label.selected {
+            .mcq-item label.selected.disabled {
                 background-color:@item-selected-color;
+            }
+            .mcq-item label.disabled {
+                background-color:@item-disabled-color; 
             }
 
             .mcq-item.correct .selected .state {
-                color:#5abd5e;
+                color:@icon-correct-color;
             }
 
             .mcq-item.incorrect .selected .state {
-                color:#db214f;
+                color:@icon-incorrect-color;
             }
         }
 
@@ -163,6 +167,14 @@
                 .mcq-item label:hover {
                     color:@item-text-hover-color;
                     background-color:@item-hover-color;
+                }
+                .mcq-item label.disabled {
+
+                    background-color:@item-disabled-color;
+                    cursor:default;
+                    &:hover{
+                        background: @item-disabled-color;
+                    }
                 }
             }
         }

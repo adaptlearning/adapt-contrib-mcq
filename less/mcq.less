@@ -16,6 +16,7 @@
         overflow:hidden;
         
         .mcq-answer-icon{
+            color: @item-text-color;
             &:before {
                 content: "\e65e";
             }
@@ -45,12 +46,12 @@
     }
 
     .mcq-correct-icon {
-        color: #0FB300;
+        color: @icon-correct-color;
         display: none;
     }
 
     .mcq-incorrect-icon {
-        color: #FF4A4A;
+        color: @icon-incorrect-color;
         display: none;
     }
 
@@ -72,6 +73,7 @@
         color: @button-text-color;
         background-color: @button-color;
         display: none;
+        margin-top:8px;
 
         &.submit {
             display: inline-block;
@@ -124,16 +126,19 @@
             .button.reset {
                 display: none;
             }
-            .mcq-item label.selected {
+            .mcq-item label.selected.disabled {
                 background-color:@item-selected-color;
+            }
+            .mcq-item label.disabled {
+                background-color:@item-disabled-color; 
             }
 
             .mcq-item.correct .selected .state {
-                color:#5abd5e;
+                color:@icon-correct-color;
             }
 
             .mcq-item.incorrect .selected .state {
-                color:#db214f;
+                color:@icon-incorrect-color;
             }
         }
 
@@ -162,6 +167,14 @@
                 .mcq-item label:hover {
                     color:@item-text-hover-color;
                     background-color:@item-hover-color;
+                }
+                .mcq-item label.disabled {
+
+                    background-color:@item-disabled-color;
+                    cursor:default;
+                    &:hover{
+                        background: @item-disabled-color;
+                    }
                 }
             }
         }

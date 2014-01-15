@@ -178,9 +178,12 @@ define(function(require) {
         onSubmitClicked: function(event) {
         	QuestionView.prototype.onSubmitClicked.apply(this, arguments);
 
-        	this.setAllItemsEnabled(false);
+            if (this.canSubmit()) {
 
-        	this.setResetButtonEnabled(!this.model.get('_isComplete'));
+               this.setAllItemsEnabled(false);
+
+               this.setResetButtonEnabled(!this.model.get('_isComplete'));
+            }
         },
 
         onModelAnswerShown: function() {

@@ -16,6 +16,7 @@
         overflow:hidden;
         
         .mcq-answer-icon{
+            color: @item-text-color;
             &:before {
                 content: "\e65e";
             }
@@ -45,12 +46,12 @@
     }
 
     .mcq-correct-icon {
-        color: #0FB300;
+        color: @icon-correct-color;
         display: none;
     }
 
     .mcq-incorrect-icon {
-        color: #FF4A4A;
+        color: @icon-incorrect-color;
         display: none;
     }
 

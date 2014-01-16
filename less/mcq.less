@@ -8,7 +8,7 @@
     .mcq-item label {            
         color:@item-text-color;
         display:block;
-        border:1px solid #b9b9b9;
+        border:@border;
         margin-bottom: 2px;
         position: relative;
         z-index: 1;
@@ -34,10 +34,8 @@
     }
 
     .mcq-item-inner {
-        padding:14px;
+        padding:@item-padding;
         margin-left: 38px;
-        padding-top:19px;
-        display: block;
     }
 
     .mcq-item input {

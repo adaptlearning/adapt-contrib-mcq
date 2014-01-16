@@ -22,33 +22,33 @@
                     <div class="mcq-item-icon mcq-correct-icon icon icon-tick"></div>
                     <div class="mcq-item-icon mcq-incorrect-icon icon icon-cross"></div>
                 </div>
-                <h5 class="mcq-item-inner">
+                <span class="mcq-item-inner">
                     {{{text}}}
-                </h5>
+                </span>
             </label>
             <input type="checkbox" id="{{../_id}}-{{@index}}"/>
         </div>
         {{/each}}
         <a href="#" class="button submit">
-            <h6>  
+            <span>  
                 {{{buttons.submit}}} 
-            </h6>
+            </span>
         </a>
         <a href="#" class="button reset">
-            <h6>
+            <span>
                 {{{buttons.reset}}} 
-            </h6>
+            </span>
         </a> 
         <a href="#" class="button model">
-            <h6> 
+            <span> 
                 {{{buttons.showCorrectAnswer}}} 
-            </h6>
+            </span>
         </a>
 
         <a href="#" class="button user">
-            <h6>
+            <span>
                 {{{buttons.hideCorrectAnswer}}} 
-            </h6>
+            </span>
         </a>
     </div>
 </div>

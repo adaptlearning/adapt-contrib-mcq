@@ -23,25 +23,26 @@ define(function(require) {
         preRender:function(){
             QuestionView.prototype.preRender.apply(this);
 
-            if(this.model.get('_isRandom') && this.model.get('_isEnabled')) this.model.set("items", _.shuffle(this.model.get("items")));
+            if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
+                this.model.set("items", _.shuffle(this.model.get("items")));
+            }
         },
 
         postRender: function() {
             QuestionView.prototype.postRender.apply(this);
 
             this.setResetButtonEnabled(false);
-    
             this.setReadyStatus();
         },
-
 
         resetQuestion: function(properties) {
         	QuestionView.prototype.resetQuestion.apply(this, arguments);
 
-        	_.each(this.model.get('items'), function(item) {item.selected = false;});
+        	_.each(this.model.get('items'), function(item) {
+                item.selected = false;
+            }, this);
         },
 
-        
         canSubmit: function() {
             return this.getNumberOfOptionsSelected() > 0;
         },
@@ -79,15 +80,15 @@ define(function(require) {
 
         	_.each(this.model.get('items'), function(item) {
         		if (item.selected) count++;
-        	});
+        	}, this);
 
         	return count;
         },
         
         deselectAllItems: function() {
-            _.each(this.model.get('items'), function(item){
+            _.each(this.model.get('items'), function(item) {
                 item.selected = false;
-            });
+            }, this);
         },
 
         setAllItemsEnabled: function(enabled) {
@@ -97,7 +98,7 @@ define(function(require) {
 
                 $itemLabel.toggleClass('disabled', !enabled);
                 $itemInput.prop('disabled', !enabled);
-            });
+            }, this);
         },
 
         setResetButtonEnabled: function(enabled) {
@@ -166,12 +167,12 @@ define(function(require) {
         },
 
         onResetClicked: function(event) {
-
             if (this.canReset()) {
                 QuestionView.prototype.onResetClicked.apply(this, arguments);
-            }
-            else {
-                if(event) event.preventDefault(); 
+            } else {
+                if (event) {
+                    event.preventDefault();
+                }
             }
         },
 
@@ -179,9 +180,7 @@ define(function(require) {
         	QuestionView.prototype.onSubmitClicked.apply(this, arguments);
 
             if (this.canSubmit()) {
-
                this.setAllItemsEnabled(false);
-
                this.setResetButtonEnabled(!this.model.get('_isComplete'));
             }
         },
@@ -197,8 +196,9 @@ define(function(require) {
         		this.setOptionSelected(index, this.model.get('_userAnswer')[index]);
         	}, this);
         }
+
     });
-    
+
     Adapt.register("mcq", Mcq);
 
     return Mcq;

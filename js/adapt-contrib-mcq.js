@@ -1,5 +1,5 @@
 define(function(require) {
-    var QuestionView = require('coreViews/QuestionView');
+    var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
 
     var Mcq = QuestionView.extend({

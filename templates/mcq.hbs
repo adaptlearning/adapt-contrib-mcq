@@ -26,16 +26,20 @@
                 {{{buttons.reset}}} 
             </span>
         </a> 
+        {{#if buttons.showCorrectAnswer}}
         <a href="#" class="button model">
             <span> 
                 {{{buttons.showCorrectAnswer}}} 
             </span>
         </a>
+        {{/if}}
 
+        {{#if buttons.hideCorrectAnswer}}
         <a href="#" class="button user">
             <span>
                 {{{buttons.hideCorrectAnswer}}} 
             </span>
         </a>
+        {{/if}}
     </div>
 </div>

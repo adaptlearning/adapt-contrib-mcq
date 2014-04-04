@@ -5,8 +5,10 @@
   "authors": [
     "Daryl Hedley <darylhedley@hotmail.com>"
   ],
-  "description": "Please enter a description about your component here. This is what will get shown when registered with the Adapt registry so make it good",
+  "description": "An Adapt core multiple choice question.",
   "main": "/js/adapt-contrib-mcq.js",
+  "displayName" : "MCQ",
+  "component" : "mcq",
   "keywords": [
     "adapt-plugin",
     "adapt-component"

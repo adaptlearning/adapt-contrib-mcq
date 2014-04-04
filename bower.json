@@ -7,7 +7,7 @@
   ],
   "description": "An Adapt core multiple choice question.",
   "main": "/js/adapt-contrib-mcq.js",
-  "displayName" : "MCQ",
+  "displayName" : "Multiple choice question",
   "component" : "mcq",
   "keywords": [
     "adapt-plugin",

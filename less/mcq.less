@@ -67,35 +67,9 @@
         z-index: 0;
     }
 
-    .button {
-        outline: none;
-        text-decoration: none;
-        padding: @button-padding;
-        color: @button-text-color;
-        background-color: @button-color;
-        display: none;
-        margin-top:8px;
-
-        &.submit {
-            display: inline-block;
-        }
-    }
-
     .mcq-widget {
 
-        &.submitted {
-            .button.submit {
-                display: none;
-            }
-            .button.reset {
-                display: inline-block;
-            }
-        }
-
         &.user {
-            .button.model {
-                display: inline-block;
-            }
             .mcq-item-icon {
                 display: none;
             }
@@ -112,9 +86,6 @@
         }
 
         &.model {
-            .button.user {
-                display: inline-block;
-            }
             .mcq-item-icon {
                 display: none;
             }
@@ -124,9 +95,6 @@
         }
 
         &.disabled {
-            .button.reset {
-                display: none;
-            }
             .mcq-item label.selected.disabled {
                 color:@item-text-selected-color;
                 background-color:@item-selected-color;
@@ -146,27 +114,12 @@
                 color:@icon-incorrect-color;
             }
         }
-
-        &.correct {
-            .button {
-                visibility: hidden;
-            }
-        }
     }
 }
 
 .no-touch {
 
     .mcq-component {
-
-        .button.submit:hover,
-        .button.reset:hover,
-        .button.user:hover,
-        .button.model:hover {
-            background-color:@button-hover-color;
-            color:@button-text-hover-color;
-        }
-
         .mcq-widget {
             &:not(.disabled) {
                 .mcq-item label:hover {

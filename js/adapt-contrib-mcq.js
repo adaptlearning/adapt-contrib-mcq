@@ -47,6 +47,18 @@ define(function(require) {
             return this.getNumberOfOptionsSelected() > 0;
         },
 
+        onCannotSubmit: function() {
+            this.showValidationError();
+        },
+
+        showValidationError: function() {
+            this.$(".mcq-item > label").addClass("mcq-validation-error");
+        },
+
+        clearValidationError: function() {
+            this.$(".mcq-item > label").removeClass("mcq-validation-error");
+        },
+
         canReset: function() {
             return !this.$('.mcq-widget, .button.reset').hasClass('disabled');
         },
@@ -135,6 +147,7 @@ define(function(require) {
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
                 this.toggleItemSelected(selectedItemObject, event);
             }
+            this.clearValidationError();
         },
 
         toggleItemSelected:function(item, clickEvent) {

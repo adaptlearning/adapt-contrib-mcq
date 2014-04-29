@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "0.0.1",
-  "description": "Description of your component",
+  "version": "0.0.2",
+  "description": "An Adapt core multiple choice question",
   "main": "",
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
@@ -16,7 +16,7 @@
     "url": "https://github.com/adaptlearning/adapt-contrib-mcq/issues"
   },
   "devDependencies": {
-    "karma": "~0.9",
+    "karma": "~0.10",
     "karma-mocha": "*",
     "karma-expect": "*"
   }

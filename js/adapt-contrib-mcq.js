@@ -24,7 +24,7 @@ define(function(require) {
             QuestionView.prototype.preRender.apply(this);
 
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
-                this.model.set("items", _.shuffle(this.model.get("items")));
+                this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
         },
 
@@ -38,7 +38,7 @@ define(function(require) {
         resetQuestion: function(properties) {
         	QuestionView.prototype.resetQuestion.apply(this, arguments);
 
-        	_.each(this.model.get('items'), function(item) {
+        	_.each(this.model.get('_items'), function(item) {
                 item.selected = false;
             }, this);
         },
@@ -52,8 +52,8 @@ define(function(require) {
         },
 
         forEachAnswer: function(callback) {
-            _.each(this.model.get('items'), function(item, index) {
-                var correctSelection = item.selected == item.shouldBeSelected;
+            _.each(this.model.get('_items'), function(item, index) {
+                var correctSelection = item.selected == item._shouldBeSelected;
                 if(item.selected && correctSelection) {
                 	this.model.set('_isAtLeastOneCorrectSelection', true);
                 }
@@ -78,7 +78,7 @@ define(function(require) {
         getNumberOfOptionsSelected:function() {
         	var count = 0;
 
-        	_.each(this.model.get('items'), function(item) {
+        	_.each(this.model.get('_items'), function(item) {
         		if (item.selected) count++;
         	}, this);
 
@@ -86,13 +86,13 @@ define(function(require) {
         },
         
         deselectAllItems: function() {
-            _.each(this.model.get('items'), function(item) {
+            _.each(this.model.get('_items'), function(item) {
                 item.selected = false;
             }, this);
         },
 
         setAllItemsEnabled: function(enabled) {
-            _.each(this.model.get('items'), function(item, index){
+            _.each(this.model.get('_items'), function(item, index){
                 var $itemLabel = this.$('label').eq(index);
                 var $itemInput = this.$('input').eq(index);
 
@@ -115,7 +115,7 @@ define(function(require) {
 
         storeUserAnswer:function() {
         	var userAnswer = [];
-        	_.each(this.model.get('items'), function(item, index) {
+        	_.each(this.model.get('_items'), function(item, index) {
         		userAnswer.push(item.selected);
         	}, this);
         	this.model.set('_userAnswer', userAnswer);
@@ -130,7 +130,7 @@ define(function(require) {
         },
         
         onItemSelected: function(event) {
-            var selectedItemObject = this.model.get('items')[$(event.currentTarget).parent('.mcq-item').index()];
+            var selectedItemObject = this.model.get('_items')[$(event.currentTarget).parent('.mcq-item').index()];
             
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
                 this.toggleItemSelected(selectedItemObject, event);
@@ -139,7 +139,7 @@ define(function(require) {
 
         toggleItemSelected:function(item, clickEvent) {
             var selectedItems = this.model.get('_selectedItems');
-            var itemIndex = _.indexOf(this.model.get('items'), item),
+            var itemIndex = _.indexOf(this.model.get('_items'), item),
                 $itemLabel = this.$('label').eq(itemIndex),
                 $itemInput = this.$('input').eq(itemIndex),
                 selected = !$itemLabel.hasClass('selected');
@@ -186,13 +186,13 @@ define(function(require) {
         },
 
         onModelAnswerShown: function() {
-        	_.each(this.model.get('items'), function(item, index) {
-        		this.setOptionSelected(index, item.shouldBeSelected);
+        	_.each(this.model.get('_items'), function(item, index) {
+        		this.setOptionSelected(index, item._shouldBeSelected);
         	}, this);
         },
 
         onUserAnswerShown: function(event) {
-        	_.each(this.model.get('items'), function(item, index) {
+        	_.each(this.model.get('_items'), function(item, index) {
         		this.setOptionSelected(index, this.model.get('_userAnswer')[index]);
         	}, this);
         }

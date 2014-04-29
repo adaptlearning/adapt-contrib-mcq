@@ -11,26 +11,26 @@
 	"_selectable":1,
 	"title": "MCQ",
 	"body": "Which of the following options would you consider to be correct?",
-	"items": [
+	"_items": [
 		{
 			"text": "This is option 1.",
-			"shouldBeSelected":true
+			"_shouldBeSelected":true
 		},
 		{
 			"text": "This is option 2.",
-			"shouldBeSelected":false
+			"_shouldBeSelected":false
 		},
 		{
 			"text": "This is option 3.",
-			"shouldBeSelected":false
+			"_shouldBeSelected":false
 		}
 	],
-	"feedback":{
+	"_feedback":{
 		"correct":"Congratulations, this is the correct feedback.",
 		"partly":"This is the partly correct feedback.",
 		"incorrect":"Unfortunately this is the incorrect feedback."
 	},
-	"buttons":{
+	"_buttons":{
 		"submit":"Submit",
 		"reset":"Reset",
 		"showCorrectAnswer":"Model Answer",

@@ -8,7 +8,7 @@
     .mcq-item label {            
         color:@item-text-color;
         display:block;
-        border:@border;
+        border:@item-border;
         margin-bottom: 2px;
         position: relative;
         z-index: 1;
@@ -25,6 +25,7 @@
         &.selected {            
             color:@item-text-selected-color;
             background-color:@item-selected-color;
+            border-color:@item-border-selected-color;
             .mcq-answer-icon{
                 &:before {
                     content: "\e65d";
@@ -35,7 +36,8 @@
 
     .mcq-item-inner {
         padding:@item-padding;
-        margin-left: 38px;
+        padding: @item-padding;
+        padding-left:(@icon-size+(@item-padding-left*2));
     }
 
     .mcq-item input {
@@ -65,35 +67,9 @@
         z-index: 0;
     }
 
-    .button {
-        outline: none;
-        text-decoration: none;
-        padding: @button-padding;
-        color: @button-text-color;
-        background-color: @button-color;
-        display: none;
-        margin-top:8px;
-
-        &.submit {
-            display: inline-block;
-        }
-    }
-
     .mcq-widget {
 
-        &.submitted {
-            .button.submit {
-                display: none;
-            }
-            .button.reset {
-                display: inline-block;
-            }
-        }
-
         &.user {
-            .button.model {
-                display: inline-block;
-            }
             .mcq-item-icon {
                 display: none;
             }
@@ -110,9 +86,6 @@
         }
 
         &.model {
-            .button.user {
-                display: inline-block;
-            }
             .mcq-item-icon {
                 display: none;
             }
@@ -122,14 +95,15 @@
         }
 
         &.disabled {
-            .button.reset {
-                display: none;
-            }
             .mcq-item label.selected.disabled {
+                color:@item-text-selected-color;
                 background-color:@item-selected-color;
+                border-color:@item-border-selected-color;
             }
             .mcq-item label.disabled {
-                background-color:@item-disabled-color; 
+                color:@item-text-disabled-color;
+                background-color:@item-disabled-color;
+                border-color:@item-border-disabled-color;
             }
 
             .mcq-item.correct .selected .state {
@@ -140,39 +114,28 @@
                 color:@icon-incorrect-color;
             }
         }
-
-        &.correct {
-            .button {
-                visibility: hidden;
-            }
-        }
     }
 }
 
 .no-touch {
 
     .mcq-component {
-
-        .button.submit:hover,
-        .button.reset:hover,
-        .button.user:hover,
-        .button.model:hover {
-            background-color:@button-hover-color;
-            color:@button-text-hover-color;
-        }
-
         .mcq-widget {
             &:not(.disabled) {
                 .mcq-item label:hover {
                     color:@item-text-hover-color;
                     background-color:@item-hover-color;
+                    border-color:@item-border-hover-color;
                 }
                 .mcq-item label.disabled {
-
+                    color:@item-text-disabled-color;
                     background-color:@item-disabled-color;
+                    border-color:@item-border-disabled-color;
                     cursor:default;
                     &:hover{
+                        color:@item-text-disabled-color;
                         background: @item-disabled-color;
+                        border-color:@item-border-disabled-color;
                     }
                 }
             }

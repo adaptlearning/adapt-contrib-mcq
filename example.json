@@ -10,7 +10,9 @@
 	"_isRandom":false,
 	"_selectable":1,
 	"title": "MCQ",
+	"displayTitle": "MCQ",
 	"body": "Which of the following options would you consider to be correct?",
+	"instruction": "",
 	"_items": [
 		{
 			"text": "This is option 1.",
@@ -25,15 +27,24 @@
 			"_shouldBeSelected":false
 		}
 	],
-	"_feedback":{
-		"correct":"Congratulations, this is the correct feedback.",
-		"partly":"This is the partly correct feedback.",
-		"incorrect":"Unfortunately this is the incorrect feedback."
+    "_feedback":{
+        "correct":"Congratulations, this is the correct feedback.",
+        "_incorrect": {
+            "notFinal": "",
+            "final": "This feedback will appear if you answered the question incorrectly."
+        },
+        "_partlyCorrect": {
+            "notFinal": "",
+            "final": "This feedback will appear if you answered part of the question correctly."
+      }
 	},
 	"_buttons":{
-		"submit":"Submit",
-		"reset":"Reset",
-		"showCorrectAnswer":"Model Answer",
-		"hideCorrectAnswer":"Your Answer"
-	}
+		"submit":"",
+		"reset":"",
+		"showCorrectAnswer":"",
+		"hideCorrectAnswer":""
+	},
+    "_pageLevelProgress": {
+        "_isEnabled": true
+    }
 }

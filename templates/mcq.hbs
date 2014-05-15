@@ -2,7 +2,7 @@
     {{> component this}}
     <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each _items}}
-        <div class="mcq-item item {{#unless ../_isEnabled}} {{#if _isCorrect}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
+        <div class="mcq-item item {{#unless ../_isEnabled}} {{#if correct}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
             <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
                 <div class="mcq-item-state">
                     <div class="mcq-item-icon mcq-answer-icon icon"></div>

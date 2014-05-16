@@ -1,21 +1,8 @@
 <div class="mcq-inner component-inner">
-    {{#if title}}
-    <div class="mcq-title component-title">
-        <h4 class="mcq-title-inner component-title-inner">
-            {{{title}}}
-        </h4>
-    </div>
-    {{/if}}
-    {{#if body}}
-    <div class="mcq-body component-body">
-        <div class="mcq-body-inner component-body-inner">
-            {{{body}}}
-        </div>
-    </div>
-    {{/if}}
+    {{> component this}}
     <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#each items}}
-        <div class="mcq-item item {{#unless ../_isEnabled}} {{#if _isCorrect}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
+        {{#each _items}}
+        <div class="mcq-item item {{#unless ../_isEnabled}} {{#if correct}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
             <label for="{{../_id}}-{{@index}}" class="{{#if selected}}selected{{/if}}">
                 <div class="mcq-item-state">
                     <div class="mcq-item-icon mcq-answer-icon icon"></div>
@@ -29,26 +16,8 @@
             <input type="checkbox" id="{{../_id}}-{{@index}}"/>
         </div>
         {{/each}}
-        <a href="#" class="button submit">
-            <span>  
-                {{{buttons.submit}}} 
-            </span>
-        </a>
-        <a href="#" class="button reset">
-            <span>
-                {{{buttons.reset}}} 
-            </span>
-        </a> 
-        <a href="#" class="button model">
-            <span> 
-                {{{buttons.showCorrectAnswer}}} 
-            </span>
-        </a>
-
-        <a href="#" class="button user">
-            <span>
-                {{{buttons.hideCorrectAnswer}}} 
-            </span>
-        </a>
+        <div class="buttons">
+            {{> buttons this}}
+        </div>
     </div>
 </div>

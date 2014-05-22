@@ -21,45 +21,53 @@
       "type":"number",
       "required":true
     },
-    "buttons": {
+    "_buttons": {
       "type":"object",
-      "required":false,
       "properties":{
         "hideCorrectAnswer": {
-          "type":"string",
-          "required":false,
-          "default":"Your Answer"
+          "type":"string"
         },
         "reset": {
-          "type":"string",
-          "required":false,
-          "default":"Reset"
+          "type":"string"
         },
         "showCorrectAnswer": {
-          "type":"string",
-          "required":false,
-          "default":"Model Answer"
+          "type":"string"
         },
         "submit": {
-          "type":"string",
-          "required":false,
-          "default":"Submit"
+          "type":"string"
         }
       }
     },
-    "feedback": {
+    "_feedback": {
       "type":"object",
       "required":true,
       "properties":{
+        "_incorrect": {
+          "type":"object",
+          "required":true,
+          "properties":{
+            "final": {
+              "type":"string"
+            },
+            "notFinal": {
+              "type":"string"
+            }
+          }
+        },
+        "_partlyCorrect": {
+          "type":"object",
+          "required":true,
+          "properties":{
+            "final": {
+              "type":"string",
+              "required":true
+            },
+            "notFinal": {
+              "type":"string"
+            }
+          }
+        },
         "correct": {
-          "type":"string",
-          "required":true
-        },
-        "incorrect": {
-          "type":"string",
-          "required":true
-        },
-        "partly": {
           "type":"string",
           "required":true
         }

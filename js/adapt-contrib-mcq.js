@@ -120,14 +120,6 @@ define(function(require) {
         	}, this);
         	this.model.set('_userAnswer', userAnswer);
         },
-
-        onItemFocus: function(event) {
-           $(event.currentTarget).prev('label').addClass('highlighted');
-        },
-        
-        onItemBlur: function(event) {
-            $(event.currentTarget).prev('label').removeClass('highlighted');
-        },
         
         onItemSelected: function(event) {
             var selectedItemObject = this.model.get('_items')[$(event.currentTarget).parent('.mcq-item').index()];

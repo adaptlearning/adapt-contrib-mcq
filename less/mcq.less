@@ -13,7 +13,6 @@
         position: relative;
         z-index: 1;
         background-color: @item-color;
-        overflow:hidden;
         
         .mcq-answer-icon{
             color: @item-text-color;
@@ -44,6 +43,11 @@
         position:absolute;
         top:14px;
         left:14px;
+    }
+
+    input:focus + label {
+        background-color:@item-hover-color;
+        color: @item-text-hover-color;
     }
 
     .mcq-correct-icon {

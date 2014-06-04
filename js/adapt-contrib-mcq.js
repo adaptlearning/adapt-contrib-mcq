@@ -122,7 +122,7 @@ define(function(require) {
         },
 
         onItemFocus: function(event) {
-            $(event.currentTarget).prev('label').addClass('highlighted');
+           $(event.currentTarget).prev('label').addClass('highlighted');
         },
         
         onItemBlur: function(event) {

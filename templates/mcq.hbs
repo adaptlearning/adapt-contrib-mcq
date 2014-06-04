@@ -3,6 +3,7 @@
     <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each _items}}
         <div class="mcq-item component-item component-item-color {{#unless ../_isEnabled}} {{#if correct}}correct{{else}}incorrect{{/if}} {{/unless}} item-{{@index}}">
+        <input type="checkbox" id="{{../_id}}-{{@index}}"/>
             <label for="{{../_id}}-{{@index}}" class="component-item-text-color component-item-border{{#if selected}}selected{{/if}}">
                 <div class="mcq-item-state">
                     <div class="mcq-item-icon mcq-answer-icon component-item-text-color icon"></div>
@@ -13,7 +14,6 @@
                     {{{text}}}
                 </h5>
             </label>
-            <input type="checkbox" id="{{../_id}}-{{@index}}"/>
         </div>
         {{/each}}
         <div class="buttons">

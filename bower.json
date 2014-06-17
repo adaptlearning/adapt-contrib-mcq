@@ -1,11 +1,13 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "authors": [
     "Daryl Hedley <darylhedley@hotmail.com>"
   ],
-  "description": "Please enter a description about your component here. This is what will get shown when registered with the Adapt registry so make it good",
+  "displayName" : "Multiple Choice Question",
+  "component" : "mcq",
+  "description": "A multiple choice question component",
   "main": "/js/adapt-contrib-mcq.js",
   "keywords": [
     "adapt-plugin",

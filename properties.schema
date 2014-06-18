@@ -73,7 +73,7 @@
         }
       }
     },
-    "items": {
+    "_items": {
       "type":"array",
       "required":true,
       "items":
@@ -81,7 +81,7 @@
           "type":"object",
           "required":true,
           "properties":{
-            "shouldBeSelected": {
+            "_shouldBeSelected": {
               "type":"boolean",
               "required":true
             },

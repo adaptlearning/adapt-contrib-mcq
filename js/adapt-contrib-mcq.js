@@ -129,6 +129,14 @@ define(function(require) {
             }
         },
 
+        onItemFocus: function(event) {
+            $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
+        },
+        
+        onItemBlur: function(event) {
+            $("label[for='"+$(event.currentTarget).attr('id')+"']").removeClass('highlighted');
+        },
+
         toggleItemSelected:function(item, clickEvent) {
             var selectedItems = this.model.get('_selectedItems');
             var itemIndex = _.indexOf(this.model.get('_items'), item),

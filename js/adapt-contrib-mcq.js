@@ -30,7 +30,6 @@ define(function(require) {
 
         postRender: function() {
             QuestionView.prototype.postRender.apply(this);
-
             this.setResetButtonEnabled(false);
             this.setReadyStatus();
         },

@@ -30,7 +30,6 @@ define(function(require) {
 
         postRender: function() {
             QuestionView.prototype.postRender.apply(this);
-
             this.setResetButtonEnabled(false);
             this.setReadyStatus();
         },
@@ -127,6 +126,14 @@ define(function(require) {
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
                 this.toggleItemSelected(selectedItemObject, event);
             }
+        },
+
+        onItemFocus: function(event) {
+            $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
+        },
+        
+        onItemBlur: function(event) {
+            $("label[for='"+$(event.currentTarget).attr('id')+"']").removeClass('highlighted');
         },
 
         toggleItemSelected:function(item, clickEvent) {

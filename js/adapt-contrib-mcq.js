@@ -136,7 +136,7 @@ define(function(require) {
 
                 var itemSelected = (item._isSelected || false);
 
-                if (itemSelected === item._shouldBeSelected) {
+                if (itemSelected && itemSelected === item._shouldBeSelected) {
                     numberOfCorrectAnswers ++;
                     item._isCorrect = true;
                     this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);

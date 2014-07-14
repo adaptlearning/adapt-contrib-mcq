@@ -1,40 +1,43 @@
 .mcq-component {
     .mcq-item {
         background-color:@item-color;
-        position: relative;
+        position:relative;
     }
 
-    .mcq-item label {            
+    .mcq-item label {
         color:@item-text-color;
         display:block;
         border:@item-border;
-        margin-bottom: 2px;
-        position: relative;
-        z-index: 1;
-        background-color: @item-color;
-        
-        .mcq-answer-icon{
-            color: @item-text-color;
+        margin-bottom:2px;
+        position:relative;
+        z-index:1;
+        background-color:@item-color;
+        cursor:pointer;
+
+        .mcq-answer-icon {
+            color:@item-text-color;
             &:before {
-                content: "\e65e";
+                content:"\e65e";
             }
         }
 
-        &.selected {            
+        &.selected {
             color:@item-text-selected-color;
             background-color:@item-selected-color;
             border-color:@item-border-selected-color;
-            .mcq-answer-icon{
+            .mcq-answer-icon {
                 &:before {
-                    content: "\e65d";
+                    content:"\e65d";
                 }
             }
-        }        
+            .mcq-item-icon {
+                color:@item-text-selected-color;
+            }
+        }
     }
 
     .mcq-item-inner {
         padding:@item-padding;
-        padding: @item-padding;
         padding-left:(@icon-size+(@item-padding-left*2));
     }
 
@@ -46,28 +49,28 @@
 
     input:focus + label {
         background-color:@item-hover-color;
-        color: @item-text-hover-color;
+        color:@item-text-hover-color;
     }
 
     .mcq-correct-icon {
-        color: @icon-correct-color;
-        display: none;
+        color:@icon-correct-color;
+        display:none;
     }
 
     .mcq-incorrect-icon {
-        color: @icon-incorrect-color;
-        display: none;
+        color:@icon-incorrect-color;
+        display:none;
     }
 
     .mcq-item-state {
-        background: none;
-        position: absolute;
-        left: 10px;
-        width: @icon-size;
-        height: @icon-size;
-        top: 50%;
-        margin-top: -(@icon-size/2);
-        z-index: 0;
+        background:none;
+        position:absolute;
+        left:10px;
+        width:@icon-size;
+        height:@icon-size;
+        top:50%;
+        margin-top:-(@icon-size/2);
+        z-index:0;
     }
 }
 
@@ -75,26 +78,26 @@
 
     &.show-user-answer {
         .mcq-item-icon {
-            display: none;
+            display:none;
         }
         .incorrect {
             .selected .mcq-incorrect-icon {
-                display: block;
+                display:block;
             }
         }
         .correct {
             .selected .mcq-correct-icon {
-                display: block;
+                display:block;
             }
         }
     }
 
     &.show-correct-answer {
         .mcq-item-icon {
-            display: none;
+            display:none;
         }
         .selected .mcq-correct-icon {
-            display: block;
+            display:block;
         }
     }
 
@@ -103,11 +106,13 @@
             color:@item-text-selected-color;
             background-color:@item-selected-color;
             border-color:@item-border-selected-color;
+            cursor:default;
         }
         .mcq-item label.disabled {
             color:@item-text-disabled-color;
             background-color:@item-disabled-color;
             border-color:@item-border-disabled-color;
+            cursor:default;
         }
 
         .mcq-item.correct .selected .state {
@@ -122,24 +127,29 @@
 
 .no-touch {
 
-        .mcq-widget {
-            &:not(.disabled) {
-                .mcq-item label:hover {
+    .mcq-widget {
+        &:not(.disabled) {
+            .mcq-item label:hover {
+                color:@item-text-hover-color;
+                background-color:@item-hover-color;
+                border-color:@item-border-hover-color;
+                .mcq-item-icon {
                     color:@item-text-hover-color;
-                    background-color:@item-hover-color;
-                    border-color:@item-border-hover-color;
                 }
-                .mcq-item label.disabled {
+            }
+            .mcq-item label.disabled {
+                color:@item-text-disabled-color;
+                background-color:@item-disabled-color;
+                border-color:@item-border-disabled-color;
+                &:hover {
                     color:@item-text-disabled-color;
                     background-color:@item-disabled-color;
                     border-color:@item-border-disabled-color;
-                    cursor:default;
-                    &:hover{
-                        color:@item-text-disabled-color;
-                        background: @item-disabled-color;
-                        border-color:@item-border-disabled-color;
-                    }
+                }
+                .mcq-item-icon {
+                    color:@item-text-disabled-color;
                 }
             }
         }
+    }
 }

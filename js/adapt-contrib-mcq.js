@@ -107,7 +107,9 @@ define(function(require) {
             var count = 0;
 
             _.each(this.model.get('_items'), function(item) {
-                if (item._isSelected) count++;
+                if (item._isSelected) {
+                    count++;
+                }
             }, this);
 
             return (count > 0) ? true : false;
@@ -130,24 +132,42 @@ define(function(require) {
 
         isCorrect: function() {
 
+            var numberOfCorrectItems = 0;
             var numberOfCorrectAnswers = 0;
+            var numberOfIncorrectAnswers = 0;
 
             _.each(this.model.get('_items'), function(item, index) {
 
+                // Set item._isSelected to either true or false
                 var itemSelected = (item._isSelected || false);
 
-                if (itemSelected && itemSelected === item._shouldBeSelected) {
-                    numberOfCorrectAnswers ++;
-                    item._isCorrect = true;
-                    this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
-                    this.model.set('_isAtLeastOneCorrectSelection', true);
-                } else {
-                    item._isCorrect = false;
+                if (item._shouldBeSelected) {
+                    // Adjust number of correct items
+                    numberOfCorrectItems ++;
+
+                    if (itemSelected) {
+                        // If the item is selected adjust correct answer
+                        numberOfCorrectAnswers ++;
+                        // Set item to correct - is used for returning to this component
+                        item._isCorrect = true;
+                        // Set that at least one correct answer has been selected
+                        // Used in isPartlyCorrect method below
+                        this.model.set('_isAtLeastOneCorrectSelection', true);
+                    }
+
+                } else if (!item._shouldBeSelected && itemSelected) {
+                    // If an item shouldn't be selected and is selected
+                    // Adjust incorrect answers
+                    numberOfIncorrectAnswers ++;
+
                 }
 
             }, this);
 
-            if (numberOfCorrectAnswers === this.model.get('_items').length) {
+            this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
+
+            // Check if correct answers matches correct items and there are no incorrect selections
+            if (numberOfCorrectAnswers === numberOfCorrectItems && numberOfIncorrectAnswers === 0) {
                 return true;
             } else {
                 return false;

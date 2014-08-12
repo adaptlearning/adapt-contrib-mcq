@@ -192,7 +192,6 @@ define(function(require) {
             }
             
             var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
-            var questionWeight = this.model.get("_questionWeight");
             var itemLength = this.model.get('_items').length;
 
             var score = questionWeight * numberOfCorrectAnswers / itemLength;

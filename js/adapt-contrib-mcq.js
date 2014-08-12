@@ -1,3 +1,8 @@
+/*
+* adapt-contrib-mcq
+* License - http://github.com/adaptlearning/adapt_framework/LICENSE
+* Maintainers - Daryl Hedley <darylhedley@gmail.com>
+*/
 define(function(require) {
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
@@ -67,7 +72,7 @@ define(function(require) {
 
         onItemSelected: function(event) {
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
-                var selectedItemObject = this.model.get('_items')[$(event.currentTarget).parent('.mcq-item').index()];
+                var selectedItemObject = this.model.get('_items')[$(event.currentTarget).parent('.component-item').index()];
                 this.toggleItemSelected(selectedItemObject, event);
             }
         },
@@ -179,8 +184,14 @@ define(function(require) {
         // Can be overwritten if the question needs to set the score in a different way
         setScore: function() {
 
-            var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
             var questionWeight = this.model.get("_questionWeight");
+
+            if (this.model.get('_isCorrect')) {
+                this.model.set('_score', questionWeight);
+                return;
+            }
+            
+            var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
             var itemLength = this.model.get('_items').length;
 
             var score = questionWeight * numberOfCorrectAnswers / itemLength;
@@ -193,7 +204,7 @@ define(function(require) {
         // Normally done through ticks and crosses by adding classes
         showMarking: function() {
             _.each(this.model.get('_items'), function(item, i) {
-                var $item = this.$('.mcq-item').eq(i);
+                var $item = this.$('.component-item').eq(i);
                 $item.addClass(item._isCorrect ? 'correct' : 'incorrect');
             }, this);
         },
@@ -222,8 +233,8 @@ define(function(require) {
         },
 
         resetItems: function() { 
-            this.$('.mcq-item label').removeClass('selected');
-            this.$('.mcq-item').removeClass('correct incorrect');
+            this.$('.component-item label').removeClass('selected');
+            this.$('.component-item').removeClass('correct incorrect');
             this.$('input').prop('checked', false);
             this.model.set({
                 _selectedItems: [],

@@ -55,6 +55,11 @@ define(function(require) {
         },
 
         onQuestionRendered: function() {
+            if (this.model.get("_selectable") == 1) {
+                this.$(".mcq-answer-icon").addClass("options");
+            } else {
+                this.$(".mcq-answer-icon").addClass("checkboxs");
+            }
             this.setReadyStatus();
         },
 

@@ -16,8 +16,21 @@
 
         .mcq-answer-icon {
             color:@item-text-color;
-            &:before {
-                content:"\e65e";
+            &.options {
+                &:before {
+                    content: "\e65e";
+                }
+            }
+            &.checkboxs {
+                &:before {
+                    content: " ";
+                }
+                border: 3px solid @item-text-color;
+                width:18px;
+                height:18px;
+                font-size:18px;
+                font-weight: bold;
+                border-radius: 2px;
             }
         }
 
@@ -26,8 +39,21 @@
             background-color:@item-selected-color;
             border-color:@item-border-selected-color;
             .mcq-answer-icon {
-                &:before {
-                    content:"\e65d";
+                 &.options {
+                    &:before {
+                        content: "\e65d";
+                    }
+                }
+                &.checkboxs {
+                    &:before {
+                        content: "\e633";
+                    }
+                    border: 3px solid @item-text-selected-color;
+                    width:18px;
+                    height:18px;
+                    font-size:18px;
+                    font-weight: bold;
+                    border-radius: 2px;
                 }
             }
             .mcq-item-icon {

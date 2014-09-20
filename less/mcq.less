@@ -39,12 +39,20 @@
     .mcq-item-inner {
         padding:@item-padding;
         padding-left:(@icon-size+(@item-padding-left*2));
+	    .dir-rtl & {
+            padding-left:inherit;
+	        padding-right:(@icon-size+(@item-padding-left*2));
+	    }
     }
 
     .mcq-item input {
         position:absolute;
         top:14px;
         left:14px;
+        .dir-rtl & {
+            left:inherit;
+            right:14px;
+        }
     }
 
     input:focus + label {
@@ -66,6 +74,10 @@
         background:none;
         position:absolute;
         left:10px;
+        .dir-rtl & {
+            left:inherit;
+            right:10px;
+        }
         width:@icon-size;
         height:@icon-size;
         top:50%;

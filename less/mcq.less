@@ -16,12 +16,12 @@
 
         .mcq-answer-icon {
             color:@item-text-color;
-            &.options {
+            &.radio {
                 &:before {
                     content: "\e65e";
                 }
             }
-            &.checkboxs {
+            &.checkbox {
                 &:before {
                     content: " ";
                 }
@@ -39,12 +39,12 @@
             background-color:@item-selected-color;
             border-color:@item-border-selected-color;
             .mcq-answer-icon {
-                 &.options {
+                 &.radio {
                     &:before {
                         content: "\e65d";
                     }
                 }
-                &.checkboxs {
+                &.checkbox {
                     &:before {
                         content: "\e633";
                     }

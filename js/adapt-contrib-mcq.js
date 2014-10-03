@@ -22,6 +22,8 @@ define(function(require) {
 
         // Left blank for question setup
         setupQuestion: function() {
+            // Radio button or checkbox
+            this.model.set("_isRadio", (this.model.get("_selectable") == 1) );
             // Set selectedItem array
             this.model.set('_selectedItems', []);
             // Check if items need to be randomised

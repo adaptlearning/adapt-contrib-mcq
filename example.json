@@ -38,12 +38,31 @@
             "final": "This feedback will appear if you answered part of the question correctly."
       }
 	},
-	"_buttons":{
-		"submit":"",
-		"reset":"",
-		"showCorrectAnswer":"",
-		"hideCorrectAnswer":""
-	},
+	"_buttons": {
+      "_submit": {
+        "buttonText": "Submit",
+        "ariaLabel": "Select here to submit your answer."
+      },
+      "_reset": {
+        "buttonText": "Reset",
+        "ariaLabel": ""
+      },
+      "_showCorrectAnswer": {
+        "buttonText": "Correct Answer",
+        "ariaLabel": ""
+      },
+      "_hideCorrectAnswer": {
+        "buttonText": "My Answer",
+        "ariaLabel": ""
+      },
+      "_showFeedback": {
+        "buttonText": "Show feedback",
+        "ariaLabel": ""
+      },
+      "remainingAttemptsText": "attempts remaining",
+      "remainingAttemptText": "final attempt",
+      "disabledAriaLabel": "This button is disabled at the moment"
+    },
     "_pageLevelProgress": {
         "_isEnabled": true
     }

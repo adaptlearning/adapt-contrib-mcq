@@ -7,87 +7,115 @@
     "_attempts": {
       "type":"number",
       "required":true,
-      "default":1
+      "default":1,
+      "minimum": 1,
+      "title": "Number of attempts"
     },
     "_isRandom": {
       "type":"boolean",
-      "required":true
+      "required":true,
+      "default":false,
+      "title": "Random order"
     },
     "_questionWeight": {
       "type":"number",
-      "required":false
+      "required":false,
+      "title": "Question weight"
     },
     "_selectable": {
       "type":"number",
-      "required":true
+      "required":true,
+      "minimum": 1,
+      "title": "Selectable answers"
     },
     "_buttons": {
       "type":"object",
+      "title": "Buttons",
       "properties":{
         "hideCorrectAnswer": {
-          "type":"string"
+          "type":"string",
+          "title": "Hide correct answer button label"
         },
         "reset": {
-          "type":"string"
+          "type":"string",
+          "title": "Reset button label"
         },
         "showCorrectAnswer": {
-          "type":"string"
+          "type":"string",
+          "title": "Show correct answer button label"
         },
         "submit": {
-          "type":"string"
+          "type":"string",
+          "title": "Submit button label"
         }
       }
     },
     "_feedback": {
       "type":"object",
       "required":true,
+      "title": "Feedback text",
       "properties":{
         "_incorrect": {
           "type":"object",
           "required":true,
+          "title": "Feedback for incorrect answers",
           "properties":{
             "final": {
-              "type":"string"
+              "type":"string",
+              "required":true,
+              "minLength": 1,
+              "title": "Incorrect final answer"
             },
             "notFinal": {
-              "type":"string"
+              "type":"string",
+              "title": "Incorrect non final answer"
             }
           }
         },
         "_partlyCorrect": {
           "type":"object",
           "required":true,
+          "title": "Feedback when answer is partly correct",
           "properties":{
             "final": {
               "type":"string",
-              "required":true
+              "required":true,
+              "minLength": 1,
+              "title": "Partially correct final answer"
             },
             "notFinal": {
-              "type":"string"
+              "type":"string",
+              "title": "Partially correct non final answer"
             }
           }
         },
         "correct": {
           "type":"string",
-          "required":true
+          "required":true,
+          "minLength": 1,
+          "title": "Feedback for correct answer"
         }
       }
     },
-    "items": {
+    "_items": {
       "type":"array",
       "required":true,
+      "title": "Question answers",
       "items":
         {
           "type":"object",
           "required":true,
           "properties":{
-            "shouldBeSelected": {
+            "_shouldBeSelected": {
               "type":"boolean",
-              "required":true
+              "required":true,
+              "title": "Correct answer"
             },
             "text": {
               "type":"string",
-              "required":true
+              "required":true,
+              "minLength": 1,
+              "title": "Answer text"
             }
           }
         }

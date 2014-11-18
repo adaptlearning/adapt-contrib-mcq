@@ -19,7 +19,7 @@
       "title": "Attempts",
       "inputType":"Number",
       "validators": ["required", "number"],
-      "help": "How many attempts the learner is allow"
+      "help": "How many attempts the learner is allowed"
     },
     "_isRandom": {
       "type":"boolean",
@@ -169,7 +169,7 @@
           "default": "",
           "inputType": "QuestionButton",
           "validators": [],
-          "help": "Button label text so show the model answer"
+          "help": "Button label text to show the model answer"
         },
         "hideCorrectAnswer": {
           "type":"string",
@@ -177,7 +177,7 @@
           "default": "",
           "inputType": "QuestionButton",
           "validators": [],
-          "help": "Button label text so hide the model answer"
+          "help": "Button label text to hide the model answer"
         }
       }
     }

@@ -73,6 +73,15 @@
             "inputType": {"type": "Boolean", "options": [true, false]},
             "validators": [],
             "help": "Set this item to 'true' if this is one of the correct answers"
+          },
+          "_feedback": {
+            "type":"string",
+            "required":false,
+            "default": "",
+            "title": "Option Specific Feedback",
+            "inputType": "Text",
+            "validators": [],
+            "help": "This text will be displayed as feedback if there is only one selectable item for this component"
           }
         }
       }

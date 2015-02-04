@@ -174,7 +174,7 @@ define(function(require) {
             this.model.set('_numberOfRequiredAnswers', numberOfRequiredAnswers);
 
             // Check if correct answers matches correct items and there are no incorrect selections
-            var answeredCorrectly = numberOfCorrectAnswers === numberOfRequiredAnswers && numberOfIncorrectAnswers === 0;
+            var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
             return answeredCorrectly;
         },
 

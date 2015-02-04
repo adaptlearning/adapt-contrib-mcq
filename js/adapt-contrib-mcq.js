@@ -181,20 +181,9 @@ define(function(require) {
         // Sets the score based upon the questionWeight
         // Can be overwritten if the question needs to set the score in a different way
         setScore: function() {
-            var usePartiallyCorrectScore = this.model.get('_canScorePartiallyCorrectAnswers');
             var questionWeight = this.model.get("_questionWeight");
             var answeredCorrectly = this.model.get('_isCorrect');
-            var score;
-
-            if (!usePartiallyCorrectScore || answeredCorrectly) {
-                score = answeredCorrectly ? questionWeight : 0;
-            }
-            else {
-                var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
-                var numberOfRequiredAnswers = this.model.get("_numberOfRequiredAnswers");
-                score = (numberOfCorrectAnswers/numberOfRequiredAnswers) * questionWeight;
-            }
-
+            var score = answeredCorrectly ? questionWeight : 0;
             this.model.set('_score', score);
         },
 

@@ -12,7 +12,8 @@ define(function(require) {
         events: {
             'focus .mcq-item input':'onItemFocus',
             'blur .mcq-item input':'onItemBlur',
-            'change .mcq-item input':'onItemSelected'
+            'change .mcq-item input':'onItemSelected',
+            'keyup .mcq-item input':'onKeyPress'
         },
 
         resetQuestionOnRevisit: function() {
@@ -62,7 +63,13 @@ define(function(require) {
 
         //////
         // Place your interactive code here
-        ////
+        
+
+        onKeyPress: function(event) {
+            if (event.which === 13) {
+                this.onItemSelected(event);
+            }
+        },
 
         onItemFocus: function(event) {
             $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
@@ -99,9 +106,11 @@ define(function(require) {
                     return;
                 }
                 $itemLabel.addClass('selected');
+                $itemLabel.a11y_selected(true);
             } else {
                 selectedItems.splice(_.indexOf(selectedItems, item), 1);
                 $itemLabel.removeClass('selected');
+                $itemLabel.a11y_selected(false);
             }
             $itemInput.prop('checked', selected);
             item._isSelected = selected;
@@ -229,6 +238,7 @@ define(function(require) {
         },
 
         deselectAllItems: function() {
+            this.$el.a11y_selected(false);
             _.each(this.model.get('_items'), function(item) {
                 item._isSelected = false;
             }, this);

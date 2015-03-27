@@ -148,7 +148,7 @@ define(function(require) {
 
         isCorrect: function() {
 
-            var numberOfCorrectItems = 0;
+            var numberOfRequiredAnswers = 0;
             var numberOfCorrectAnswers = 0;
             var numberOfIncorrectAnswers = 0;
 
@@ -159,7 +159,7 @@ define(function(require) {
 
                 if (item._shouldBeSelected) {
                     // Adjust number of correct items
-                    numberOfCorrectItems ++;
+                    numberOfRequiredAnswers ++;
 
                     if (itemSelected) {
                         // If the item is selected adjust correct answer
@@ -175,40 +175,25 @@ define(function(require) {
                     // If an item shouldn't be selected and is selected
                     // Adjust incorrect answers
                     numberOfIncorrectAnswers ++;
-
                 }
 
             }, this);
 
             this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
+            this.model.set('_numberOfRequiredAnswers', numberOfRequiredAnswers);
 
             // Check if correct answers matches correct items and there are no incorrect selections
-            if (numberOfCorrectAnswers === numberOfCorrectItems && numberOfIncorrectAnswers === 0) {
-                return true;
-            } else {
-                return false;
-            }
-            
+            var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
+            return answeredCorrectly;
         },
 
         // Sets the score based upon the questionWeight
         // Can be overwritten if the question needs to set the score in a different way
         setScore: function() {
-
             var questionWeight = this.model.get("_questionWeight");
-
-            if (this.model.get('_isCorrect')) {
-                this.model.set('_score', questionWeight);
-                return;
-            }
-            
-            var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
-            var itemLength = this.model.get('_items').length;
-
-            var score = questionWeight * numberOfCorrectAnswers / itemLength;
-
+            var answeredCorrectly = this.model.get('_isCorrect');
+            var score = answeredCorrectly ? questionWeight : 0;
             this.model.set('_score', score);
-
         },
 
         // This is important and should give the user feedback on how they answered the question

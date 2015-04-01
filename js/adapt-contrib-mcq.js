@@ -31,7 +31,6 @@ define(function(require) {
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
                 this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
-            
         },
 
         disableQuestion: function() {
@@ -189,6 +188,29 @@ define(function(require) {
                 return false;
             }
             
+        },
+
+        setupIncorrectFeedback: function() {
+            if (this.model.get('_attemptsLeft') === 0 || !this.model.get('_feedback')._incorrect.notFinal) {
+                // setup individual item feedback
+                var selectedItems = this.model.get('_selectedItems');
+                if (this.model.get('_useIndividualItemFeedback') && this.model.set("_isRadio") && selectedItems[0].feedback) {
+                    this.model.set({
+                        feedbackTitle: this.model.get('title'),
+                        feedbackMessage: selectedItems[0].feedback
+                    });
+                } else {
+                    this.model.set({
+                        feedbackTitle: this.model.get('title'),
+                        feedbackMessage: this.model.get('_feedback')._incorrect.final
+                    });
+                }
+            } else {
+                this.model.set({
+                    feedbackTitle: this.model.get('title'),
+                    feedbackMessage: this.model.get('_feedback')._incorrect.notFinal
+                });
+            }
         },
 
         // Sets the score based upon the questionWeight

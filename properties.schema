@@ -28,6 +28,12 @@
       "minimum": 1,
       "title": "Selectable answers"
     },
+    "_useIndividualItemFeedback": {
+      "type":"boolean",
+      "required":true,
+      "default":false,
+      "title": "Use individual answer feedback for incorrect"
+    },
     "_buttons": {
       "type":"object",
       "title": "Buttons",
@@ -116,6 +122,11 @@
               "required":true,
               "minLength": 1,
               "title": "Answer text"
+            },
+            "feedback": {
+              "type":"string",
+              "required":false,
+              "title": "Incorrect answer feedback"
             }
           }
         }

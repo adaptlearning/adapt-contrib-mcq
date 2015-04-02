@@ -222,7 +222,7 @@ define(function(require) {
                 if((this.model.get('_selectable') === 1) && this.model.get('_selectedItems')[0].feedback) {
                     var selectedItem = this.model.get('_selectedItems')[0];
                      if (selectedItem.feedback) {
-                         this.setupIndiviualFeedback(selectedItem);
+                         this.setupIndividualFeedback(selectedItem);
                          return;
                      }
                 } else {
@@ -231,7 +231,7 @@ define(function(require) {
             }
         },
 
-        setupIndiviualFeedback: function(selectedItem) {
+        setupIndividualFeedback: function(selectedItem) {
              this.model.set({
                  feedbackTitle: this.model.get('title'), 
                  feedbackMessage: selectedItem.feedback

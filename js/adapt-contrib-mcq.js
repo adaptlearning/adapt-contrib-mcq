@@ -220,11 +220,8 @@ define(function(require) {
             } else {
                 // apply individual item feedback
                 if((this.model.get('_selectable') === 1) && this.model.get('_selectedItems')[0].feedback) {
-                    var selectedItem = this.model.get('_selectedItems')[0];
-                     if (selectedItem.feedback) {
-                         this.setupIndividualFeedback(selectedItem);
-                         return;
-                     }
+                    this.setupIndividualFeedback(this.model.get('_selectedItems')[0]);
+                    return;
                 } else {
                     this.setupIncorrectFeedback();
                 }

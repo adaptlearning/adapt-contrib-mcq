@@ -190,29 +190,6 @@ define(function(require) {
             
         },
 
-        setupIncorrectFeedback: function() {
-            if (this.model.get('_attemptsLeft') === 0 || !this.model.get('_feedback')._incorrect.notFinal) {
-                // setup individual item feedback
-                var selectedItems = this.model.get('_selectedItems');
-                if (this.model.get('_useIndividualItemFeedback') && this.model.set("_isRadio") && selectedItems[0].feedback) {
-                    this.model.set({
-                        feedbackTitle: this.model.get('title'),
-                        feedbackMessage: selectedItems[0].feedback
-                    });
-                } else {
-                    this.model.set({
-                        feedbackTitle: this.model.get('title'),
-                        feedbackMessage: this.model.get('_feedback')._incorrect.final
-                    });
-                }
-            } else {
-                this.model.set({
-                    feedbackTitle: this.model.get('title'),
-                    feedbackMessage: this.model.get('_feedback')._incorrect.notFinal
-                });
-            }
-        },
-
         // Sets the score based upon the questionWeight
         // Can be overwritten if the question needs to set the score in a different way
         setScore: function() {
@@ -231,6 +208,34 @@ define(function(require) {
 
             this.model.set('_score', score);
 
+        },
+
+        // Used to setup the correct, incorrect and partly correct feedback
+        setupFeedback: function() {
+
+            if (this.model.get('_isCorrect')) {
+                this.setupCorrectFeedback();
+            } else if (this.isPartlyCorrect()) {
+                this.setupPartlyCorrectFeedback();
+            } else {
+                // apply individual item feedback
+                if((this.model.get('_selectable') === 1) && this.model.get('_selectedItems')[0].feedback) {
+                    var selectedItem = this.model.get('_selectedItems')[0];
+                     if (selectedItem.feedback) {
+                         this.setupIndiviualFeedback(selectedItem);
+                         return;
+                     }
+                } else {
+                    this.setupIncorrectFeedback();
+                }
+            }
+        },
+
+        setupIndiviualFeedback: function(selectedItem) {
+             this.model.set({
+                 feedbackTitle: this.model.get('title'), 
+                 feedbackMessage: selectedItem.feedback
+             });
         },
 
         // This is important and should give the user feedback on how they answered the question

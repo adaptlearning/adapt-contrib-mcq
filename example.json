@@ -9,7 +9,6 @@
 	"_questionWeight":1,
 	"_isRandom":false,
 	"_selectable":1,
-  "_useIndividualItemFeedback": true,
 	"title": "MCQ",
 	"displayTitle": "MCQ",
 	"body": "Which of the following options would you consider to be correct?",

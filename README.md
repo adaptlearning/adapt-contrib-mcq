@@ -50,10 +50,6 @@ Setting this value to `true` will cause the `_items` to appear in a random order
 
 Defines the number of `_items` that can be selected.
 
-###_useIndividualItemFeedback
-
-Setting this value to `true` uses the individual `_items` feedback value for incorrect feedback. This only applies for `radio` button style questions where the value for `_selectable` will be 1.
-
 ####_items
 
 Each item represents one choice for the multiple choice question and contains values for `text` and `_shouldBeSelected`.
@@ -69,7 +65,7 @@ Value can be `true` or `false`. Use `true` for items that must be selected for a
 
 ###feedback
 
-Feedback text that will be shown if this item is selected and is an incorrect answer. This will only be used if `_useIndividualItemFeedback` is set to `true`.
+Feedback text that will be shown if this item is selected and is an incorrect answer. This only applies for `radio` button style questions where the value for `_selectable` is set to 1.
 
 ##Limitations
  

@@ -16,8 +16,7 @@
   "_items": [
     {
       "text": "This is option 1.",
-      "_shouldBeSelected":true,
-      "feedback":"Option one incorrect feedback"
+      "_shouldBeSelected":true
     },
     {
     "text": "This is option 2.",
@@ -26,8 +25,7 @@
     },
     {
       "text": "This is option 3.",
-      "_shouldBeSelected":false,
-      "feedback":"Option three incorrect feedback"
+      "_shouldBeSelected":false
     }
   ],
     "_feedback":{

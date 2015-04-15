@@ -31,7 +31,6 @@ define(function(require) {
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
                 this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
-            
         },
 
         disableQuestion: function() {
@@ -194,6 +193,31 @@ define(function(require) {
             var answeredCorrectly = this.model.get('_isCorrect');
             var score = answeredCorrectly ? questionWeight : 0;
             this.model.set('_score', score);
+        },
+
+        // Used to setup the correct, incorrect and partly correct feedback
+        setupFeedback: function() {
+
+            if (this.model.get('_isCorrect')) {
+                this.setupCorrectFeedback();
+            } else if (this.isPartlyCorrect()) {
+                this.setupPartlyCorrectFeedback();
+            } else {
+                // apply individual item feedback
+                if((this.model.get('_selectable') === 1) && this.model.get('_selectedItems')[0].feedback) {
+                    this.setupIndividualFeedback(this.model.get('_selectedItems')[0]);
+                    return;
+                } else {
+                    this.setupIncorrectFeedback();
+                }
+            }
+        },
+
+        setupIndividualFeedback: function(selectedItem) {
+             this.model.set({
+                 feedbackTitle: this.model.get('title'), 
+                 feedbackMessage: selectedItem.feedback
+             });
         },
 
         // This is important and should give the user feedback on how they answered the question

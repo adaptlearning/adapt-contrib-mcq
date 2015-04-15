@@ -63,6 +63,10 @@ The text for this setting will be displayed as a multiple choice option.
 
 Value can be `true` or `false`. Use `true` for items that must be selected for a correct answer. The value of `_selectable` must correspond to the number of `_items` where `_shouldBeSelected` is set to `true`.
 
+###feedback
+
+Feedback text that will be shown if this item is selected and is an incorrect answer. This only applies for `radio` button style questions where the value for `_selectable` is set to 1.
+
 ##Limitations
  
 To be completed.

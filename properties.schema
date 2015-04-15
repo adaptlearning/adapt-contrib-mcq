@@ -116,6 +116,11 @@
               "required":true,
               "minLength": 1,
               "title": "Answer text"
+            },
+            "feedback": {
+              "type":"string",
+              "required":false,
+              "title": "Incorrect answer feedback (selectable answers must be 1)"
             }
           }
         }

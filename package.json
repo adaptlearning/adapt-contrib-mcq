@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "0.0.2",
+  "version": "2.0.0",
   "description": "A multiple choice question component",
   "main": "",
   "scripts": {

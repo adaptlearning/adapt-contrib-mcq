@@ -71,7 +71,9 @@ define(function(require) {
         },
 
         onItemFocus: function(event) {
-            $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
+            if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
+                $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
+            }
         },
         
         onItemBlur: function(event) {

@@ -65,8 +65,7 @@
         "ariaLabel": ""
       },
       "remainingAttemptsText": "attempts remaining",
-      "remainingAttemptText": "final attempt",
-      "disabledAriaLabel": "This button is disabled at the moment"
+      "remainingAttemptText": "final attempt"
     },
     "_pageLevelProgress": {
         "_isEnabled": true

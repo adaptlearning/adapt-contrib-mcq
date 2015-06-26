@@ -180,7 +180,7 @@ define(function(require) {
                 return a._index - b._index;
             });
 
-            _.each(this.model.get('_items'), function(item, index) {
+            _.each(items, function(item, index) {
                 userAnswer.push(item._isSelected);
             }, this);
             this.model.set('_userAnswer', userAnswer);

@@ -32,42 +32,42 @@
       "_shouldBeSelected":false
     }
   ],
-    "_feedback":{
-        "correct":"Congratulations, this is the correct feedback.",
-        "_incorrect": {
-            "notFinal": "",
-            "final": "This feedback will appear if you answered the question incorrectly."
-        },
-        "_partlyCorrect": {
-            "notFinal": "",
-            "final": "This feedback will appear if you answered the question correctly."
-      }
+  "_feedback":{
+    "correct":"Congratulations, this is the correct feedback.",
+    "_incorrect": {
+      "notFinal": "",
+      "final": "This feedback will appear if you answered the question incorrectly."
+    },
+    "_partlyCorrect": {
+      "notFinal": "",
+      "final": "This feedback will appear if you answered the question correctly."
+    }
   },
   "_buttons": {
-      "_submit": {
-        "buttonText": "Submit",
-        "ariaLabel": "Select here to submit your answer."
-      },
-      "_reset": {
-        "buttonText": "Reset",
-        "ariaLabel": ""
-      },
-      "_showCorrectAnswer": {
-        "buttonText": "Correct Answer",
-        "ariaLabel": ""
-      },
-      "_hideCorrectAnswer": {
-        "buttonText": "My Answer",
-        "ariaLabel": ""
-      },
-      "_showFeedback": {
-        "buttonText": "Show feedback",
-        "ariaLabel": ""
-      },
-      "remainingAttemptsText": "attempts remaining",
-      "remainingAttemptText": "final attempt"
+    "_submit": {
+      "buttonText": "Submit",
+      "ariaLabel": "Select here to submit your answer."
     },
-    "_pageLevelProgress": {
-        "_isEnabled": true
-    }
+    "_reset": {
+      "buttonText": "Reset",
+      "ariaLabel": ""
+    },
+    "_showCorrectAnswer": {
+      "buttonText": "Correct Answer",
+      "ariaLabel": ""
+    },
+    "_hideCorrectAnswer": {
+      "buttonText": "My Answer",
+      "ariaLabel": ""
+    },
+    "_showFeedback": {
+      "buttonText": "Show feedback",
+      "ariaLabel": ""
+    },
+    "remainingAttemptsText": "attempts remaining",
+    "remainingAttemptText": "final attempt"
+  },
+  "_pageLevelProgress": {
+    "_isEnabled": true
+  }
 }

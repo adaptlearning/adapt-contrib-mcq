@@ -18,7 +18,7 @@ To Be Updated
 
 ##Settings overview
  
-A complete example of this components settings can be found in the [example.json](https://github.com/adaptlearning/adapt-contrib-mcq/blob/master/example.json) file. A description of the core settings can be found at: [Core model attributes](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes)
+A complete example of this components settings can be found in the [example.json](example.json) file. A description of the core settings can be found at: [Core model attributes](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes)
 
 Further settings for this component are:
 

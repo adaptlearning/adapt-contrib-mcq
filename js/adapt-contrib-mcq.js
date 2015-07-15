@@ -27,10 +27,43 @@ define(function(require) {
             this.model.set("_isRadio", (this.model.get("_selectable") == 1) );
             // Set selectedItem array
             this.model.set('_selectedItems', []);
+
+            this.setupQuestionItemIndexes();
+            this.restoreUserAnswers();
+
             // Check if items need to be randomised
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
                 this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
+        },
+
+        setupQuestionItemIndexes: function() {
+            var items = this.model.get("_items");
+            for (var i = 0, l = items.length; i < l; i++) {
+                if (items[i]._index === undefined) items[i]._index = i;
+            }
+        },
+
+        restoreUserAnswers: function() {
+            if (!this.model.get("_isSubmitted")) return;
+
+            var selectedItems = [];
+            var items = this.model.get("_items");
+            var userAnswer = this.model.get("_userAnswer");
+            _.each(items, function(item, index) {
+                item._isSelected = userAnswer[item._index];
+                if (item._isSelected) {
+                    selectedItems.push(item)
+                }
+            });
+
+            this.model.set("_selectedItems", selectedItems);
+
+            this.setQuestionAsSubmitted();
+            this.markQuestion();
+            this.setScore();
+            this.showMarking();
+            this.setupFeedback();
         },
 
         disableQuestion: function() {
@@ -141,7 +174,13 @@ define(function(require) {
         // This should preserve the state of the users answers
         storeUserAnswer: function() {
             var userAnswer = [];
-            _.each(this.model.get('_items'), function(item, index) {
+
+            var items = this.model.get('_items').slice(0);
+            items.sort(function(a, b) {
+                return a._index - b._index;
+            });
+
+            _.each(items, function(item, index) {
                 userAnswer.push(item._isSelected);
             }, this);
             this.model.set('_userAnswer', userAnswer);
@@ -227,7 +266,7 @@ define(function(require) {
         showMarking: function() {
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.component-item').eq(i);
-                $item.addClass(item._isCorrect ? 'correct' : 'incorrect');
+                $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'correct' : 'incorrect');
             }, this);
         },
 
@@ -285,7 +324,7 @@ define(function(require) {
 
         hideCorrectAnswer: function() {
             _.each(this.model.get('_items'), function(item, index) {
-                this.setOptionSelected(index, this.model.get('_userAnswer')[index]);
+                this.setOptionSelected(index, this.model.get('_userAnswer')[item._index]);
             }, this);
         }
 

@@ -1,6 +1,6 @@
 <div class="mcq-inner component-inner" role="region" aria-label="{{_globals._components._mcq.ariaRegion}}" {{#if _globals._components._mcq.ariaRegion}}tabindex="0"{{/if}}>
     {{> component this}}
-    <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+    <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each _items}}
         <div class="mcq-item component-item component-item-color {{#unless ../_isEnabled}} {{#if _isCorrect}} correct{{else}} incorrect{{/if}} {{/unless}} item-{{@index}}">
         <input type="checkbox" id="{{../_id}}-{{@index}}" aria-labelledby="{{../_id}}-{{@index}}-aria"/>

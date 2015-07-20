@@ -28,6 +28,15 @@
       "validators": ["required", "number"],
       "help": "How many attempts the learner is allowed"
     },
+    "_shouldDisplayAttempts": {
+      "type":"boolean",
+      "required":false,
+      "default": false,
+      "title": "Display Attempts",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "Select 'true' to display the numbers of attempts left"
+    },
     "_isRandom": {
       "type":"boolean",
       "required":true,

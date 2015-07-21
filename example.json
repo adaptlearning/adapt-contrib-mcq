@@ -6,6 +6,7 @@
   "_classes":"",
   "_layout":"left",
   "_attempts":1,
+  "_shouldDisplayAttempts": false,
   "_questionWeight":1,
   "_isRandom":false,
   "_selectable":1,

@@ -3,6 +3,15 @@
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "This component is a multiple choice question. Once you have selected an option select the submit button below",
+      "inputType": "Text",
+      "validators": []
+    }
+  },
   "properties":{
     "_supportedLayout": {
       "type": "string",

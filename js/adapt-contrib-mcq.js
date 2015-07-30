@@ -1,8 +1,3 @@
-/*
-* adapt-contrib-mcq
-* License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Daryl Hedley <darylhedley@gmail.com>
-*/
 define(function(require) {
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
@@ -94,8 +89,7 @@ define(function(require) {
         },
 
         //////
-        // Place your interactive code here
-        
+        // Place your interactive code here        
 
         onKeyPress: function(event) {
             if (event.which === 13) {

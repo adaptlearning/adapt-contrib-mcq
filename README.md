@@ -1,76 +1,95 @@
-#adapt-contrib-mcq
+# adapt-contrib-mcq  
 
-An Adapt core multiple choice question.
+<img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/mcq01.gif" alt="multiple choice question in action" align="right"> **Multiple Choice Question (MCQ)** is a *question component* bundled with the [Adapt framework](https://github.com/adaptlearning/adapt_framework).   
+
+Possible answers are presented to the learner accompanied by a radio button or checkbox, depending on whether a single answer or multiple answers are required. Upon submission, feedback is provided via the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor), if installed. Feedback can be provided for correct, incorrect and partially correct answers. The number of attempts allowed may be configured. [**GMCQ**](https://github.com/adaptlearning/gmcq/wiki) is a variation that includes a graphic. 
+
+[Visit the **MCQ** wiki](https://github.com/adaptlearning/mcq/wiki) for more information about its functionality and for explanations of key properties. 
 
 ##Installation
 
-First, be sure to install the [Adapt Command Line Interface](https://github.com/adaptlearning/adapt-cli), then from the command line run:-
+As one of Adapt's *[core components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#components),* **MCQ** is included with the [installation of the Adapt framework](https://github.com/adaptlearning/adapt_framework/wiki/Manual-installation-of-the-Adapt-framework#installation) and the [installation of the Adapt authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-Adapt-Origin).
 
-        adapt install adapt-contrib-mcq
+* If **MCQ** has been uninstalled from the Adapt framework, it may be reinstalled.
+With the [Adapt CLI](https://github.com/adaptlearning/adapt-cli) installed, run the following from the command line:  
+`adapt install adapt-contrib-mcq`
 
-This component can also be installed by adding the component to the adapt.json file before running `adapt install`:
+    Alternatively, this component can also be installed by adding the following line of code to the *adapt.json* file:  
+    `"adapt-contrib-mcq": "*"`  
+    Then running the command:  
+    `adapt install`  
+    (This second method will reinstall all plug-ins listed in *adapt.json*.)  
 
-        "adapt-contrib-mcq": "*"
+* If **MCQ** has been uninstalled from the Adapt authoring tool, it may be reinstalled using the [Plug-in Manager](https://github.com/adaptlearning/adapt_authoring/wiki/Plugin-Manager).
 
-##Usage
+<div float align=right><a href="#top">Back to Top</a></div>
 
-To Be Updated
+## Settings Overview
 
-##Settings overview
+The attributes listed below are used in *components.json* to configure **MCQ**, and are properly formatted as JSON in [example.json](https://github.com/adaptlearning/adapt-contrib-mcq/blob/master/example.json). Visit the [**MCQ** wiki](https://github.com/adaptlearning/mcq/wiki) for more information about how they appear in the [authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki). 
+
+### Attributes
+
+In addition to the attributes specifically listed below, [*question components*](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components) can implement the following sets of attributes:   
++ [**core model attributes**](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes): These are inherited by every Adapt component. They have no default values. Like the attributes below, their values are assigned in *components.json*. 
++ [**core buttons**](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons): Default values are found in *course.json*, but may be overridden by **MCQ's** model in *components.json*.
+
+**_component** (string): This value must be: `mcq`.
+
+**_classes** (string): CSS class name to be applied to **MCQ**’s containing `div`. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+
+**_layout** (string): This defines the horizontal position of the component in the block. Acceptable values are `full`, `left` or `right`.  
+
+**instruction** (string): This optional text appears above the component. It is frequently used to
+guide the learner’s interaction with the component.  
+
+**_attempts** (integer): This specifies the number of times a learner is allowed to submit an answer. The default is `1`.    
+
+**_shouldDisplayAttempts** (boolean): Determines whether or not the text set in **remainingAttemptText** and **remainingAttemptsText** will be displayed. These two attributes are part of the [core buttons](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons) attribute group. The default is `false`.  
+
+**_isRandom** (boolean): Setting this value to `true` will cause the `_items` to appear in a random order each time the component is loaded. The default is `true`.   
+
+**_questionWeight** (number): A number which reflects the significance of the question in relation to the other questions in the course. This number is used in calculations of the final score reported to the LMS.  
+
+**_selectable** (integer): Defines the number of **_items**, or answers, that can be selected. If the value of **_selectable** is `1`, **_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number must match the number of **_items** whose **_shouldBeSelected** is set to `true`. The default is `1`.
+
+**_items** (array): Each *item* represents one choice for the multiple choice question and contains values for **text**, **_shouldBeSelected**, and **feedback**.
+
+>**text** (string): Text that comprises the multiple choice option.  
+
+>**_shouldBeSelected** (boolean): Determines whether the *item* must be selected for the answer to be correct. Value can be `true` or `false`. The value of **_selectable** must correspond to the total number of **_items** where **_shouldBeSelected** is set to `true`.  
+
+>**feedback** (string): This attribute is used only when the value for **_selectable** is set to `1` (i.e., radio button style questions). This text will be shown if the learner selects this item, and it is an incorrect answer. 
+
+**_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these various texts will be displayed depending on the submitted answer. **_feedback**
+contains values for three types of answers: **correct**, **_incorrect**, and **_partlyCorrect**.
+
+>**correct** (string): Text that will be displayed when the submitted answer is correct.  
+
+>**_incorrect** (object): Texts that will be displayed when the submitted answer is incorrect. It contains values that are displayed under differing conditions: **final** and **notFinal**. 
+
+>>**final** (string): Text that will be displayed when the submitted answer is incorrect and no more attempts are permitted. 
+
+>>**notFinal** (string): Text that will be displayed when the submitted answer is incorrect while more attempts are permitted.  
+
+>**_partlyCorrect** (object): Texts that will be displayed when the submitted answer is partially correct. It contains values that are displayed under differing conditions: **final** and **notFinal**.  
+
+>>**final** (string): Text that will be displayed when the submitted answer is partly correct and no more attempts are permitted. 
+
+>>**notFinal** (string): Text that will be displayed when the submitted answer is partly correct while more attempts are permitted.   
+
+### Accessibility
+**Multiple Choice Question** has been assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion**. This label is not a visible element. It is utilized by assistive technology such as screen readers. Should the region's text need to be customised, it can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-mcq/blob/master/properties.schema).   
+<div float align=right><a href="#top">Back to Top</a></div>
+
+## Limitations
  
-A complete example of this components settings can be found in the [example.json](example.json) file. A description of the core settings can be found at: [Core model attributes](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes)
+No known limitations.  
 
-Further settings for this component are:
-
-####_component
-
-This value must be: `mcq`
-
-####_classes
-
-You can use this setting to add custom classes to your template and LESS file.
-
-####_layout
-
-This defines the position of the component in the block. Values can be `full`, `left` or `right`. 
-
-####_attempts
-
-Default: `1`
-
-Specifies the number of attempts for this question.
-
-####_isRandom
-
-Default: `false`
-
-Setting this value to `true` will cause the `_items` to appear in a random order each time this component is loaded.
-
-####_selectable
-
-Defines the number of `_items` that can be selected.
-
-####_items
-
-Each item represents one choice for the multiple choice question and contains values for `text` and `_shouldBeSelected`.
-
-####text
-
-The text for this setting will be displayed as a multiple choice option.
-
-
-####_shouldBeSelected
-
-Value can be `true` or `false`. Use `true` for items that must be selected for a correct answer. The value of `_selectable` must correspond to the number of `_items` where `_shouldBeSelected` is set to `true`.
-
-###feedback
-
-Feedback text that will be shown if this item is selected and is an incorrect answer. This only applies for `radio` button style questions where the value for `_selectable` is set to 1.
-
-##Limitations
- 
-To be completed.
- 
-##Browser spec
- 
-This component has been tested to the standard Adapt browser specification.
+----------------------------
+**Version number:**  2.0   <a href="https://community.adaptlearning.org/ target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Framework versions:** 2.0  
+**Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-mcq/graphs/contributors)  
+**Accessibility support:** WAI AA   
+**RTL support:** yes  
+**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), IE 11, IE10, IE9, IE8, IE Mobile 11, Safari for iPhone (iOS 7+8), Safari for iPad (iOS 7+8), Safari 8, Opera    

@@ -320,6 +320,15 @@ define(function(require) {
             _.each(this.model.get('_items'), function(item, index) {
                 this.setOptionSelected(index, this.model.get('_userAnswer')[item._index]);
             }, this);
+        },
+
+        getResponse:function() {
+            var selected = _.where(this.model.get('_items'), {'_isSelected':true});
+            return _.pluck(selected, 'text').join(',');
+        },
+
+        getResponseType:function() {
+            return "choice";
         }
 
     });

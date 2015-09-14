@@ -28,6 +28,8 @@ define(function(require) {
 
             // Check if items need to be randomised
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
+                // need to store (1-based) index for use in tracking
+                _.each(this.model.get('_items'), function(item, index) {item._originalIndex = index + 1;});
                 this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
         },
@@ -324,7 +326,7 @@ define(function(require) {
 
         getResponse:function() {
             var selected = _.where(this.model.get('_items'), {'_isSelected':true});
-            return _.pluck(selected, 'text').join(',');
+            return _.pluck(selected, '_originalIndex').join(',');
         },
 
         getResponseType:function() {

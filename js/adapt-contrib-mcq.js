@@ -16,26 +16,29 @@ define(function(require) {
             this.resetQuestion();
         },
 
-        // Left blank for question setup
         setupQuestion: function() {
-            // Radio button or checkbox
+            // if only one answer is selectable, we should display radio buttons not checkboxes
             this.model.set("_isRadio", (this.model.get("_selectable") == 1) );
-            // Set selectedItem array
+            
             this.model.set('_selectedItems', []);
 
             this.setupQuestionItemIndexes();
-            this.restoreUserAnswers();
 
-            // Check if items need to be randomised
-            if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
-                this.model.set("_items", _.shuffle(this.model.get("_items")));
-            }
+            this.setupRandomisation();
+            
+            this.restoreUserAnswers();
         },
 
         setupQuestionItemIndexes: function() {
             var items = this.model.get("_items");
             for (var i = 0, l = items.length; i < l; i++) {
                 if (items[i]._index === undefined) items[i]._index = i;
+            }
+        },
+
+        setupRandomisation: function() {
+            if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
+                this.model.set("_items", _.shuffle(this.model.get("_items")));
             }
         },
 
@@ -88,11 +91,8 @@ define(function(require) {
             this.setReadyStatus();
         },
 
-        //////
-        // Place your interactive code here        
-
         onKeyPress: function(event) {
-            if (event.which === 13) {
+            if (event.which === 13) { //<ENTER> keypress
                 this.onItemSelected(event);
             }
         },
@@ -145,8 +145,7 @@ define(function(require) {
             this.model.set('_selectedItems', selectedItems);
         },
 
-        // Use to check if the user is allowed to submit the question
-        // Maybe the user has to select an item?
+        // check if the user is allowed to submit the question
         canSubmit: function() {
             var count = 0;
 
@@ -188,26 +187,20 @@ define(function(require) {
 
             _.each(this.model.get('_items'), function(item, index) {
 
-                // Set item._isSelected to either true or false
                 var itemSelected = (item._isSelected || false);
 
                 if (item._shouldBeSelected) {
-                    // Adjust number of correct items
                     numberOfRequiredAnswers ++;
 
                     if (itemSelected) {
-                        // If the item is selected adjust correct answer
                         numberOfCorrectAnswers ++;
-                        // Set item to correct - is used for returning to this component
+                        
                         item._isCorrect = true;
-                        // Set that at least one correct answer has been selected
-                        // Used in isPartlyCorrect method below
+
                         this.model.set('_isAtLeastOneCorrectSelection', true);
                     }
 
                 } else if (!item._shouldBeSelected && itemSelected) {
-                    // If an item shouldn't be selected and is selected
-                    // Adjust incorrect answers
                     numberOfIncorrectAnswers ++;
                 }
 
@@ -230,7 +223,6 @@ define(function(require) {
             this.model.set('_score', score);
         },
 
-        // Used to setup the correct, incorrect and partly correct feedback
         setupFeedback: function() {
 
             if (this.model.get('_isCorrect')) {
@@ -273,12 +265,10 @@ define(function(require) {
         },
 
         // Used by the question view to reset the look and feel of the component.
-        // This could also include resetting item data
         resetQuestion: function() {
 
             this.deselectAllItems();
             this.resetItems();
-
         },
 
         deselectAllItems: function() {

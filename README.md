@@ -46,14 +46,13 @@ guide the learner’s interaction with the component.
 **_attempts** (integer): This specifies the number of times a learner is allowed to submit an answer. The default is `1`.    
 
 **_shouldDisplayAttempts** (boolean): Determines whether or not the text set in **remainingAttemptText** and **remainingAttemptsText** will be displayed. These two attributes are part of the [core buttons](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons) attribute group. The default is `false`.  
-
 **_isRandom** (boolean): Setting this value to `true` will cause the `_items` to appear in a random order each time the component is loaded. The default is `true`.   
 
 **_questionWeight** (number): A number which reflects the significance of the question in relation to the other questions in the course. This number is used in calculations of the final score reported to the LMS.  
 
 **_selectable** (integer): Defines the number of **_items**, or answers, that can be selected. If the value of **_selectable** is `1`, **_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number must match the number of **_items** whose **_shouldBeSelected** is set to `true`. The default is `1`.
 
-**_recordInteraction** (boolean) Determines whether the question uses SCORM cmi.interactions to track each attempt the user makes.
+**_recordInteraction** (boolean) Determines whether or not the user's response to the question will be recorded to the LMS or not. Default is `true`. For further information, see the entry for `_shouldRecordInteractions` in the README for [adapt-contrib-spoor](https://github.com/adaptlearning/adapt-contrib-spoor).
 
 **_items** (array): Each *item* represents one choice for the multiple choice question and contains values for **text**, **_shouldBeSelected**, and **feedback**.
 

@@ -314,7 +314,12 @@ define(function(require) {
 
         getResponse:function() {
             var selected = _.where(this.model.get('_items'), {'_isSelected':true});
-            return _.pluck(selected, '_originalIndex').join(',');
+            var selectedIndexes = _.pluck(selected, '_index');
+            // indexes are 0-based, we need them to be 1-based for cmi.interactions
+            for (var i = 0, count = selectedIndexes.length; i < count; i++) {
+                selectedIndexes[i]++;
+            }
+            return selectedIndexes.join(',');
         },
 
         getResponseType:function() {

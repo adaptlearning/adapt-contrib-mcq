@@ -26,7 +26,7 @@
                 &:before {
                     content: " ";
                 }
-                border: 3px solid @item-text-color;
+                border: 3px solid @item-border-color;
                 width:18px;
                 height:18px;
                 font-size:18px;
@@ -36,9 +36,9 @@
         }
 
         &.selected {
-            color:@item-text-selected-color;
-            background-color:@item-selected-color;
-            border-color:@item-border-selected-color;
+            color:@item-text-color-selected;
+            background-color:@item-color-selected;
+            border-color:@item-border-color-selected;
             .mcq-answer-icon {
                  &.radio {
                     &:before {
@@ -49,7 +49,7 @@
                     &:before {
                         content: "\e633";
                     }
-                    border: 3px solid @item-text-selected-color;
+                    border: 3px solid @item-text-color-selected;
                     width:18px;
                     height:18px;
                     font-size:18px;
@@ -58,7 +58,7 @@
                 }
             }
             .mcq-item-icon {
-                color:@item-text-selected-color;
+                color:@item-text-color-selected;
             }
         }
     }
@@ -76,6 +76,8 @@
         position:absolute;
         top:14px;
         left:14px;
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
         .dir-rtl & {
             left:inherit;
             right:14px;
@@ -83,12 +85,12 @@
     }
 
     .mcq-correct-icon {
-        color:@icon-correct-color;
+        color:@validation-success;
         display:none;
     }
 
     .mcq-incorrect-icon {
-        color:@icon-incorrect-color;
+        color:@validation-error;
         display:none;
     }
 
@@ -137,24 +139,24 @@
 
     &.disabled {
         .mcq-item label.selected.disabled {
-            color:@item-text-selected-color;
-            background-color:@item-selected-color;
-            border-color:@item-border-selected-color;
+            color:@item-text-color-selected;
+            background-color:@item-color-selected;
+            border-color:@item-border-color-selected;
             cursor:default;
         }
         .mcq-item label.disabled {
-            color:@item-text-disabled-color;
-            background-color:@item-disabled-color;
-            border-color:@item-border-disabled-color;
+            color:@item-text-color-disabled;
+            background-color:@item-color-disabled;
+            border-color:@item-border-color-disabled;
             cursor:default;
         }
 
         .mcq-item.correct .selected .state {
-            color:@icon-correct-color;
+            color:@validation-success;
         }
 
         .mcq-item.incorrect .selected .state {
-            color:@icon-incorrect-color;
+            color:@validation-error;
         }
     }
 }
@@ -164,24 +166,24 @@
     .mcq-widget {
         &:not(.disabled) {
             .mcq-item label:hover {
-                color:@item-text-hover-color;
-                background-color:@item-hover-color;
-                border-color:@item-border-hover-color;
+                color:@item-text-color-hover;
+                background-color:@item-color-hover;
+                border-color:@item-border-color-hover;
                 .mcq-item-icon {
-                    color:@item-text-hover-color;
+                    color:@item-text-color-hover;
                 }
             }
             .mcq-item label.disabled {
-                color:@item-text-disabled-color;
-                background-color:@item-disabled-color;
-                border-color:@item-border-disabled-color;
+                color:@item-text-color-disabled;
+                background-color:@item-color-disabled;
+                border-color:@item-border-color-disabled;
                 &:hover {
-                    color:@item-text-disabled-color;
-                    background-color:@item-disabled-color;
-                    border-color:@item-border-disabled-color;
+                    color:@item-text-color-disabled;
+                    background-color:@item-color-disabled;
+                    border-color:@item-border-color-disabled;
                 }
                 .mcq-item-icon {
-                    color:@item-text-disabled-color;
+                    color:@item-text-color-disabled;
                 }
             }
         }

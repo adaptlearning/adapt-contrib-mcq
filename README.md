@@ -2,9 +2,9 @@
 
 <img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/mcq01.gif" alt="multiple choice question in action" align="right"> **Multiple Choice Question (MCQ)** is a *question component* bundled with the [Adapt framework](https://github.com/adaptlearning/adapt_framework).   
 
-Possible answers are presented to the learner accompanied by a radio button or checkbox, depending on whether a single answer or multiple answers are required. Upon submission, feedback is provided via the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor), if installed. Feedback can be provided for correct, incorrect and partially correct answers. The number of attempts allowed may be configured. [**GMCQ**](https://github.com/adaptlearning/gmcq/wiki) is a variation that includes a graphic. 
+Possible answers are presented to the learner accompanied by a radio button or checkbox, depending on whether a single answer or multiple answers are required. Upon submission, feedback is provided via the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor), if installed. Feedback can be provided for correct, incorrect and partially correct answers. The number of attempts allowed may be configured. [**GMCQ**](https://github.com/adaptlearning/adapt-contrib-gmcq/wiki) is a variation that includes a graphic. 
 
-[Visit the **MCQ** wiki](https://github.com/adaptlearning/mcq/wiki) for more information about its functionality and for explanations of key properties. 
+[Visit the **MCQ** wiki](https://github.com/adaptlearning/adapt-contrib-mcq/wiki) for more information about its functionality and for explanations of key properties. 
 
 ##Installation
 
@@ -26,7 +26,7 @@ With the [Adapt CLI](https://github.com/adaptlearning/adapt-cli) installed, run 
 
 ## Settings Overview
 
-The attributes listed below are used in *components.json* to configure **MCQ**, and are properly formatted as JSON in [example.json](https://github.com/adaptlearning/adapt-contrib-mcq/blob/master/example.json). Visit the [**MCQ** wiki](https://github.com/adaptlearning/mcq/wiki) for more information about how they appear in the [authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki). 
+The attributes listed below are used in *components.json* to configure **MCQ**, and are properly formatted as JSON in [example.json](https://github.com/adaptlearning/adapt-contrib-mcq/blob/master/example.json). Visit the [**MCQ** wiki](https://github.com/adaptlearning/adapt-contrib-mcq/wiki) for more information about how they appear in the [authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki). 
 
 ### Attributes
 
@@ -88,7 +88,7 @@ contains values for three types of answers: **correct**, **_incorrect**, and **_
 No known limitations.  
 
 ----------------------------
-**Version number:**  2.0   <a href="https://community.adaptlearning.org/ target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Version number:**  2.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
 **Framework versions:** 2.0  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-mcq/graphs/contributors)  
 **Accessibility support:** WAI AA   

@@ -242,7 +242,7 @@ define(function(require) {
 
         setupIndividualFeedback: function(selectedItem) {
              this.model.set({
-                 feedbackTitle: this.model.get('title'), 
+                 feedbackTitle: this.model.get('title'),
                  feedbackMessage: selectedItem.feedback
              });
         },
@@ -278,7 +278,7 @@ define(function(require) {
             }, this);
         },
 
-        resetItems: function() { 
+        resetItems: function() {
             this.$('.component-item label').removeClass('selected');
             this.$('.component-item').removeClass('correct incorrect');
             this.$('input').prop('checked', false);
@@ -312,6 +312,10 @@ define(function(require) {
             }, this);
         },
 
+        /**
+        * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
+        * returns the user's answers as a string in the format "1,5,2"
+        */
         getResponse:function() {
             var selected = _.where(this.model.get('_items'), {'_isSelected':true});
             var selectedIndexes = _.pluck(selected, '_index');
@@ -322,6 +326,9 @@ define(function(require) {
             return selectedIndexes.join(',');
         },
 
+        /**
+        * used by adapt-contrib-spoor to get the type of this question in the format required by the cmi.interactions.n.type data field
+        */
         getResponseType:function() {
             return "choice";
         }

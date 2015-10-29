@@ -48,12 +48,21 @@
     },
     "_isRandom": {
       "type":"boolean",
-      "required":true,
-      "default": true,
+      "required":false,
+      "default": false,
       "title": "Randomised Items",
       "inputType": {"type": "Boolean", "options": [true, false]},
       "validators": [],
       "help": "If set to 'true', all items will be randomised"
+    },
+    "_recordInteraction": {
+      "type":"boolean",
+      "required":false,
+      "default": true,
+      "title": "Record interaction",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'true', the user's answer(s) will be recorded to cmi.interactions on the LMS (where supported)."
     },
     "_questionWeight": {
       "type":"number",
@@ -141,35 +150,35 @@
             },
             "notFinal": {
               "type":"string",
-              "required": true,
+              "required": false,
               "default": "",
               "title": "Incorrect Not Final",
               "inputType": "TextArea",
-              "validators": ["required"],
+              "validators": [],
               "help": "Incorrect feedback for any attempt apart from the last attempt"
             }
           }
         },
         "_partlyCorrect": {
           "type":"object",
-          "required":true,
+          "required":false,
           "properties":{
             "final": {
               "type":"string",
-              "required": true,
+              "required": false,
               "default": "",
               "title": "Partly Correct Final",
               "inputType": "TextArea",
-              "validators": ["required"],
+              "validators": [],
               "help": "Partly correct feedback for the final attempt"
             },
             "notFinal": {
               "type":"string",
-              "required": true,
+              "required": false,
               "default": "",
               "title": "Partly Correct Not Final",
               "inputType": "TextArea",
-              "validators": ["required"],
+              "validators": [],
               "help": "Partly correct feedback for any attempt apart from the last attempt"
             }
           }

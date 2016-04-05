@@ -37,6 +37,15 @@
       "validators": ["required", "number"],
       "help": "How many attempts the learner is allowed"
     },
+    "_canShowModelAnswer": {
+      "type":"boolean",
+      "required":true,
+      "default": true,
+      "title": "Display Model Answer",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "Select 'true' to display the Model Answer"
+    },
     "_shouldDisplayAttempts": {
       "type":"boolean",
       "required":false,

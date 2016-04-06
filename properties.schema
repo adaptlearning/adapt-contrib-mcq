@@ -44,7 +44,7 @@
       "title": "Display Model Answer",
       "inputType": {"type": "Boolean", "options": [true, false]},
       "validators": [],
-      "help": "Select 'true' to display the Model Answer"
+      "help": "Select 'true' to allow the user to view the 'model answer' should they answer the question incorrectly"
     },
     "_shouldDisplayAttempts": {
       "type":"boolean",

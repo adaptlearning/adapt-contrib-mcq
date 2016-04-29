@@ -31,8 +31,10 @@ define(function(require) {
 
         setupQuestionItemIndexes: function() {
             var items = this.model.get("_items");
-            for (var i = 0, l = items.length; i < l; i++) {
-                if (items[i]._index === undefined) items[i]._index = i;
+            if (items && items.length > 0) {
+                for (var i = 0, l = items.length; i < l; i++) {
+                    if (items[i]._index === undefined) items[i]._index = i;
+                }
             }
         },
 

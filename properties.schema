@@ -97,6 +97,14 @@
       "validators": [],
       "help": "Select 'true' to allow the user to view feedback on their answer"
     },
+    "_canShowMarking": {
+      "type": "boolean",
+      "default": true,
+      "title": "Display Marking",
+      "inputType": { "type": "Boolean", "options": [ true, false ] },
+      "validators": [],
+      "help": "Select 'true' to display ticks and crosses on question completion"
+    },
     "_shouldDisplayAttempts": {
       "type":"boolean",
       "required":false,

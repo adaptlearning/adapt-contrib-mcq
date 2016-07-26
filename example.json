@@ -10,6 +10,7 @@
   "_questionWeight":1,
   "_isRandom":false,
   "_selectable":1,
+  "_requiredCorrectAnswers":1,
   "_canShowModelAnswer": true,
   "_recordInteraction":true,
   "title": "MCQ",

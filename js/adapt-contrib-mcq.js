@@ -186,6 +186,7 @@ define(function(require) {
             var numberOfRequiredAnswers = 0;
             var numberOfCorrectAnswers = 0;
             var numberOfIncorrectAnswers = 0;
+            var numberOfSelectable=this.model.get('_selectable');
 
             _.each(this.model.get('_items'), function(item, index) {
 
@@ -213,7 +214,14 @@ define(function(require) {
 
             // Check if correct answers matches correct items and there are no incorrect selections
             var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
-            return answeredCorrectly;
+            if(answeredCorrectly) {
+                return answeredCorrectly;
+            }
+            else {
+               // Check if _selectable matches or less than correct items and there are no incorrect selections
+                var canBeCorrect=(numberOfSelectable <= numberOfCorrectAnswers) && (numberOfIncorrectAnswers === 0);
+                return canBeCorrect;
+            }
         },
 
         // Sets the score based upon the questionWeight

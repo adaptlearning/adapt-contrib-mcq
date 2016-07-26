@@ -142,6 +142,15 @@
       "validators": ["number", "required"],
       "help": "How many items are selectable"
     },
+    "_requiredCorrectAnswers": {
+      "type":"number",
+      "required":false,
+      "default": 1,
+      "title": "Required correct answer",
+      "inputType": "Number",
+      "validators": ["number", "required"],
+      "help": "How many correct answers are required"
+    },
     "_feedback": {
       "type":"object",
       "required":true,

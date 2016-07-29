@@ -215,8 +215,7 @@ define(function(require) {
             var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
             if(answeredCorrectly) {
                 return answeredCorrectly;
-            }
-            else {
+            } else {
                //Check if _requiredCorrectAnswers is less than or matches numberOfCorrectAnswers and there are no incorrect selections
                return (this.model.get('_requiredCorrectAnswers') <= numberOfCorrectAnswers) && (numberOfIncorrectAnswers === 0);
             }

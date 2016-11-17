@@ -183,19 +183,20 @@ define(function(require) {
 
         isCorrect: function() {
 
-            var numberOfRequiredAnswers = 0;
-            var numberOfCorrectAnswers = 0;
-            var numberOfIncorrectAnswers = 0;
+            var availableCorrectAnswers = 0;
+            var numberOfCorrectAnswersSelected = 0;
+            var numberOfIncorrectAnswersSelected = 0;
+            var selectableAnswers = this.model.get( '_selectable' );
 
             _.each(this.model.get('_items'), function(item, index) {
 
                 var itemSelected = (item._isSelected || false);
 
                 if (item._shouldBeSelected) {
-                    numberOfRequiredAnswers ++;
+	                availableCorrectAnswers ++;
 
                     if (itemSelected) {
-                        numberOfCorrectAnswers ++;
+	                    numberOfCorrectAnswersSelected ++;
                         
                         item._isCorrect = true;
 
@@ -203,17 +204,20 @@ define(function(require) {
                     }
 
                 } else if (!item._shouldBeSelected && itemSelected) {
-                    numberOfIncorrectAnswers ++;
+                    numberOfIncorrectAnswersSelected ++;
                 }
 
             }, this);
 
-            this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
-            this.model.set('_numberOfRequiredAnswers', numberOfRequiredAnswers);
+	        this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswersSelected);
 
-            // Check if correct answers matches correct items and there are no incorrect selections
-            var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
-            return answeredCorrectly;
+	        if( selectableAnswers < availableCorrectAnswers ) {
+		        this.model.set('_numberOfRequiredAnswers', selectableAnswers);
+		        return ( numberOfCorrectAnswersSelected === selectableAnswers ) && numberOfIncorrectAnswersSelected === 0;
+	        } else {
+		        this.model.set('_numberOfRequiredAnswers', availableCorrectAnswers);
+		        return ( numberOfCorrectAnswersSelected === availableCorrectAnswers ) && numberOfIncorrectAnswersSelected === 0;
+	        }
         },
 
         // Sets the score based upon the questionWeight

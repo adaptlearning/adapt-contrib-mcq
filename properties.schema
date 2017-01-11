@@ -167,7 +167,7 @@
         },
         "_incorrect": {
           "type":"object",
-          "required":true,
+          "required": false,
           "title": "Incorrect Feedback",
           "properties":{
             "final": {

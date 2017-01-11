@@ -152,16 +152,16 @@
     },
     "_feedback": {
       "type":"object",
-      "required":true,
+      "required": false,
       "title": "Feedback",
       "properties":{
         "correct": {
           "type":"string",
-          "required":true,
+          "required": false,
           "default": "",
           "title": "Correct",
           "inputType": "TextArea",
-          "validators": ["required"],
+          "validators": [],
           "help": "Correct feedback for this question",
           "translatable": true
         },
@@ -172,11 +172,11 @@
           "properties":{
             "final": {
               "type":"string",
-              "required": true,
+              "required": false,
               "default": "",
               "title": "Incorrect Final",
               "inputType": "TextArea",
-              "validators": ["required"],
+              "validators": [],
               "help": "Incorrect feedback for the final attempt",
               "translatable": true
             },

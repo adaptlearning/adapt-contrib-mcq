@@ -49,9 +49,9 @@
             "translatable": true
           },
           "_shouldBeSelected": {
-            "type":"boolean",
-            "required":true,
-            "default": true,
+            "type": "boolean",
+            "required": true,
+            "default": false,
             "title": "Should Be Selected",
             "inputType": {"type": "Boolean", "options": [true, false]},
             "validators": [],

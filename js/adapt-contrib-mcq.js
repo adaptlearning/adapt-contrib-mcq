@@ -213,7 +213,12 @@ define(function(require) {
 
             // Check if correct answers matches correct items and there are no incorrect selections
             var answeredCorrectly = (numberOfCorrectAnswers === numberOfRequiredAnswers) && (numberOfIncorrectAnswers === 0);
-            return answeredCorrectly;
+            if(answeredCorrectly) {
+                return answeredCorrectly;
+            } else {
+               //Check if _requiredCorrectAnswers is less than or matches numberOfCorrectAnswers and there are no incorrect selections
+               return (this.model.get('_requiredCorrectAnswers') <= numberOfCorrectAnswers) && (numberOfIncorrectAnswers === 0);
+            }
         },
 
         // Sets the score based upon the questionWeight

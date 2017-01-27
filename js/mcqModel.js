@@ -1,5 +1,5 @@
 define([
-    'coreModels/questionModel'
+    'core/js/models/questionModel'
 ], function(QuestionModel) {
     
     var McqModel = QuestionModel.extend({
@@ -32,7 +32,7 @@ define([
             _.each(items, function(item, index) {
                 item._isSelected = userAnswer[item._index];
                 if (item._isSelected) {
-                    selectedItems.push(item)
+                    selectedItems.push(item);
                 }
             });
 

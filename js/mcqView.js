@@ -1,5 +1,5 @@
 define([
-    'coreViews/questionView'
+    'core/js/views/questionView'
 ], function(QuestionView) {
 
     var McqView = QuestionView.extend({
@@ -111,7 +111,7 @@ define([
         // Normally done through ticks and crosses by adding classes
         showMarking: function() {
             if (!this.model.get('_canShowMarking')) return;
-            
+
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.component-item').eq(i);
                 $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'correct' : 'incorrect');

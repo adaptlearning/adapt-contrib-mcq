@@ -9,7 +9,8 @@
       "required": true,
       "default": "This component is a multiple choice question. Once you have selected an option select the submit button below",
       "inputType": "Text",
-      "validators": []
+      "validators": [],
+      "translatable": true
     }
   },
   "properties":{
@@ -26,7 +27,48 @@
       "default": "",
       "inputType": "Text",
       "validators": [],
-      "help": "This is the instruction text"
+      "help": "This is the instruction text",
+      "translatable": true
+    },
+    "_items": {
+      "type":"array",
+      "required":true,
+      "title": "Items",
+      "items": {
+        "type":"object",
+        "required":true,
+        "properties":{
+          "text": {
+            "type":"string",
+            "required":true,
+            "default": "",
+            "title": "Item Text",
+            "inputType": "Text",
+            "validators": ["required"],
+            "help": "This text will display as the item text",
+            "translatable": true
+          },
+          "_shouldBeSelected": {
+            "type": "boolean",
+            "required": true,
+            "default": false,
+            "title": "Should Be Selected",
+            "inputType": {"type": "Boolean", "options": [true, false]},
+            "validators": [],
+            "help": "Set this item to 'true' if this is one of the correct answers"
+          },
+          "feedback": {
+            "type":"string",
+            "required":false,
+            "default": "",
+            "title": "Option Specific Feedback",
+            "inputType": "Text",
+            "validators": [],
+            "help": "This text will be displayed as feedback if there is only one selectable item for this component",
+            "translatable": true
+          }
+        }
+      }
     },
     "_attempts": {
       "type":"number",
@@ -36,6 +78,32 @@
       "inputType":"Number",
       "validators": ["required", "number"],
       "help": "How many attempts the learner is allowed"
+    },
+    "_canShowModelAnswer": {
+      "type":"boolean",
+      "required":true,
+      "default": true,
+      "title": "Display Model Answer",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "Select 'true' to allow the user to view the 'model answer' should they answer the question incorrectly"
+    },
+    "_canShowFeedback": {
+      "type":"boolean",
+      "required":true,
+      "default": true,
+      "title": "Display Feedback",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "Select 'true' to allow the user to view feedback on their answer"
+    },
+    "_canShowMarking": {
+      "type": "boolean",
+      "default": true,
+      "title": "Display Marking",
+      "inputType": { "type": "Boolean", "options": [ true, false ] },
+      "validators": [],
+      "help": "Select 'true' to display ticks and crosses on question completion"
     },
     "_shouldDisplayAttempts": {
       "type":"boolean",
@@ -82,71 +150,35 @@
       "validators": ["number", "required"],
       "help": "How many items are selectable"
     },
-    "_items": {
-      "type":"array",
-      "required":true,
-      "title": "Items",
-      "items": {
-        "type":"object",
-        "required":true,
-        "properties":{
-          "text": {
-            "type":"string",
-            "required":true,
-            "default": "",
-            "title": "Item Text",
-            "inputType": "Text",
-            "validators": ["required"],
-            "help": "This text will display as the item text"
-          },
-          "_shouldBeSelected": {
-            "type":"boolean",
-            "required":true,
-            "default": true,
-            "title": "Should Be Selected",
-            "inputType": {"type": "Boolean", "options": [true, false]},
-            "validators": [],
-            "help": "Set this item to 'true' if this is one of the correct answers"
-          },
-          "feedback": {
-            "type":"string",
-            "required":false,
-            "default": "",
-            "title": "Option Specific Feedback",
-            "inputType": "Text",
-            "validators": [],
-            "help": "This text will be displayed as feedback if there is only one selectable item for this component"
-          }
-        }
-      }
-    },
     "_feedback": {
       "type":"object",
-      "required":true,
+      "required": false,
       "title": "Feedback",
       "properties":{
         "correct": {
           "type":"string",
-          "required":true,
+          "required": false,
           "default": "",
           "title": "Correct",
           "inputType": "TextArea",
-          "validators": ["required"],
-          "help": "Correct feedback for this question"
+          "validators": [],
+          "help": "Correct feedback for this question",
+          "translatable": true
         },
         "_incorrect": {
           "type":"object",
-          "required":true,
+          "required": false,
           "title": "Incorrect Feedback",
           "properties":{
             "final": {
               "type":"string",
-              "required": true,
+              "required": false,
               "default": "",
               "title": "Incorrect Final",
               "inputType": "TextArea",
-              "validators": ["required"],
-              "help": "Incorrect feedback for the final attempt"
+              "validators": [],
+              "help": "Incorrect feedback for the final attempt",
+              "translatable": true
             },
             "notFinal": {
               "type":"string",
@@ -155,7 +187,8 @@
               "title": "Incorrect Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect feedback for any attempt apart from the last attempt"
+              "help": "Incorrect feedback for any attempt apart from the last attempt",
+              "translatable": true
             }
           }
         },
@@ -170,7 +203,8 @@
               "title": "Partly Correct Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for the final attempt"
+              "help": "Partly correct feedback for the final attempt",
+              "translatable": true
             },
             "notFinal": {
               "type":"string",
@@ -179,7 +213,8 @@
               "title": "Partly Correct Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for any attempt apart from the last attempt"
+              "help": "Partly correct feedback for any attempt apart from the last attempt",
+              "translatable": true
             }
           }
         }
@@ -201,16 +236,18 @@
               "title": "",
               "inputType": "QuestionButton",
               "validators": [],
-              "help": "Button label text for the submit button"
+              "help": "Button label text for the submit button",
+              "translatable": true
             },
             "ariaLabel": {
               "type":"string",
               "required": false,
               "default": "",
               "title": "",
-              "inputType": "Text",
+              "inputType": "QuestionButton",
               "validators": [],
-              "help": "Aria label for the submit button"
+              "help": "Aria label for the submit button",
+              "translatable": true
             }
           }
         },
@@ -225,16 +262,18 @@
               "title": "",
               "inputType": "QuestionButton",
               "validators": [],
-              "help": "Button label text for the reset button"
+              "help": "Button label text for the reset button",
+              "translatable": true
             },
             "ariaLabel": {
               "type":"string",
               "required": false,
               "default": "",
               "title": "",
-              "inputType": "Text",
+              "inputType": "QuestionButton",
               "validators": [],
-              "help": "Aria label for the reset button"
+              "help": "Aria label for the reset button",
+              "translatable": true
             }
           }
         },
@@ -249,16 +288,18 @@
               "title": "",
               "inputType": "QuestionButton",
               "validators": [],
-              "help": "Button label text to show the model answer"
+              "help": "Button label text to show the model answer",
+              "translatable": true
             },
             "ariaLabel": {
               "type":"string",
               "required": false,
               "default": "",
               "title": "",
-              "inputType": "Text",
+              "inputType": "QuestionButton",
               "validators": [],
-              "help": "Aria label for the show model answer button"
+              "help": "Aria label for the show model answer button",
+              "translatable": true
             }
           }
         },
@@ -273,16 +314,18 @@
               "title": "",
               "inputType": "QuestionButton",
               "validators": [],
-              "help": "Button label text to hide the model answer"
+              "help": "Button label text to hide the model answer",
+              "translatable": true
             },
             "ariaLabel": {
               "type":"string",
               "required": false,
               "default": "",
               "title": "",
-              "inputType": "Text",
+              "inputType": "QuestionButton",
               "validators": [],
-              "help": "Aria label for the hide model answer button"
+              "help": "Aria label for the hide model answer button",
+              "translatable": true
             }
           }
         },
@@ -297,16 +340,18 @@
               "title": "",
               "inputType": "QuestionButton",
               "validators": [],
-              "help": "Button label text to show feedback"
+              "help": "Button label text to show feedback",
+              "translatable": true
             },
             "ariaLabel": {
               "type":"string",
               "required": false,
               "default": "",
               "title": "",
-              "inputType": "Text",
+              "inputType": "QuestionButton",
               "validators": [],
-              "help": "Aria label for the show feedback button"
+              "help": "Aria label for the show feedback button",
+              "translatable": true
             }
           }
         },
@@ -315,18 +360,20 @@
           "required": false,
           "default": "",
           "title": "Attempts Remaining Text",
-          "inputType": "Text",
+          "inputType": "QuestionButton",
           "validators": [],
-          "help": "Shown when there are multiple attempts left"
+          "help": "Shown when there are multiple attempts left",
+          "translatable": true
         },
         "remainingAttemptText": {
           "type":"string",
           "required": false,
           "default": "",
           "title": "Final Attempt Text",
-          "inputType": "Text",
+          "inputType": "QuestionButton",
           "validators": [],
-          "help": "Shown when there is one attempt left"
+          "help": "Shown when there is one attempt left",
+          "translatable": true
         }
       }
     }

@@ -43,7 +43,7 @@
             "type":"string",
             "required":true,
             "default": "",
-            "title": "Item Text",
+            "title": "Answer Text",
             "inputType": "Text",
             "validators": ["required"],
             "help": "This text will display as the answer text",

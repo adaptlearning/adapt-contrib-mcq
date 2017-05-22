@@ -33,7 +33,8 @@
     "_items": {
       "type":"array",
       "required":true,
-      "title": "Items",
+      "title": "Answers",
+      "help": "The possible answers available to the learner",
       "items": {
         "type":"object",
         "required":true,
@@ -42,10 +43,10 @@
             "type":"string",
             "required":true,
             "default": "",
-            "title": "Item Text",
+            "title": "Answer Text",
             "inputType": "Text",
             "validators": ["required"],
-            "help": "This text will display as the item text",
+            "help": "This text will display as the answer text",
             "translatable": true
           },
           "_shouldBeSelected": {

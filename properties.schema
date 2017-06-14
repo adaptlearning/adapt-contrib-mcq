@@ -1,5 +1,5 @@
 {
-  "type":"object",
+  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
@@ -13,7 +13,7 @@
       "translatable": true
     }
   },
-  "properties":{
+  "properties": {
     "_supportedLayout": {
       "type": "string",
       "required": true,
@@ -31,17 +31,17 @@
       "translatable": true
     },
     "_items": {
-      "type":"array",
-      "required":true,
+      "type": "array",
+      "required": true,
       "title": "Answers",
       "help": "The possible answers available to the learner",
       "items": {
-        "type":"object",
-        "required":true,
-        "properties":{
+        "type": "object",
+        "required": true,
+        "properties": {
           "text": {
-            "type":"string",
-            "required":true,
+            "type": "string",
+            "required": true,
             "default": "",
             "title": "Answer Text",
             "inputType": "Text",
@@ -59,8 +59,8 @@
             "help": "Defines whether this answer is correct or not"
           },
           "feedback": {
-            "type":"string",
-            "required":false,
+            "type": "string",
+            "required": false,
             "default": "",
             "title": "Answer-specific feedback",
             "inputType": "Text",
@@ -72,17 +72,17 @@
       }
     },
     "_attempts": {
-      "type":"number",
-      "required":true,
-      "default":1,
+      "type": "number",
+      "required": true,
+      "default": 1,
       "title": "Attempts",
-      "inputType":"Number",
+      "inputType": "Number",
       "validators": ["required", "number"],
       "help": "How many attempts the learner is allowed"
     },
     "_canShowModelAnswer": {
-      "type":"boolean",
-      "required":true,
+      "type": "boolean",
+      "required": true,
       "default": true,
       "title": "Display Model Answer",
       "inputType": "Checkbox",
@@ -90,8 +90,8 @@
       "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
     },
     "_canShowFeedback": {
-      "type":"boolean",
-      "required":true,
+      "type": "boolean",
+      "required": true,
       "default": true,
       "title": "Display Feedback",
       "inputType": "Checkbox",
@@ -105,8 +105,8 @@
       "validators": []
     },
     "_shouldDisplayAttempts": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": false,
       "title": "Display Attempts",
       "inputType": "Checkbox",
@@ -114,16 +114,16 @@
       "help": "Display the number of attempts remaining?"
     },
     "_isRandom": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": false,
       "title": "Randomise answers",
       "inputType": "Checkbox",
       "validators": []
     },
     "_recordInteraction": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": true,
       "title": "Record interaction",
       "inputType": "Checkbox",
@@ -131,8 +131,8 @@
       "help": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only."
     },
     "_questionWeight": {
-      "type":"number",
-      "required":false,
+      "type": "number",
+      "required": false,
       "default": 1,
       "title": "Question Weight",
       "inputType": "Number",
@@ -140,8 +140,8 @@
       "help": "How much this question is worth"
     },
     "_selectable": {
-      "type":"number",
-      "required":true,
+      "type": "number",
+      "required": true,
       "default": 1,
       "title": "Selectable Items",
       "inputType": "Number",
@@ -149,12 +149,12 @@
       "help": "How many items are selectable"
     },
     "_feedback": {
-      "type":"object",
+      "type": "object",
       "required": false,
       "title": "Feedback",
-      "properties":{
+      "properties": {
         "correct": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Correct",
@@ -164,12 +164,12 @@
           "translatable": true
         },
         "_incorrect": {
-          "type":"object",
+          "type": "object",
           "required": false,
           "title": "Incorrect Feedback",
-          "properties":{
+          "properties": {
             "final": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Incorrect Final",
@@ -179,7 +179,7 @@
               "translatable": true
             },
             "notFinal": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Incorrect Not Final",
@@ -191,11 +191,11 @@
           }
         },
         "_partlyCorrect": {
-          "type":"object",
-          "required":false,
-          "properties":{
+          "type": "object",
+          "required": false,
+          "properties": {
             "final": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Partly Correct Final",
@@ -205,7 +205,7 @@
               "translatable": true
             },
             "notFinal": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Partly Correct Not Final",
@@ -219,16 +219,16 @@
       }
     },
     "_buttons": {
-      "type":"object",
+      "type": "object",
       "title": "Buttons",
       "required": false,
-      "properties":{
+      "properties": {
         "_submit": {
-          "type":"object",
+          "type": "object",
           "title": "Submit",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -238,7 +238,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -250,11 +250,11 @@
           }
         },
         "_reset": {
-          "type":"object",
+          "type": "object",
           "title": "Reset",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -264,7 +264,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -276,11 +276,11 @@
           }
         },
         "_showCorrectAnswer": {
-          "type":"object",
+          "type": "object",
           "title": "Show Correct Answer",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -290,7 +290,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -302,11 +302,11 @@
           }
         },
         "_hideCorrectAnswer": {
-          "type":"object",
+          "type": "object",
           "title": "Hide Correct Answer",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -316,7 +316,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -328,11 +328,11 @@
           }
         },
         "_showFeedback": {
-          "type":"object",
+          "type": "object",
           "title": "Show Feedback",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -342,7 +342,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -354,7 +354,7 @@
           }
         },
         "remainingAttemptsText": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Attempts Remaining Text",
@@ -364,7 +364,7 @@
           "translatable": true
         },
         "remainingAttemptText": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Final Attempt Text",

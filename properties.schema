@@ -53,10 +53,9 @@
             "type": "boolean",
             "required": true,
             "default": false,
-            "title": "Should Be Selected",
+            "title": "Correct answer?",
             "inputType": "Checkbox",
-            "validators": [],
-            "help": "Defines whether this answer is correct or not"
+            "validators": []
           },
           "feedback": {
             "type": "string",

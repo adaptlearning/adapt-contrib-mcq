@@ -7,7 +7,7 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "This component is a multiple choice question. Once you have selected an option select the submit button below",
+      "default": "This is a multiple choice question. Once you have selected an option, select the submit button below",
       "inputType": "Text",
       "validators": [],
       "translatable": true
@@ -54,18 +54,18 @@
             "required": true,
             "default": false,
             "title": "Should Be Selected",
-            "inputType": {"type": "Boolean", "options": [true, false]},
+            "inputType": "Checkbox",
             "validators": [],
-            "help": "Set this item to 'true' if this is one of the correct answers"
+            "help": "Defines whether this answer is correct or not"
           },
           "feedback": {
             "type":"string",
             "required":false,
             "default": "",
-            "title": "Option Specific Feedback",
+            "title": "Answer-specific feedback",
             "inputType": "Text",
             "validators": [],
-            "help": "This text will be displayed as feedback if there is only one selectable item for this component",
+            "help": "When 'Selectable Items' is set to 1, this can be used to give the user feedback specific to the answer they selected",
             "translatable": true
           }
         }
@@ -85,53 +85,50 @@
       "required":true,
       "default": true,
       "title": "Display Model Answer",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "Select 'true' to allow the user to view the 'model answer' should they answer the question incorrectly"
+      "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
     },
     "_canShowFeedback": {
       "type":"boolean",
       "required":true,
       "default": true,
       "title": "Display Feedback",
-      "inputType": {"type": "Boolean", "options": [true, false]},
-      "validators": [],
-      "help": "Select 'true' to allow the user to view feedback on their answer"
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_canShowMarking": {
       "type": "boolean",
       "default": true,
       "title": "Display Marking",
-      "inputType": { "type": "Boolean", "options": [ true, false ] },
-      "validators": [],
-      "help": "Select 'true' to display ticks and crosses on question completion"
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_shouldDisplayAttempts": {
       "type":"boolean",
       "required":false,
       "default": false,
       "title": "Display Attempts",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "Select 'true' to display the numbers of attempts left"
+      "help": "Display the number of attempts remaining?"
     },
     "_isRandom": {
       "type":"boolean",
       "required":false,
       "default": false,
-      "title": "Randomised Items",
-      "inputType": {"type": "Boolean", "options": [true, false]},
-      "validators": [],
-      "help": "If set to 'true', all items will be randomised"
+      "title": "Randomise answers",
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_recordInteraction": {
       "type":"boolean",
       "required":false,
       "default": true,
       "title": "Record interaction",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "If set to 'true', the user's answer(s) will be recorded to cmi.interactions on the LMS (where supported)."
+      "help": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only."
     },
     "_questionWeight": {
       "type":"number",
@@ -163,7 +160,7 @@
           "title": "Correct",
           "inputType": "TextArea",
           "validators": [],
-          "help": "Correct feedback for this question",
+          "help": "Correct answer feedback for this question",
           "translatable": true
         },
         "_incorrect": {
@@ -178,7 +175,7 @@
               "title": "Incorrect Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect feedback for the final attempt",
+              "help": "Incorrect answer feedback for the final attempt",
               "translatable": true
             },
             "notFinal": {
@@ -188,7 +185,7 @@
               "title": "Incorrect Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect feedback for any attempt apart from the last attempt",
+              "help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             }
           }
@@ -204,7 +201,7 @@
               "title": "Partly Correct Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for the final attempt",
+              "help": "Partly correct answer feedback for the final attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             },
             "notFinal": {
@@ -214,7 +211,7 @@
               "title": "Partly Correct Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for any attempt apart from the last attempt",
+              "help": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Partly Correct Final' feedback will be used instead.",
               "translatable": true
             }
           }

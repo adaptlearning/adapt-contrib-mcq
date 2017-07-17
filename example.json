@@ -48,6 +48,7 @@
       "final": "This feedback will appear if you answered the question correctly."
     }
   },
+  "_comment": "You only need to include _buttons if you want to override the button labels that are set in course.json",
   "_buttons": {
     "_submit": {
       "buttonText": "Submit",

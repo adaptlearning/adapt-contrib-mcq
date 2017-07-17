@@ -11,6 +11,7 @@
   "_isRandom":false,
   "_selectable":1,
   "_canShowModelAnswer": true,
+  "_canShowFeedback": true,
   "_canShowMarking": true,
   "_recordInteraction":true,
   "title": "MCQ",

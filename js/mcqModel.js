@@ -187,13 +187,6 @@ define([
                 return item._shouldBeSelected;
             });
 
-            correctItems.map(function(item) {
-                return {
-                    id: (item._index + 1).toString(),
-                    description: item.text
-                }
-            });
-
             interactions.correctResponsesPattern = [
                 _.pluck(correctItems, '_index')
                     .map(function(index) {

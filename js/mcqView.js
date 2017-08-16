@@ -92,11 +92,9 @@ define([
                     return;
                 }
                 $itemLabel.addClass('selected');
-                $itemLabel.a11y_selected(true);
             } else {
                 selectedItems.splice(_.indexOf(selectedItems, item), 1);
                 $itemLabel.removeClass('selected');
-                $itemLabel.a11y_selected(false);
             }
             $itemInput.prop('checked', selected);
             item._isSelected = selected;
@@ -125,7 +123,6 @@ define([
         },
 
         deselectAllItems: function() {
-            this.$el.a11y_selected(false);
             this.model.deselectAllItems();
         },
 

@@ -145,7 +145,8 @@ define([
         setupIndividualFeedback: function(selectedItem) {
              this.set({
                  feedbackTitle: this.get('title'),
-                 feedbackMessage: selectedItem.feedback
+                 feedbackMessage: selectedItem.feedback,
+                 feedbackImage: selectedItem._feedbackImage
              });
         },
 

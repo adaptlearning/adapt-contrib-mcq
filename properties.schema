@@ -66,6 +66,48 @@
             "validators": [],
             "help": "When 'Selectable Items' is set to 1, this can be used to give the user feedback specific to the answer they selected",
             "translatable": true
+          },
+          "_feedbackImage": {
+            "type":"object",
+            "required":false,
+            "title": "Feedback image",
+            "properties":{
+              "alt": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "title": "Alternative Text",
+                "inputType": "Text",
+                "validators": [],
+                "help": "The alternative text for this image",
+                "translatable": true
+              },
+              "large": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [],
+                "help": "The large sized image for desktop devices"
+              },
+              "small": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [],
+                "help": "The small sized image for mobile devices"
+              },
+              "attribution": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Text to be displayed as an attribution",
+                "translatable": true
+              }
+            }
           }
         }
       }
@@ -162,6 +204,48 @@
           "help": "Correct answer feedback for this question",
           "translatable": true
         },
+        "_correctImage": {
+          "type":"object",
+          "required":false,
+          "title": "Correct feedback image",
+          "properties":{
+            "alt": {
+              "type":"string",
+              "required":false,
+              "default": "",
+              "title": "Alternative Text",
+              "inputType": "Text",
+              "validators": [],
+              "help": "The alternative text for this image",
+              "translatable": true
+            },
+            "large": {
+              "type":"string",
+              "required":false,
+              "default": "",
+              "inputType": "Asset:image",
+              "validators": [],
+              "help": "The large sized image for desktop devices"
+            },
+            "small": {
+              "type":"string",
+              "required":false,
+              "default": "",
+              "inputType": "Asset:image",
+              "validators": [],
+              "help": "The small sized image for mobile devices"
+            },
+            "attribution": {
+              "type":"string",
+              "required":false,
+              "default": "",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text to be displayed as an attribution",
+              "translatable": true
+            }
+          }
+        },
         "_incorrect": {
           "type": "object",
           "required": false,
@@ -177,6 +261,48 @@
               "help": "Incorrect answer feedback for the final attempt",
               "translatable": true
             },
+            "_finalImage": {
+              "type":"object",
+              "required":false,
+              "title": "Incorrect final feedback image",
+              "properties":{
+                "alt": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "The alternative text for this image",
+                  "translatable": true
+                },
+                "large": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The large sized image for desktop devices"
+                },
+                "small": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The small sized image for mobile devices"
+                },
+                "attribution": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Text to be displayed as an attribution",
+                  "translatable": true
+                }
+              }
+            },
             "notFinal": {
               "type": "string",
               "required": false,
@@ -186,6 +312,48 @@
               "validators": [],
               "help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
+            },
+            "_notFinalImage": {
+              "type":"object",
+              "required":false,
+              "title": "Incorrect not final feedback image",
+              "properties":{
+                "alt": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "The alternative text for this image",
+                  "translatable": true
+                },
+                "large": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The large sized image for desktop devices"
+                },
+                "small": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The small sized image for mobile devices"
+                },
+                "attribution": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Text to be displayed as an attribution",
+                  "translatable": true
+                }
+              }
             }
           }
         },
@@ -203,6 +371,48 @@
               "help": "Partly correct answer feedback for the final attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             },
+            "_finalImage": {
+              "type":"object",
+              "required":false,
+              "title": "Partly correct final feedback image",
+              "properties":{
+                "alt": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "The alternative text for this image",
+                  "translatable": true
+                },
+                "large": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The large sized image for desktop devices"
+                },
+                "small": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The small sized image for mobile devices"
+                },
+                "attribution": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Text to be displayed as an attribution",
+                  "translatable": true
+                }
+              }
+            },
             "notFinal": {
               "type": "string",
               "required": false,
@@ -211,7 +421,61 @@
               "inputType": "TextArea",
               "validators": [],
               "help": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Partly Correct Final' feedback will be used instead.",
-              "translatable": true
+              "translatable": true,
+              "properties": {
+                "notFinal": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Partly Correct Not Final",
+                  "inputType": "TextArea",
+                  "validators": [],
+                  "help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
+                  "translatable": true
+                }
+              }
+            },
+            "_notFinalImage": {
+              "type":"object",
+              "required":false,
+              "title": "Partly correct not final feedback image",
+              "properties":{
+                "alt": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "The alternative text for this image",
+                  "translatable": true
+                },
+                "large": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The large sized image for desktop devices"
+                },
+                "small": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Asset:image",
+                  "validators": [],
+                  "help": "The small sized image for mobile devices"
+                },
+                "attribution": {
+                  "type":"string",
+                  "required":false,
+                  "default": "",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Text to be displayed as an attribution",
+                  "translatable": true
+                }
+              }
             }
           }
         }

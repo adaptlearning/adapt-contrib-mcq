@@ -152,6 +152,16 @@
       "required": false,
       "title": "Feedback",
       "properties": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "title": "Feedback Title",
+          "inputType": "Text",
+          "validators": [],
+          "help": "This text will display as the feedback title",
+          "translatable": true
+        },
         "correct": {
           "type": "string",
           "required": false,

@@ -1,19 +1,19 @@
 {
-  "_id":"c-105",
-  "_parentId":"b-55",
-  "_type":"component",
-  "_component":"mcq",
-  "_classes":"",
-  "_layout":"left",
-  "_attempts":1,
+  "_id": "c-105",
+  "_parentId": "b-55",
+  "_type": "component",
+  "_component": "mcq",
+  "_classes": "",
+  "_layout": "left",
+  "_attempts": 1,
   "_shouldDisplayAttempts": false,
-  "_questionWeight":1,
-  "_isRandom":false,
-  "_selectable":1,
+  "_questionWeight": 1,
+  "_isRandom": false,
+  "_selectable": 1,
   "_canShowModelAnswer": true,
   "_canShowFeedback": true,
   "_canShowMarking": true,
-  "_recordInteraction":true,
+  "_recordInteraction": true,
   "title": "MCQ",
   "displayTitle": "MCQ",
   "body": "Which of the following options would you consider to be correct?",
@@ -21,24 +21,25 @@
   "_items": [
     {
       "text": "This is option 1.",
-      "_shouldBeSelected":true
+      "_shouldBeSelected": true
     },
     {
       "text": "This is option 2.",
-      "_shouldBeSelected":false,
-      "feedback":"Option two incorrect feedback"
+      "_shouldBeSelected": false,
+      "feedback": "Option two incorrect feedback"
     },
     {
       "text": "This is option 3.",
-      "_shouldBeSelected":false
+      "_shouldBeSelected": false
     },
     {
       "text": "This is option 4.",
-      "_shouldBeSelected":false
+      "_shouldBeSelected": false
     }
   ],
   "_feedback":{
-    "correct":"Congratulations, this is the correct feedback.",
+    "title": "Feedback title",
+    "correct": "Congratulations, this is the correct feedback.",
     "_incorrect": {
       "notFinal": "",
       "final": "This feedback will appear if you answered the question incorrectly."

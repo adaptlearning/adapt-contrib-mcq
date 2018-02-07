@@ -38,7 +38,7 @@
     }
   ],
   "_feedback":{
-    "title": "Feedback title",
+    "title": "Feedback",
     "correct": "Congratulations, this is the correct feedback.",
     "_incorrect": {
       "notFinal": "",

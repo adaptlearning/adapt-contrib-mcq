@@ -159,7 +159,7 @@
           "title": "Feedback Title",
           "inputType": "Text",
           "validators": [],
-          "help": "This text will display as the feedback title",
+          "help": "Leave blank to have the component's title shown instead.",
           "translatable": true
         },
         "correct": {

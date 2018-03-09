@@ -168,6 +168,55 @@ define([
                 _selectedItems: [],
                 _isAtLeastOneCorrectSelection: false
             });
+        },
+
+        getInteractionObject: function() {
+            var interactions = {
+                correctResponsesPattern: [],
+                choices: []
+            };
+
+            interactions.choices = this.get('_items').map(function(item) {
+                return {
+                    id: (item._index + 1).toString(),
+                    description: item.text
+                }
+            });
+
+            var correctItems = _.filter(this.get('_items'), function(item) {
+                return item._shouldBeSelected;
+            });
+
+            interactions.correctResponsesPattern = [
+                _.pluck(correctItems, '_index')
+                    .map(function(index) {
+                        return (index + 1).toString();
+                    })
+                    .join('[,]')
+            ];
+
+            return interactions;
+        },
+
+        /**
+        * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
+        * returns the user's answers as a string in the format "1,5,2"
+        */
+        getResponse: function() {
+            var selected = _.where(this.get('_items'), {_isSelected: true});
+            var selectedIndexes = _.pluck(selected, '_index');
+            // indexes are 0-based, we need them to be 1-based for cmi.interactions
+            for (var i = 0, count = selectedIndexes.length; i < count; i++) {
+                selectedIndexes[i]++;
+            }
+            return selectedIndexes.join(',');
+        },
+
+        /**
+        * used by adapt-contrib-spoor to get the type of this question in the format required by the cmi.interactions.n.type data field
+        */
+        getResponseType: function() {
+            return 'choice';
         }
 
     });

@@ -62,7 +62,7 @@
             "required": false,
             "default": "",
             "title": "Answer-specific feedback",
-            "inputType": "Text",
+            "inputType": "TextArea",
             "validators": [],
             "help": "When 'Selectable Items' is set to 1, this can be used to give the user feedback specific to the answer they selected",
             "translatable": true

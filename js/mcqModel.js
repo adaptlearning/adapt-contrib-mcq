@@ -143,10 +143,10 @@ define([
         },
 
         setupIndividualFeedback: function(selectedItem) {
-             this.set({
-                 feedbackTitle: this.get('title'),
-                 feedbackMessage: selectedItem.feedback
-             });
+            this.set({
+                feedbackTitle: this.getFeedbackTitle(this.get('_feedback')),
+                feedbackMessage: selectedItem.feedback
+            });
         },
 
         isPartlyCorrect: function() {
@@ -180,7 +180,7 @@ define([
                 return {
                     id: (item._index + 1).toString(),
                     description: item.text
-                }
+                };
             });
 
             var correctItems = _.filter(this.get('_items'), function(item) {

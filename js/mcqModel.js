@@ -143,8 +143,12 @@ define([
         },
 
         setupIndividualFeedback: function(selectedItem) {
+            var title = this.getFeedbackTitle ?
+                this.getFeedbackTitle(this.get('_feedback')) :
+                this.get('title');
+
             this.set({
-                feedbackTitle: this.getFeedbackTitle(this.get('_feedback')),
+                feedbackTitle: title,
                 feedbackMessage: selectedItem.feedback
             });
         },

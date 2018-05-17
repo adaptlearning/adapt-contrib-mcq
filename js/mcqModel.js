@@ -143,6 +143,7 @@ define([
         },
 
         setupIndividualFeedback: function(selectedItem) {
+            // for compatibility with framework v2
             var title = this.getFeedbackTitle ?
                 this.getFeedbackTitle(this.get('_feedback')) :
                 this.get('title');

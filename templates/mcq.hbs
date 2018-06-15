@@ -1,10 +1,10 @@
 <div class="mcq-inner component-inner">
     {{> component this}}
-    <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+    <div class="mcq-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}" role="{{#if _isRadio}}radiogroup{{else}}group{{/if}}">
         {{#each _items}}
         <div class="mcq-item component-item component-item-color {{#unless ../_isEnabled}}{{#if ../_canShowMarking}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/if}}{{/unless}} item-{{@index}}">
-            <input type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" id="{{../_id}}-{{@index}}"{{#unless ../_isEnabled}} disabled{{/unless}}/>
-            <label id="{{../_id}}-{{@index}}-aria" for="{{../_id}}-{{@index}}" class="component-item-text-color component-item-border{{#unless ../_isEnabled}} disabled {{/unless}}{{#if _isSelected}} selected{{/if}}">
+            <input {{#if ../_isRadio}}name="{{../_id}}-item" {{/if}} type="{{#if ../_isRadio}}radio{{else}}checkbox{{/if}}" id="{{../_id}}-{{@index}}-label" {{#unless ../_isEnabled}} disabled{{/unless}} aria-label="{{{a11y_normalize text}}}" data-adapt-index="{{_index}}" />
+            <label aria-hidden="true" for="{{../_id}}-{{@index}}-label" class="component-item-text-color component-item-border{{#unless ../_isEnabled}} disabled {{/unless}}{{#if _isSelected}} selected{{/if}}" data-adapt-index="{{_index}}" >
                 <div class="mcq-item-state">
                     <div class="mcq-item-icon mcq-answer-icon {{#if ../_isRadio}}radio{{else}}checkbox{{/if}} component-item-text-color icon"></div>
                     <div class="mcq-item-icon mcq-correct-icon icon icon-tick"></div>

@@ -1,14 +1,14 @@
 define([
     'core/js/models/questionModel'
 ], function(QuestionModel) {
-    
+
     var McqModel = QuestionModel.extend({
 
         init: function() {
             QuestionModel.prototype.init.call(this);
 
             this.set("_isRadio", (this.get("_selectable") == 1) );
-            
+
             this.set('_selectedItems', []);
 
             this.setupQuestionItemIndexes();
@@ -96,7 +96,7 @@ define([
 
                     if (itemSelected) {
                         numberOfCorrectAnswers ++;
-                        
+
                         item._isCorrect = true;
 
                         this.set('_isAtLeastOneCorrectSelection', true);
@@ -166,6 +166,31 @@ define([
             _.each(this.get('_items'), function(item) {
                 item._isSelected = false;
             }, this);
+        },
+
+        toggleItem: function(item, selected) {
+            var selectedItems = this.get('_selectedItems');
+            item._isSelected = selected;
+            if (selected) {
+                selectedItems.push(item);
+            } else {
+                selectedItems.splice(_.indexOf(selectedItems, item), 1);
+            }
+            this.set('_selectedItems', selectedItems);
+        },
+
+        isAtSelectionLimit: function() {
+            var selectedItems = this.get("_selectedItems");
+            return (selectedItems.length === this.get('_selectable'));
+        },
+
+        isSingleSelect: function() {
+            return (this.get('_selectable') === 1);
+        },
+
+        getLastSelectedItem: function(){
+            var selectedItems = this.get("_selectedItems");
+            return selectedItems[selectedItems.length-1];
         },
 
         resetItems: function() {

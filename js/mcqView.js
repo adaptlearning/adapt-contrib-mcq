@@ -60,7 +60,7 @@ define([
                 $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
             }
         },
-        
+
         onItemBlur: function(event) {
             $("label[for='"+$(event.currentTarget).attr('id')+"']").removeClass('highlighted');
         },
@@ -73,32 +73,19 @@ define([
         },
 
         toggleItemSelected:function(item, clickEvent) {
-            var selectedItems = this.model.get('_selectedItems');
-            var itemIndex = _.indexOf(this.model.get('_items'), item),
-                $itemLabel = this.$('label').eq(itemIndex),
-                $itemInput = this.$('input').eq(itemIndex),
-                selected = !$itemLabel.hasClass('selected');
-            
-                if(selected) {
-                    if(this.model.get('_selectable') === 1){
-                        this.$('label').removeClass('selected');
-                        this.$('input').prop('checked', false);
-                        this.deselectAllItems();
-                        selectedItems[0] = item;
-                    } else if(selectedItems.length < this.model.get('_selectable')) {
-                     selectedItems.push(item);
-                 } else {
-                    clickEvent.preventDefault();
-                    return;
-                }
-                $itemLabel.addClass('selected');
-            } else {
-                selectedItems.splice(_.indexOf(selectedItems, item), 1);
-                $itemLabel.removeClass('selected');
+            var shouldSelect = !item._isSelected;
+
+            if (this.model.isSingleSelect()) {
+                // Assume a click is always a selection
+                shouldSelect = true;
+                this.deselectAllItems();
+            } else if (shouldSelect && this.model.isAtSelectionLimit()) {
+                // At the selection limit, deselect the last item
+                this.toggleItem(this.model.getLastSelectedItem(), false);
             }
-            $itemInput.prop('checked', selected);
-            item._isSelected = selected;
-            this.model.set('_selectedItems', selectedItems);
+
+            // Select or deselect accordingly
+            this.toggleItem(item, shouldSelect);
         },
 
         // Blank method to add functionality for when the user cannot submit
@@ -122,7 +109,19 @@ define([
             this.resetItems();
         },
 
+        toggleItem: function(item, selected) {
+            // Change visual appearance
+            var $itemLabel = this.$('label[data-adapt-index='+item._index+']');
+            var $itemInput = this.$('input[data-adapt-index='+item._index+']');
+            $itemLabel.toggleClass('selected', selected);
+            $itemInput.prop('checked', selected);
+            // Change model values
+            this.model.toggleItem(item, selected);
+        },
+
         deselectAllItems: function() {
+            this.$('label').removeClass('selected');
+            this.$('input').prop('checked', false);
             this.model.deselectAllItems();
         },
 
@@ -156,6 +155,7 @@ define([
                 this.setOptionSelected(index, this.model.get('_userAnswer')[item._index]);
             }, this);
         }
+
     });
 
     return McqView;

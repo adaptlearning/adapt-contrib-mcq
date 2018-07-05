@@ -7,7 +7,7 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "This is a multiple choice question. Once you have selected an option, select the submit button below",
+      "default": "Multiple choice question. Select your option and then submit.",
       "inputType": "Text",
       "validators": [],
       "translatable": true

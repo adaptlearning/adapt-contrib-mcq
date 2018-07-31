@@ -1,14 +1,14 @@
 define([
     'core/js/models/questionModel'
 ], function(QuestionModel) {
-    
+
     var McqModel = QuestionModel.extend({
 
         init: function() {
             QuestionModel.prototype.init.call(this);
 
             this.set("_isRadio", (this.get("_selectable") == 1) );
-            
+
             this.set('_selectedItems', []);
 
             this.setupQuestionItemIndexes();
@@ -96,7 +96,7 @@ define([
 
                     if (itemSelected) {
                         numberOfCorrectAnswers ++;
-                        
+
                         item._isCorrect = true;
 
                         this.set('_isAtLeastOneCorrectSelection', true);
@@ -126,7 +126,8 @@ define([
         },
 
         setupFeedback: function() {
-
+            if (this.has('_canShowFeedback') && this.get('_canShowFeedback') == false)
+                return;
             if (this.get('_isCorrect')) {
                 this.setupCorrectFeedback();
             } else if (this.isPartlyCorrect()) {

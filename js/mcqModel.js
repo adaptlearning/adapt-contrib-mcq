@@ -126,7 +126,8 @@ define([
         },
 
         setupFeedback: function() {
-
+            if (this.has('_canShowFeedback') && this.get('_canShowFeedback') == false)
+                return;
             if (this.get('_isCorrect')) {
                 this.setupCorrectFeedback();
             } else if (this.isPartlyCorrect()) {

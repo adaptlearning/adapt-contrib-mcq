@@ -45,7 +45,7 @@ define([
 
         onQuestionRendered: function() {
             this.setReadyStatus();
-            if (!this.model.get("_isSubmitted")) return;
+            if (!this.model.get('_isSubmitted')) return;
             this.showMarking();
         },
 
@@ -57,12 +57,12 @@ define([
 
         onItemFocus: function(event) {
             if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
-                $("label[for='"+$(event.currentTarget).attr('id')+"']").addClass('highlighted');
+                $('label[for=''+$(event.currentTarget).attr('id')+'']').addClass('highlighted');
             }
         },
 
         onItemBlur: function(event) {
-            $("label[for='"+$(event.currentTarget).attr('id')+"']").removeClass('highlighted');
+            $('label[for=''+$(event.currentTarget).attr('id')+'']').removeClass('highlighted');
         },
 
         onItemSelected: function(event) {

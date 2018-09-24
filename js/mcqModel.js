@@ -126,6 +126,7 @@ define([
         },
 
         setupFeedback: function() {
+            if (!this.has('_feedback')) return;
 
             if (this.get('_isCorrect')) {
                 this.setupCorrectFeedback();

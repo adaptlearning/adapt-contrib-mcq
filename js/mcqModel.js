@@ -1,21 +1,21 @@
 define([
     'core/js/models/questionModel'
 ], function(QuestionModel) {
-    
+
     var McqModel = QuestionModel.extend({
 
         init: function() {
             QuestionModel.prototype.init.call(this);
 
-            this.set("_isRadio", (this.get("_selectable") == 1) );
-            
+            this.set('_isRadio', (this.get('_selectable') == 1) );
+
             this.set('_selectedItems', []);
 
             this.setupQuestionItemIndexes();
         },
 
         setupQuestionItemIndexes: function() {
-            var items = this.get("_items");
+            var items = this.get('_items');
             if (items && items.length > 0) {
                 for (var i = 0, l = items.length; i < l; i++) {
                     if (items[i]._index === undefined) items[i]._index = i;
@@ -24,11 +24,11 @@ define([
         },
 
         restoreUserAnswers: function() {
-            if (!this.get("_isSubmitted")) return;
+            if (!this.get('_isSubmitted')) return;
 
             var selectedItems = [];
-            var items = this.get("_items");
-            var userAnswer = this.get("_userAnswer");
+            var items = this.get('_items');
+            var userAnswer = this.get('_userAnswer');
             _.each(items, function(item, index) {
                 item._isSelected = userAnswer[item._index];
                 if (item._isSelected) {
@@ -36,7 +36,7 @@ define([
                 }
             });
 
-            this.set("_selectedItems", selectedItems);
+            this.set('_selectedItems', selectedItems);
 
             this.setQuestionAsSubmitted();
             this.markQuestion();
@@ -47,7 +47,7 @@ define([
 
         setupRandomisation: function() {
             if (this.get('_isRandom') && this.get('_isEnabled')) {
-                this.set("_items", _.shuffle(this.get("_items")));
+                this.set('_items', _.shuffle(this.get('_items')));
             }
         },
 
@@ -96,7 +96,7 @@ define([
 
                     if (itemSelected) {
                         numberOfCorrectAnswers ++;
-                        
+
                         item._isCorrect = true;
 
                         this.set('_isAtLeastOneCorrectSelection', true);
@@ -119,7 +119,7 @@ define([
         // Sets the score based upon the questionWeight
         // Can be overwritten if the question needs to set the score in a different way
         setScore: function() {
-            var questionWeight = this.get("_questionWeight");
+            var questionWeight = this.get('_questionWeight');
             var answeredCorrectly = this.get('_isCorrect');
             var score = answeredCorrectly ? questionWeight : 0;
             this.set('_score', score);
@@ -169,6 +169,31 @@ define([
             }, this);
         },
 
+        toggleItem: function(item, selected) {
+            var selectedItems = this.get('_selectedItems');
+            item._isSelected = selected;
+            if (selected) {
+                selectedItems.push(item);
+            } else {
+                selectedItems.splice(_.indexOf(selectedItems, item), 1);
+            }
+            this.set('_selectedItems', selectedItems);
+        },
+
+        isAtSelectionLimit: function() {
+            var selectedItems = this.get('_selectedItems');
+            return (selectedItems.length === this.get('_selectable'));
+        },
+
+        isSingleSelect: function() {
+            return (this.get('_selectable') === 1);
+        },
+
+        getLastSelectedItem: function(){
+            var selectedItems = this.get('_selectedItems');
+            return selectedItems[selectedItems.length-1];
+        },
+
         resetItems: function() {
             this.set({
                 _selectedItems: [],
@@ -206,7 +231,7 @@ define([
 
         /**
         * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
-        * returns the user's answers as a string in the format "1,5,2"
+        * returns the user's answers as a string in the format '1,5,2'
         */
         getResponse: function() {
             var selected = _.where(this.get('_items'), {_isSelected: true});

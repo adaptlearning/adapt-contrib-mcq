@@ -1,6 +1,7 @@
 define([
+    'core/js/adapt',
     'core/js/views/questionView'
-], function(QuestionView) {
+], function(Adapt, QuestionView) {
 
     var McqView = QuestionView.extend({
 
@@ -97,9 +98,18 @@ define([
         showMarking: function() {
             if (!this.model.get('_canShowMarking')) return;
 
+            var ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
+            var isCorrect = this.model.get('_isCorrect');
+
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.component-item').eq(i);
                 $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'correct' : 'incorrect');
+
+                var ariaLabel = (item._shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect) + ", ";
+                ariaLabel += (item._isSelected ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer) + ". ";
+                ariaLabel += $.a11y_normalize(item.text);
+
+                $item.find('input').attr('aria-label', ariaLabel);
             }, this);
         },
 

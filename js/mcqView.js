@@ -99,7 +99,6 @@ define([
             if (!this.model.get('_canShowMarking')) return;
 
             var ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
-            var isCorrect = this.model.get('_isCorrect');
 
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.component-item').eq(i);

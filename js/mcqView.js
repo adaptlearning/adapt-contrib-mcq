@@ -6,14 +6,26 @@ define([
     var McqView = QuestionView.extend({
 
         events: {
-            'focus .mcq-item input':'onItemFocus',
-            'blur .mcq-item input':'onItemBlur',
-            'change .mcq-item input':'onItemSelected',
-            'keyup .mcq-item input':'onKeyPress'
+            'focus .component-item input':'onItemFocus',
+            'blur .component-item input':'onItemBlur',
+            'change .component-item input':'onItemSelect',
+            'keyup .component-item input':'onKeyPress'
+        },
+
+        isCorrectAnswerShown: false,
+
+        initialize: function() {
+            QuestionView.prototype.initialize.apply(this, arguments);
+            this.update = _.debounce(this.update.bind(this), 1);
+            this.listenTo(this.model, {
+                "change:_isEnabled change:_isComplete change:_isSubmitted": this.update
+            });
+            this.listenTo(this.model.getChildren(), {
+                "change:_isActive": this.update
+            });
         },
 
         resetQuestionOnRevisit: function() {
-            this.setAllItemsEnabled(true);
             this.resetQuestion();
         },
 
@@ -21,72 +33,44 @@ define([
             this.model.setupRandomisation();
         },
 
-        disableQuestion: function() {
-            this.setAllItemsEnabled(false);
-        },
-
-        enableQuestion: function() {
-            this.setAllItemsEnabled(true);
-        },
-
-        setAllItemsEnabled: function(isEnabled) {
-            _.each(this.model.get('_items'), function(item, index){
-                var $itemLabel = this.$('label').eq(index);
-                var $itemInput = this.$('input').eq(index);
-
-                if (isEnabled) {
-                    $itemLabel.removeClass('disabled');
-                    $itemInput.prop('disabled', false);
-                } else {
-                    $itemLabel.addClass('disabled');
-                    $itemInput.prop('disabled', true);
-                }
-            }, this);
-        },
-
         onQuestionRendered: function() {
             this.setReadyStatus();
-            if (!this.model.get('_isSubmitted')) return;
-            this.showMarking();
+            this.update();
         },
 
         onKeyPress: function(event) {
-            if (event.which === 13) { //<ENTER> keypress
-                this.onItemSelected(event);
-            }
+            if (event.which !== 13) return;
+            //<ENTER> keypress
+            this.onItemSelect(event);
         },
 
         onItemFocus: function(event) {
-            if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
-                $('label[for='+$(event.currentTarget).attr('id')+']').addClass('highlighted');
-            }
+            if (!this.model.isInteractive()) return;
+
+            $('label[for='+$(event.currentTarget).attr('id')+']').addClass('highlighted');
         },
 
         onItemBlur: function(event) {
             $('label[for='+$(event.currentTarget).attr('id')+']').removeClass('highlighted');
         },
 
-        onItemSelected: function(event) {
-            if(this.model.get('_isEnabled') && !this.model.get('_isSubmitted')){
-                var selectedItemObject = this.model.get('_items')[$(event.currentTarget).parent('.component-item').index()];
-                this.toggleItemSelected(selectedItemObject, event);
-            }
-        },
+        onItemSelect: function(event) {
+            if (!this.model.isInteractive()) return;
 
-        toggleItemSelected:function(item, clickEvent) {
-            var shouldSelect = !item._isSelected;
+            var itemModel = this.model.getChildren().at($(event.currentTarget).parent('.component-item').index());
+            var shouldSelect = !itemModel.get("_isActive");
 
             if (this.model.isSingleSelect()) {
                 // Assume a click is always a selection
                 shouldSelect = true;
-                this.deselectAllItems();
-            } else if (shouldSelect && this.model.isAtSelectionLimit()) {
+                this.model.resetActiveItems();
+            } else if (shouldSelect && this.model.isAtActiveLimit()) {
                 // At the selection limit, deselect the last item
-                this.toggleItem(this.model.getLastSelectedItem(), false);
+                this.model.getLastActiveItem().toggleActive(false);
             }
 
             // Select or deselect accordingly
-            this.toggleItem(item, shouldSelect);
+            itemModel.toggleActive(shouldSelect);
         },
 
         // Blank method to add functionality for when the user cannot submit
@@ -96,73 +80,91 @@ define([
         // This is important and should give the user feedback on how they answered the question
         // Normally done through ticks and crosses by adding classes
         showMarking: function() {
-            if (!this.model.get('_canShowMarking')) return;
-
-            var ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
-
-            _.each(this.model.get('_items'), function(item, i) {
-                var $item = this.$('.component-item').eq(i);
-                $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'correct' : 'incorrect');
-
-                var ariaLabel = (item._shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect) + ", ";
-                ariaLabel += (item._isSelected ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer) + ". ";
-                ariaLabel += $.a11y_normalize(item.text);
-
-                $item.find('input').attr('aria-label', ariaLabel);
-            }, this);
+            this.update();
         },
 
         // Used by the question view to reset the look and feel of the component.
         resetQuestion: function() {
-            this.deselectAllItems();
-            this.resetItems();
-        },
-
-        toggleItem: function(item, selected) {
-            // Change visual appearance
-            var $itemLabel = this.$('label[data-adapt-index='+item._index+']');
-            var $itemInput = this.$('input[data-adapt-index='+item._index+']');
-            $itemLabel.toggleClass('selected', selected);
-            $itemInput.prop('checked', selected);
-            // Change model values
-            this.model.toggleItem(item, selected);
-        },
-
-        deselectAllItems: function() {
-            this.$('label').removeClass('selected');
-            this.$('input').prop('checked', false);
-            this.model.deselectAllItems();
-        },
-
-        resetItems: function() {
-            this.$('.component-item label').removeClass('selected');
-            this.$('.component-item').removeClass('correct incorrect');
-            this.$('input').prop('checked', false);
+            this.model.resetActiveItems();
             this.model.resetItems();
         },
 
         showCorrectAnswer: function() {
-            _.each(this.model.get('_items'), function(item, index) {
-                this.setOptionSelected(index, item._shouldBeSelected);
-            }, this);
-        },
-
-        setOptionSelected:function(index, selected) {
-            var $itemLabel = this.$('label').eq(index);
-            var $itemInput = this.$('input').eq(index);
-            if (selected) {
-                $itemLabel.addClass('selected');
-                $itemInput.prop('checked', true);
-            } else {
-                $itemLabel.removeClass('selected');
-                $itemInput.prop('checked', false);
-            }
+            this.isCorrectAnswerShown = true;
+            this.update();
         },
 
         hideCorrectAnswer: function() {
-            _.each(this.model.get('_items'), function(item, index) {
-                this.setOptionSelected(index, this.model.get('_userAnswer')[item._index]);
-            }, this);
+            this.isCorrectAnswerShown = false;
+            this.update();
+        },
+
+        update: function() {
+            this.updateSelection();
+            this.updateMarking();
+        },
+
+        updateSelection: function() {
+
+            var isEnabled = this.model.get("_isEnabled");
+
+            this.model.getChildren().each(function(itemModel, i) {
+
+                var isSelected = this.isCorrectAnswerShown ?
+                    itemModel.get("_shouldBeSelected") :
+                    itemModel.get("_isActive");
+
+                var $itemLabel = this.$('label').eq(i)
+                $itemLabel
+                    .toggleClass('selected', isSelected)
+                    .toggleClass('disabled', !isEnabled);
+
+                var $itemInput = this.$('input').eq(i);
+                $itemInput
+                    .prop('checked', isSelected)
+                    .prop('disabled', !isEnabled);
+
+            }.bind(this));
+
+        },
+
+        updateMarking: function() {
+
+            var isInteractive = this.model.isInteractive();
+            var canShowMarking = this.model.get('_canShowMarking');
+            var ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
+
+            this.model.getChildren().each(function(itemModel, i) {
+
+                var $item = this.$('.component-item').eq(i);
+                var $itemInput = this.$('input').eq(i);
+
+                if (isInteractive || !canShowMarking) {
+                    // Remove item marking
+                    $item.removeClass('correct incorrect');
+                    $itemInput.attr('aria-label', $.a11y_normalize(itemModel.get("text")));
+                    return;
+                }
+
+                // Mark item
+                var shouldBeSelected = itemModel.get("_shouldBeSelected");
+                var isCorrect = itemModel.get("_isCorrect");
+                var isActive = itemModel.get("_isActive");
+
+                $item
+                    .removeClass('correct incorrect')
+                    .addClass(isCorrect ? 'correct' : 'incorrect');
+
+                $itemInput.attr('aria-label', [
+                    (shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect),
+                    ", ",
+                    (isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer),
+                    ". ",
+                    $.a11y_normalize(itemModel.get("text"))
+                ].join(""));
+
+            }.bind(this));
+
         }
 
     });

@@ -1,12 +1,12 @@
 define([
     'core/js/adapt',
     './mcqView',
-    './mcqModel'
-], function(Adapt, McqView, McqModel) {
+    'core/js/models/itemsQuestionModel'
+], function(Adapt, McqView, ItemsQuestionModel) {
 
     return Adapt.register("mcq", {
         view: McqView,
-        model: McqModel
+        model: ItemsQuestionModel.extend({})
     });
 
 });

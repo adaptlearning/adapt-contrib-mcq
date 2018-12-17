@@ -6,6 +6,8 @@ define([
 
     return Adapt.register("mcq", {
         view: McqView,
+        // Extend ItemsQuestionModel to distinguish McqModel in
+        // the inheritance chain and allow targeted model extensions.
         model: ItemsQuestionModel.extend({})
     });
 

@@ -1,192 +1,112 @@
-.mcq-component {
-    .mcq-item {
-        background-color:@item-color;
-        position:relative;
+.mcq {
+  &__item {
+    position: relative;
+  }
+
+  &__item-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    .transform(translate(-50%, -50%));
+  }
+
+  &__item-label {
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
+
+  &__item-label:not(.is-disabled) {
+    cursor: pointer;
+  }
+
+  &__item-state {
+    position: absolute;
+    top: 50%;
+    left: @item-padding;
+    .transform(translateY(-50%));
+
+    .dir-rtl & {
+      left: inherit;
+      right: @item-padding;
     }
+  }
 
-    .mcq-item label {
-        color:@item-text-color;
-        display:block;
-        margin-bottom:2px;
-        position:relative;
-        z-index:1;
-        background-color:@item-color;
-        cursor:pointer;
+  // --------------------------------------------------
+  // MCQ item icons
+  // --------------------------------------------------
+  &__item-answer-icon.is-radio .icon {
+    .icon-radio-unchecked;
+  }
 
-        .mcq-answer-icon {
-            color:@item-text-color;
-            &.radio {
-                width: @icon-size + 2;
-                height: @icon-size + 2;
-                &:before {
-                    content: "\e65e";
-                }
-            }
-            &.checkbox {
-                &:before {
-                    content: " ";
-                }
-                border: 3px solid @item-text-color;
-                width:18px;
-                height:18px;
-                font-size:18px;
-                font-weight: bold;
-                border-radius: 2px;
-            }
-        }
+  &__item-answer-icon.is-checkbox .icon {
+    .icon-checkbox-unchecked;
+  }
 
-        &.selected {
-            color:@item-text-color-selected;
-            background-color:@item-color-selected;
-            border-color:@item-border-color-selected;
-            .mcq-answer-icon {
-                 &.radio {
-                    &:before {
-                        content: "\e65d";
-                    }
-                }
-                &.checkbox {
-                    &:before {
-                        content: "\e633";
-                    }
-                    border: 3px solid @item-text-color-selected;
-                    width:18px;
-                    height:18px;
-                    font-size:18px;
-                    font-weight: bold;
-                    border-radius: 2px;
-                }
-            }
-            .mcq-item-icon {
-                color:@item-text-color-selected;
-            }
-        }
+  &__item-label.is-selected {
+    .mcq__item-answer-icon.is-radio .icon {
+      .icon-radio-checked;
     }
+  }
 
-    .mcq-item-inner {
-        padding:@item-padding;
-        padding-left:(@icon-size+(@item-padding-left*2));
-      .dir-rtl & {
-            padding-left:inherit;
-          padding-right:(@icon-size+(@item-padding-left*2));
-      }
+  &__item-label.is-selected {
+    .mcq__item-answer-icon.is-checkbox .icon {
+      .icon-checkbox-checked;
     }
+  }
 
-    .mcq-item input {
-        position:absolute;
-        top:14px;
-        left:14px;
-        opacity: 0;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
-        .dir-rtl & {
-            left:inherit;
-            right:14px;
-        }
+  &__item-correct-icon .icon {
+    .icon-tick;
+  }
+
+  &__item-incorrect-icon .icon {
+    .icon-cross;
+  }
+  // --------------------------------------------------
+
+  &__item-text {
+    padding: @item-padding @item-padding @item-padding (@icon-size + (@item-padding * 2));
+
+    .dir-rtl & {
+      padding-left: @item-padding;
+      padding-right: @icon-size + (@item-padding * 2);
     }
+  }
 
-    .mcq-correct-icon {
-        color:@validation-success;
-        display:none;
+  &__item-icon {
+    display: none;
+  }
+
+  // --------------------------------------------------
+  // Class to show the selection icons until the component is complete
+  // --------------------------------------------------
+  &__widget:not(.is-complete) {
+    .mcq__item-answer-icon {
+      display: block
     }
+  }
+  // --------------------------------------------------
 
-    .mcq-incorrect-icon {
-        color:@validation-error;
-        display:none;
+  // --------------------------------------------------
+  // Class to show the users selection
+  // --------------------------------------------------
+  &__widget.show-user-answer {
+    .is-correct .is-selected .mcq__item-correct-icon,
+    .is-incorrect .is-selected .mcq__item-incorrect-icon {
+      display: block;
     }
+  }
+  // --------------------------------------------------
 
-    .mcq-item-state {
-        background:none;
-        position:absolute;
-        left:10px;
-        .dir-rtl & {
-            left:inherit;
-            right:10px;
-        }
-        width:@icon-size;
-        height:@icon-size;
-        top:50%;
-        margin-top:-(@icon-size/2);
-        z-index:0;
+  // --------------------------------------------------
+  // Class to show the correct answers
+  // --------------------------------------------------
+  &__widget.show-correct-answer {
+    .is-correct .is-selected .mcq__item-correct-icon,
+    .is-incorrect .is-selected .mcq__item-correct-icon {
+      display: block;
     }
-}
-
-.mcq-widget {
-
-    &.show-user-answer {
-        .mcq-item-icon {
-            display:none;
-        }
-        .incorrect {
-            .selected .mcq-incorrect-icon {
-                display:block;
-            }
-        }
-        .correct {
-            .selected .mcq-correct-icon {
-                display:block;
-            }
-        }
-    }
-
-    &.show-correct-answer {
-        .mcq-item-icon {
-            display:none;
-        }
-        .incorrect .selected .mcq-correct-icon,
-        .correct .selected .mcq-correct-icon {
-            display:block;
-        }
-    }
-
-    &.disabled {
-        .mcq-item label.selected.disabled {
-            color:@item-text-color-selected;
-            background-color:@item-color-selected;
-            border-color:@item-border-color-selected;
-            cursor:default;
-        }
-        .mcq-item label.disabled {
-            color:@item-text-color-disabled;
-            background-color:@item-color-disabled;
-            border-color:@item-border-color-disabled;
-            cursor:default;
-        }
-
-        .mcq-item.correct .selected .state {
-            color:@validation-success;
-        }
-
-        .mcq-item.incorrect .selected .state {
-            color:@validation-error;
-        }
-    }
-}
-
-.no-touch {
-
-    .mcq-widget {
-        &:not(.disabled) {
-            .mcq-item label:hover {
-                color:@item-text-color-hover;
-                background-color:@item-color-hover;
-                border-color:@item-border-color-hover;
-                .mcq-item-icon {
-                    color:@item-text-color-hover;
-                }
-            }
-            .mcq-item label.disabled {
-                color:@item-text-color-disabled;
-                background-color:@item-color-disabled;
-                border-color:@item-border-color-disabled;
-                &:hover {
-                    color:@item-text-color-disabled;
-                    background-color:@item-color-disabled;
-                    border-color:@item-border-color-disabled;
-                }
-                .mcq-item-icon {
-                    color:@item-text-color-disabled;
-                }
-            }
-        }
-    }
+  }
+  // --------------------------------------------------
 }

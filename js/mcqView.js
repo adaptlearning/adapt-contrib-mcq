@@ -109,7 +109,7 @@ define([
 
             var isEnabled = this.model.get("_isEnabled");
 
-            this.model.getChildren().each(function(itemModel, i) {
+            this.model.getChildren().each(function(itemModel) {
 
                 var isSelected = this.isCorrectAnswerShown ?
                     itemModel.get("_shouldBeSelected") :

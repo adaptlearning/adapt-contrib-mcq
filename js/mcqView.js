@@ -57,7 +57,8 @@ define([
         onItemSelect: function(event) {
             if (!this.model.isInteractive()) return;
 
-            var itemModel = this.model.getChildren().at($(event.currentTarget).parent('.component-item').index());
+            var index = $(event.currentTarget).data('adapt-index');
+            var itemModel = this.model.getItem(index);
             var shouldSelect = !itemModel.get("_isActive");
 
             if (this.model.isSingleSelect()) {
@@ -114,13 +115,12 @@ define([
                     itemModel.get("_shouldBeSelected") :
                     itemModel.get("_isActive");
 
-                var $itemLabel = this.$('label').eq(i)
-                $itemLabel
+                var index = itemModel.get('_index');
+                this.$('label').filter('[data-adapt-index="' + index + '"]')
                     .toggleClass('selected', isSelected)
                     .toggleClass('disabled', !isEnabled);
 
-                var $itemInput = this.$('input').eq(i);
-                $itemInput
+                this.$('input').filter('[data-adapt-index="' + index + '"]')
                     .prop('checked', isSelected)
                     .prop('disabled', !isEnabled);
 
@@ -134,10 +134,11 @@ define([
             var canShowMarking = this.model.get('_canShowMarking');
             var ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
-            this.model.getChildren().each(function(itemModel, i) {
+            this.model.getChildren().each(function(itemModel) {
 
-                var $item = this.$('.component-item').eq(i);
-                var $itemInput = this.$('input').eq(i);
+                var index = itemModel.get('_index');
+                var $itemInput = this.$('input').filter('[data-adapt-index="' + index + '"]');
+                var $item = $itemInput.parents('.component-item');
 
                 if (isInteractive || !canShowMarking) {
                     // Remove item marking
@@ -148,12 +149,12 @@ define([
 
                 // Mark item
                 var shouldBeSelected = itemModel.get("_shouldBeSelected");
-                var isCorrect = itemModel.get("_isCorrect");
-                var isActive = itemModel.get("_isActive");
+                var isCorrect = Boolean(itemModel.get("_isCorrect"));
+                var isActive = Boolean(itemModel.get("_isActive"));
 
                 $item
-                    .removeClass('correct incorrect')
-                    .addClass(isCorrect ? 'correct' : 'incorrect');
+                    .toggleClass('correct', isCorrect)
+                    .toggleClass('incorrect', !isCorrect);
 
                 $itemInput.attr('aria-label', [
                     (shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect),

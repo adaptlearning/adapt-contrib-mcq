@@ -6,10 +6,10 @@ define([
   var McqView = QuestionView.extend({
 
     events: {
-      'focus .component-item input':'onItemFocus',
-      'blur .component-item input':'onItemBlur',
-      'change .component-item input':'onItemSelect',
-      'keyup .component-item input':'onKeyPress'
+      'focus .js-item-input': 'onItemFocus',
+      'blur .js-item-input': 'onItemBlur',
+      'change .js-item-input': 'onItemSelect',
+      'keyup .js-item-input': 'onKeyPress'
     },
 
      isCorrectAnswerShown: false,
@@ -47,7 +47,7 @@ define([
     onItemFocus: function(event) {
       if (!this.model.isInteractive()) return;
 
-      $('label[for='+$(event.currentTarget).attr('id')+']').addClass('highlighted');
+      $('.js-item-label[for='+$(event.currentTarget).attr('id')+']').addClass('is-highlighted');
     },
 
     onItemBlur: function(event) {
@@ -116,11 +116,11 @@ define([
             itemModel.get("_isActive");
 
         var index = itemModel.get('_index');
-        this.$('label').filter('[data-adapt-index="' + index + '"]')
-            .toggleClass('selected', isSelected)
-            .toggleClass('disabled', !isEnabled);
+        this.$('.js-item-label').filter('[data-adapt-index="' + index + '"]')
+            .toggleClass('is-selected', isSelected)
+            .toggleClass('is-disabled', !isEnabled);
 
-        this.$('input').filter('[data-adapt-index="' + index + '"]')
+        this.$('.js-item-input').filter('[data-adapt-index="' + index + '"]')
               .prop('checked', isSelected)
               .prop('disabled', !isEnabled);
 
@@ -137,12 +137,12 @@ define([
       this.model.getChildren().each(function(itemModel) {
 
         var index = itemModel.get('_index');
-        var $itemInput = this.$('input').filter('[data-adapt-index="' + index + '"]');
-        var $item = $itemInput.parents('.component-item');
+        var $itemInput = this.$('.js-item-input').filter('[data-adapt-index="' + index + '"]');
+        var $item = $itemInput.parents('.js-mcq-item');
 
         if (isInteractive || !canShowMarking) {
           // Remove item marking
-          $item.removeClass('correct incorrect');
+          $item.removeClass('is-correct is-incorrect');
           $itemInput.attr('aria-label', $.a11y_normalize(itemModel.get("text")));
           return;
         }
@@ -153,8 +153,8 @@ define([
         var isActive = Boolean(itemModel.get("_isActive"));
 
         $item
-            .toggleClass('correct', isCorrect)
-            .toggleClass('incorrect', !isCorrect);
+            .toggleClass('is-correct', isCorrect)
+            .toggleClass('is-incorrect', !isCorrect);
 
         $itemInput.attr('aria-label', [
           (shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect),

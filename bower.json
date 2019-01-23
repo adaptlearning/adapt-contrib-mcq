@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "2.2.1",
-  "framework": ">=2.0.11",
+  "version": "3.0.0",
+  "framework": ">=4",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
   "displayName" : "Multiple Choice Question",

@@ -8,11 +8,11 @@
     top: 50%;
     left: 50%;
     opacity: 0;
+    z-index: -1;
     .transform(translate(-50%, -50%));
   }
 
   &__item-label {
-    position: relative;
     display: block;
     z-index: 1;
   }
@@ -21,16 +21,8 @@
     cursor: pointer;
   }
 
-  &__item-state {
-    position: absolute;
-    top: 50%;
-    left: @item-padding;
-    .transform(translateY(-50%));
-
-    .dir-rtl & {
-      left: inherit;
-      right: @item-padding;
-    }
+  &__item-icon {
+    display: none;
   }
 
   // --------------------------------------------------
@@ -64,19 +56,6 @@
     .icon-cross;
   }
   // --------------------------------------------------
-
-  &__item-text {
-    padding: @item-padding @item-padding @item-padding (@icon-size + (@item-padding * 2));
-
-    .dir-rtl & {
-      padding-left: @item-padding;
-      padding-right: @icon-size + (@item-padding * 2);
-    }
-  }
-
-  &__item-icon {
-    display: none;
-  }
 
   // --------------------------------------------------
   // Class to show the selection icons until the component is complete

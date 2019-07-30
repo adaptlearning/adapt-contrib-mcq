@@ -76,6 +76,12 @@
       display: block;
     }
   }
+
+  &__widget.show-user-answer {
+    .mcq__item:not(.is-correct):not(.is-incorrect) .is-selected .mcq__item-answer-icon {
+      display: block;
+    }
+  }
   // --------------------------------------------------
 
   // --------------------------------------------------
@@ -84,6 +90,12 @@
   &__widget.show-correct-answer {
     .is-correct .is-selected .mcq__item-correct-icon,
     .is-incorrect .is-selected .mcq__item-correct-icon {
+      display: block;
+    }
+  }
+
+  &__widget.show-correct-answer {
+    .mcq__item:not(.is-correct):not(.is-incorrect) .is-selected .mcq__item-answer-icon {
       display: block;
     }
   }

@@ -121,8 +121,8 @@ define([
             .toggleClass('is-disabled', !isEnabled);
 
         this.$('.js-item-input').filter('[data-adapt-index="' + index + '"]')
-              .prop('checked', isSelected)
-              .prop('disabled', !isEnabled);
+            .prop('checked', isSelected)
+            .prop('disabled', !isEnabled);
 
       }.bind(this));
 

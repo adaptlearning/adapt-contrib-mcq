@@ -1,16 +1,16 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "3.0.0",
-  "framework": ">=4",
+  "version": "4.0.0",
+  "framework": ">=5",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
-  "displayName" : "Multiple Choice Question",
   "component" : "mcq",
+  "displayName" : "Multiple Choice Question",
   "description": "A multiple choice question component",
   "main": "/js/adapt-contrib-mcq.js",
   "keywords": [
     "adapt-plugin",
     "adapt-component"
   ],
-  "license": "GPLv3"
+  "license": "GPL-3.0"
 }

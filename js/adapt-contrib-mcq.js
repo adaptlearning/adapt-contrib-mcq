@@ -1,14 +1,8 @@
-define([
-  'core/js/adapt',
-  './mcqView',
-  'core/js/models/itemsQuestionModel'
-], function(Adapt, McqView, ItemsQuestionModel) {
+import Adapt from 'core/js/adapt';
+import McqView from './mcqView';
+import McqModel from './mcqModel';
 
-  return Adapt.register("mcq", {
-    view: McqView,
-    // Extend ItemsQuestionModel to distinguish McqModel in
-    // the inheritance chain and allow targeted model extensions.
-    model: ItemsQuestionModel.extend({})
-  });
-
+export default Adapt.register('mcq', {
+  model: McqModel,
+  view: McqView
 });

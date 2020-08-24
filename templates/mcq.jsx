@@ -28,7 +28,6 @@ export default function(model, view) {
           <div
             className={classes([
               `mcq__item item-${index}`,
-              'js-mcq-item',
               (!isInteractive && data._canShowMarking && _shouldBeSelected) ? 'is-correct' : null,
               (!isInteractive && data._canShowMarking && !_shouldBeSelected) ? 'is-incorrect' : null
             ])}

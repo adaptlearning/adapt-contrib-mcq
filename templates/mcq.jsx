@@ -3,7 +3,9 @@ import { templates, classes, html, compile } from 'core/js/reactHelpers';
 
 export default function(model, view) {
   const data = model.toJSON();
-  data._globals = Adapt.course.get('_globals');
+  const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
+
+  const isInteractive = model.isInteractive();
 
   return (
     <div className='component__inner mcq__inner'>
@@ -21,28 +23,40 @@ export default function(model, view) {
         role={data._isRadio ? 'radiogroup' : 'group'}
       >
 
-        {data._items.map(({ text, _index, _isActive, _isVisited, _isSelected }, index) =>
+        {data._items.map(({ text, _index, _isActive, _shouldBeSelected }, index) =>
 
           <div
-            className={`mcq__item item-${index}`}
+            className={classes([
+              `mcq__item item-${index}`,
+              'js-mcq-item',
+              (!isInteractive && data._canShowMarking && _shouldBeSelected) ? 'is-correct' : null,
+              (!isInteractive && data._canShowMarking && !_shouldBeSelected) ? 'is-incorrect' : null
+            ])}
             key={_index}
           >
 
             <input
-              className='mcq__item-input js-item-input'
+              className='mcq__item-input'
               id={`${data._id}-${index}-input`}
               name={data._isRadio ? `${data._id}-item` : null}
               type={data._isRadio ? 'radio' : 'checkbox'}
-              disabled={data._isEnabled}
-              aria-label={Adapt.a11y.normalize(text)}
+              disabled={!data._isEnabled}
+              aria-label={(isInteractive || !data._canShowMarking) ?
+                Adapt.a11y.normalize(text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${Adapt.a11y.normalize(text)}`}
               data-adapt-index={_index}
+              onKeyPress={(event) => view.onKeyPress(event)}
+              onChange={(event) => view.onItemSelect(event)}
+              onFocus={(event) => view.onItemFocus(event)}
+              onBlur={(event) => view.onItemBlur(event)}
             />
 
             <label
               className={classes([
                 'mcq__item-label',
                 'js-item-label',
-                _isSelected && 'is-selected'
+                !data._isEnabled && 'is-disabled',
+                (data._isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
               aria-hidden={true}
               htmlFor={`${data._id}-${index}-input`}

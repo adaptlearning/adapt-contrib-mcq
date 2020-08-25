@@ -4,9 +4,7 @@ class McqView extends QuestionView {
 
   initialize(...args) {
     super.initialize(...args);
-    this.listenTo(this.model.getChildren(), {
-      'all': this.changed
-    });
+    this.listenTo(this.model.getChildren(), 'all', this.changed);
   }
 
   resetQuestionOnRevisit() {

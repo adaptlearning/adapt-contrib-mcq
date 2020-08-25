@@ -4,13 +4,9 @@ class McqView extends QuestionView {
 
   initialize(...args) {
     super.initialize(...args);
-    this.listenTo(this.model, {
-      "_isEnabled _isComplete _isSubmitted _isCorrectAnswerShown": this.changed
-    });
     this.listenTo(this.model.getChildren(), {
       'all': this.changed
     });
-    this.model.isCorrectAnswerShown = false;
   }
 
   resetQuestionOnRevisit() {

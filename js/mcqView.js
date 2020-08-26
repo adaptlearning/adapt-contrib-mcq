@@ -28,11 +28,12 @@ class McqView extends QuestionView {
   onItemFocus(event) {
     if (!this.model.isInteractive()) return;
 
-    this.$('.js-item-label[for='+$(event.currentTarget).attr('id')+']').addClass('is-highlighted');
+    const id = $(event.currentTarget).attr('id');
+    this.$(`.js-item-label[for=${id}]`).addClass('is-highlighted');
   }
 
   onItemBlur(event) {
-    this.$('.js-item-label[for='+$(event.currentTarget).attr('id')+']').removeClass('is-highlighted');
+    this.$(`.js-item-label[for=${$(event.currentTarget).attr('id')}]`).removeClass('is-highlighted');
   }
 
   onItemSelect(event) {
@@ -40,7 +41,7 @@ class McqView extends QuestionView {
 
     const index = $(event.currentTarget).data('adapt-index');
     const itemModel = this.model.getItem(index);
-    let shouldSelect = !itemModel.get("_isActive");
+    let shouldSelect = !itemModel.get('_isActive');
 
     if (this.model.isSingleSelect()) {
       // Assume a click is always a selection
@@ -55,10 +56,6 @@ class McqView extends QuestionView {
     itemModel.toggleActive(shouldSelect);
   }
 
-  // Blank method to add functionality for when the user cannot submit
-  // Could be used for a popup or explanation dialog/hint
-  onCannotSubmit() {}
-
   // Used by the question view to reset the look and feel of the component.
   resetQuestion() {
     this.model.resetActiveItems();
@@ -66,11 +63,11 @@ class McqView extends QuestionView {
   }
 
   showCorrectAnswer() {
-    this.model.set("_isCorrectAnswerShown", true);
+    this.model.set('_isCorrectAnswerShown', true);
   }
 
   hideCorrectAnswer() {
-    this.model.set("_isCorrectAnswerShown", false);
+    this.model.set('_isCorrectAnswerShown', false);
   }
 
 }

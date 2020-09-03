@@ -28,12 +28,15 @@ class McqView extends QuestionView {
   onItemFocus(event) {
     if (!this.model.isInteractive()) return;
 
-    const id = $(event.currentTarget).attr('id');
-    this.$(`.js-item-label[for=${id}]`).addClass('is-highlighted');
+    const index = parseInt($(event.currentTarget).data('adapt-index'));
+    const item = this.model.getChildren().findWhere({ _index: index });
+    item.set('_isHighlighted', true);
   }
 
   onItemBlur(event) {
-    this.$(`.js-item-label[for=${$(event.currentTarget).attr('id')}]`).removeClass('is-highlighted');
+    const index = $(event.currentTarget).data('adapt-index');
+    const item = this.model.getChildren().findWhere({ _index: index });
+    item.set('_isHighlighted', false);
   }
 
   onItemSelect(event) {

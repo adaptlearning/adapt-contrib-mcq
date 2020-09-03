@@ -23,7 +23,7 @@ export default function(model, view) {
         role={data._isRadio ? 'radiogroup' : 'group'}
       >
 
-        {data._items.map(({ text, _index, _isActive, _shouldBeSelected }, index) =>
+        {data._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
 
           <div
             className={classes([
@@ -53,8 +53,8 @@ export default function(model, view) {
             <label
               className={classes([
                 'mcq__item-label',
-                'js-item-label',
                 !data._isEnabled && 'is-disabled',
+                _isHighlighted && 'is-highlighted',
                 (data._isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
               aria-hidden={true}

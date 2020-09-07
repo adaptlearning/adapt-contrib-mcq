@@ -6,6 +6,7 @@ export default function(model, view) {
   const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
   const isInteractive = model.isInteractive();
+  const shouldShowMarking = !isInteractive && data._canShowMarking;
 
   return (
     <div className='component__inner mcq__inner'>
@@ -28,8 +29,8 @@ export default function(model, view) {
           <div
             className={classes([
               `mcq__item item-${index}`,
-              (!isInteractive && data._canShowMarking && _shouldBeSelected) ? 'is-correct' : null,
-              (!isInteractive && data._canShowMarking && !_shouldBeSelected) ? 'is-incorrect' : null
+              shouldShowMarking && _shouldBeSelected && 'is-correct',
+              shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
             key={_index}
           >
@@ -40,7 +41,7 @@ export default function(model, view) {
               name={data._isRadio ? `${data._id}-item` : null}
               type={data._isRadio ? 'radio' : 'checkbox'}
               disabled={!data._isEnabled}
-              aria-label={(isInteractive || !data._canShowMarking) ?
+              aria-label={!shouldShowMarking ?
                 Adapt.a11y.normalize(text) :
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${Adapt.a11y.normalize(text)}`}
               data-adapt-index={_index}

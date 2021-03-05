@@ -28,7 +28,6 @@
         "instruction": {
           "type": "string",
           "title": "Instruction",
-          "description": "This is the instruction text",
           "default": "",
           "_adapt": {
             "translatable": true
@@ -36,14 +35,14 @@
         },
         "_items": {
           "type": "array",
-          "title": "Answers",
+          "title": "Items",
           "description": "The possible answers available to the learner",
           "items": {
             "type": "object",
             "properties": {
               "text": {
                 "type": "string",
-                "title": "Answer Text",
+                "title": "Text",
                 "description": "This text will display as the answer text",
                 "default": "",
                 "_adapt": {
@@ -52,13 +51,13 @@
               },
               "_shouldBeSelected": {
                 "type": "boolean",
-                "title": "Correct answer?",
+                "title": "Mark this option as correct",
                 "default": false
               },
               "feedback": {
                 "type": "string",
                 "title": "Answer-specific feedback",
-                "description": "When 'Selectable Items' is set to 1, this can be used to give the user feedback specific to the answer they selected - if incorrect.",
+                "description": "When 'Selectable items' is set to 1, this can be used to give the user feedback specific to the answer they selected - if incorrect",
                 "default": "",
                 "_adapt": {
                   "translatable": true
@@ -70,30 +69,29 @@
         },
         "_attempts": {
           "type": "number",
-          "title": "Attempts",
+          "title": "Allowed attempts",
           "description": "How many attempts the learner is allowed",
           "default": 1
         },
         "_canShowModelAnswer": {
           "type": "boolean",
-          "title": "Display Model Answer",
-          "description": "Allow the user to view the 'model answer' if they answer the question incorrectly?",
+          "title": "Enable correct answer toggle",
+          "description": "Allow the user to view the 'model answer' if they answer the question incorrectly",
           "default": true
         },
         "_canShowFeedback": {
           "type": "boolean",
-          "title": "Display Feedback",
+          "title": "Enable feedback",
           "default": true
         },
         "_canShowMarking": {
           "type": "boolean",
-          "title": "Display Marking",
+          "title": "Enable marking",
           "default": true
         },
         "_shouldDisplayAttempts": {
           "type": "boolean",
-          "title": "Display Attempts",
-          "description": "Display the number of attempts remaining?",
+          "title": "Show number of remaining attempts",
           "default": false
         },
         "_isRandom": {
@@ -104,18 +102,18 @@
         "_recordInteraction": {
           "type": "boolean",
           "title": "Record interaction",
-          "description": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only.",
+          "description": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only",
           "default": true
         },
         "_questionWeight": {
           "type": "number",
-          "title": "Question Weight",
+          "title": "Question weight",
           "description": "How much this question is worth",
           "default": 1
         },
         "_selectable": {
           "type": "number",
-          "title": "Selectable Items",
+          "title": "Selectable items",
           "description": "How many items are selectable",
           "default": 1
         },
@@ -126,8 +124,8 @@
           "properties": {
             "title": {
               "type": "string",
-              "title": "Feedback Title",
-              "description": "Leave blank to have the component's title shown instead.",
+              "title": "Title",
+              "description": "Leave blank to have the component's title shown instead",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -135,7 +133,7 @@
             },
             "correct": {
               "type": "string",
-              "title": "Correct",
+              "title": "Correct feedback",
               "description": "Correct answer feedback for this question",
               "default": "",
               "_adapt": {
@@ -145,12 +143,12 @@
             },
             "_incorrect": {
               "type": "object",
-              "title": "Incorrect Feedback",
+              "title": "Incorrect",
               "default": {},
               "properties": {
                 "final": {
                   "type": "string",
-                  "title": "Incorrect Final",
+                  "title": "Default incorrect feedback",
                   "description": "Incorrect answer feedback for the final attempt",
                   "default": "",
                   "_adapt": {
@@ -160,8 +158,8 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Incorrect Not Final",
-                  "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
+                  "title": "Try again feedback",
+                  "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the default incorrect feedback will be used instead",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -177,8 +175,8 @@
               "properties": {
                 "final": {
                   "type": "string",
-                  "title": "Partly Correct Final",
-                  "description": "Partly correct answer feedback for the final attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
+                  "title": "Default partly correct feedback",
+                  "description": "Partly correct answer feedback for the final attempt. If you leave this blank, the default incorrect feedback will be used instead",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -187,8 +185,8 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Partly Correct Not Final",
-                  "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Partly Correct Final' feedback will be used instead.",
+                  "title": "Try again feedback",
+                  "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the default partly correct feedback will be used instead",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -201,7 +199,7 @@
         },
         "_buttons": {
           "type": "object",
-          "title": "Buttons",
+          "title": "Button overrides",
           "default": {},
           "properties": {
             "_submit": {
@@ -212,7 +210,6 @@
                 "buttonText": {
                   "type": "string",
                   "title": "Button text",
-                  "description": "Button label text for the submit button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -221,7 +218,6 @@
                 "ariaLabel": {
                   "type": "string",
                   "title": "ARIA label",
-                  "description": "ARIA label for the submit button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -237,7 +233,6 @@
                 "buttonText": {
                   "type": "string",
                   "title": "Button text",
-                  "description": "Button label text for the reset button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -246,7 +241,6 @@
                 "ariaLabel": {
                   "type": "string",
                   "title": "ARIA label",
-                  "description": "ARIA label for the reset button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -256,13 +250,12 @@
             },
             "_showCorrectAnswer": {
               "type": "object",
-              "title": "Show Correct Answer",
+              "title": "Show correct answer",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
                   "title": "Button text",
-                  "description": "Button label text to show the model answer",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -271,7 +264,6 @@
                 "ariaLabel": {
                   "type": "string",
                   "title": "ARIA label",
-                  "description": "ARIA label for the show model answer button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -281,13 +273,12 @@
             },
             "_hideCorrectAnswer": {
               "type": "object",
-              "title": "Hide Correct Answer",
+              "title": "Hide correct answer",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
                   "title": "Button text",
-                  "description": "Button label text to hide the model answer",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -296,7 +287,6 @@
                 "ariaLabel": {
                   "type": "string",
                   "title": "ARIA label",
-                  "description": "ARIA label for the hide model answer button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -306,13 +296,12 @@
             },
             "_showFeedback": {
               "type": "object",
-              "title": "Show Feedback",
+              "title": "Show feedback",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
                   "title": "Button text",
-                  "description": "Button label text to show feedback",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -321,7 +310,6 @@
                 "ariaLabel": {
                   "type": "string",
                   "title": "ARIA label",
-                  "description": "ARIA label for the show feedback button",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -331,8 +319,7 @@
             },
             "remainingAttemptsText": {
               "type": "string",
-              "title": "Attempts Remaining Text",
-              "description": "Shown when there are multiple attempts left",
+              "title": "Remaining attempts label",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -340,8 +327,7 @@
             },
             "remainingAttemptText": {
               "type": "string",
-              "title": "Final Attempt Text",
-              "description": "Shown when there is one attempt left",
+              "title": "Final attempt label",
               "default": "",
               "_adapt": {
                 "translatable": true

@@ -158,7 +158,7 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Try again feedback",
+                  "title": "Retry feedback",
                   "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the default incorrect feedback will be used instead",
                   "default": "",
                   "_adapt": {
@@ -185,7 +185,7 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Try again feedback",
+                  "title": "Retry feedback",
                   "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the default partly correct feedback will be used instead",
                   "default": "",
                   "_adapt": {

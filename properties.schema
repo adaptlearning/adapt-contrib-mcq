@@ -11,6 +11,42 @@
       "inputType": "Text",
       "validators": [],
       "translatable": true
+    },
+    "ariaCorrectAnswer": {
+      "type": "string",
+      "required": true,
+      "default": "The correct answer is {{{correctAnswer}}}",
+      "inputType": "Text",
+      "validators": [],
+      "help": "Text that will be announced by the screen reader when the learner selects the 'correct answer' button (and there is only one correct answer)",
+      "translatable": true
+    },
+    "ariaCorrectAnswers": {
+      "type": "string",
+      "required": true,
+      "default": "The correct answers are {{{correctAnswer}}}",
+      "inputType": "Text",
+      "validators": [],
+      "help": "Text that will be announced by the screen reader when the learner selects the 'correct answer' button (and there is more than one correct answer)",
+      "translatable": true
+    },
+    "ariaUserAnswer": {
+      "type": "string",
+      "required": true,
+      "default": "The answer you chose was {{{userAnswer}}}",
+      "inputType": "Text",
+      "validators": [],
+      "help": "Text that will be announced by the screen reader when the learner selects the 'hide correct answer' button (and the learner only chose one answer)",
+      "translatable": true
+    },
+    "ariaUserAnswers": {
+      "type": "string",
+      "required": true,
+      "default": "The answers you chose were {{{userAnswer}}}",
+      "inputType": "Text",
+      "validators": [],
+      "help": "Text that will be announced by the screen reader when the learner selects the 'hide correct answer' button (and the learner chose more than one answer)",
+      "translatable": true
     }
   },
   "properties": {

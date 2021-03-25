@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "4.1.0-alpha.4",
+  "version": "4.1.0-alpha.5",
   "framework": ">=5",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",

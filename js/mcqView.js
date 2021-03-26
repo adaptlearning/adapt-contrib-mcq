@@ -144,7 +144,7 @@ define([
         if (isInteractive || !canShowMarking) {
           // Remove item marking
           $item.removeClass('is-correct is-incorrect');
-          $itemInput.attr('aria-label', $.a11y_normalize(itemModel.get('text')));
+          $itemInput.attr('aria-label', Adapt.a11y.normalize(itemModel.get('text')));
           return;
         }
 
@@ -162,7 +162,7 @@ define([
           ', ',
           (isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer),
           '. ',
-          $.a11y_normalize(itemModel.get('text'))
+          Adapt.a11y.normalize(itemModel.get('text'))
         ].join(''));
 
       });

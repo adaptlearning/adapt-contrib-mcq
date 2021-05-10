@@ -3,8 +3,11 @@ import QuestionView from 'core/js/views/questionView';
 class McqView extends QuestionView {
 
   initialize(...args) {
+    this.onKeyPress = this.onKeyPress.bind(this);
+    this.onItemSelect = this.onItemSelect.bind(this);
+    this.onItemFocus = this.onItemFocus.bind(this);
+    this.onItemBlur = this.onItemBlur.bind(this);
     super.initialize(...args);
-    this.listenTo(this.model.getChildren(), 'all', this.changed);
   }
 
   resetQuestionOnRevisit() {
@@ -21,7 +24,7 @@ class McqView extends QuestionView {
 
   onKeyPress(event) {
     if (event.which !== 13) return;
-    //<ENTER> keypress
+    // <ENTER> keypress
     this.onItemSelect(event);
   }
 

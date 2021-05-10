@@ -1,30 +1,44 @@
 import Adapt from 'core/js/adapt';
+import React from 'react';
 import { templates, classes, html, compile } from 'core/js/reactHelpers';
 
-export default function(model, view) {
-  const data = model.toJSON();
+export default function Mcq(props) {
   const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
-  const isInteractive = model.isInteractive();
-  const shouldShowMarking = !isInteractive && data._canShowMarking;
+  const {
+    _id,
+    _isEnabled,
+    _isInteractionComplete,
+    _isCorrect,
+    _isCorrectAnswerShown,
+    _canShowMarking,
+    _isRadio,
+    onKeyPress,
+    onItemSelect,
+    onItemFocus,
+    onItemBlur,
+    isInteractive
+  } = props;
+
+  const shouldShowMarking = isInteractive() && _canShowMarking;
 
   return (
     <div className='component__inner mcq__inner'>
 
-      {templates.component(model, view)}
+      <templates.header {...props} />
 
       <div
         className={classes([
           'component__widget',
           'mcq__widget',
-          !data._isEnabled && 'is-disabled',
-          data._isInteractionComplete && 'is-complete is-submitted show-user-answer',
-          data._isCorrect && 'is-correct'
+          !_isEnabled && 'is-disabled',
+          _isInteractionComplete && 'is-complete is-submitted show-user-answer',
+          _isCorrect && 'is-correct'
         ])}
-        role={data._isRadio ? 'radiogroup' : 'group'}
+        role={_isRadio ? 'radiogroup' : 'group'}
       >
 
-        {data._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
+        {props._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
 
           <div
             className={classes([
@@ -37,29 +51,29 @@ export default function(model, view) {
 
             <input
               className='mcq__item-input'
-              id={`${data._id}-${index}-input`}
-              name={data._isRadio ? `${data._id}-item` : null}
-              type={data._isRadio ? 'radio' : 'checkbox'}
-              disabled={!data._isEnabled}
+              id={`${_id}-${index}-input`}
+              name={_isRadio ? `${_id}-item` : null}
+              type={_isRadio ? 'radio' : 'checkbox'}
+              disabled={!_isEnabled}
               aria-label={!shouldShowMarking ?
                 Adapt.a11y.normalize(text) :
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${Adapt.a11y.normalize(text)}`}
               data-adapt-index={_index}
-              onKeyPress={(event) => view.onKeyPress(event)}
-              onChange={(event) => view.onItemSelect(event)}
-              onFocus={(event) => view.onItemFocus(event)}
-              onBlur={(event) => view.onItemBlur(event)}
+              onKeyPress={onKeyPress}
+              onChange={onItemSelect}
+              onFocus={onItemFocus}
+              onBlur={onItemBlur}
             />
 
             <label
               className={classes([
                 'mcq__item-label',
-                !data._isEnabled && 'is-disabled',
+                !_isEnabled && 'is-disabled',
                 _isHighlighted && 'is-highlighted',
-                (data._isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
+                (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
               aria-hidden={true}
-              htmlFor={`${data._id}-${index}-input`}
+              htmlFor={`${_id}-${index}-input`}
               data-adapt-index={_index}
             >
 
@@ -68,7 +82,7 @@ export default function(model, view) {
                   className={classes([
                     'mcq__item-icon',
                     'mcq__item-answer-icon',
-                    data._isRadio ? 'is-radio' : 'is-checkbox'
+                    _isRadio ? 'is-radio' : 'is-checkbox'
                   ])}
                 >
 

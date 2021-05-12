@@ -93,6 +93,14 @@
             "inputType": "Checkbox",
             "validators": []
           },
+          "_isPartlyCorrect": {
+            "type": "boolean",
+            "required": true,
+            "default": false,
+            "title": "Is only partly correct?",
+            "inputType": "Checkbox",
+            "validators": []
+          },
           "feedback": {
             "type": "string",
             "required": false,

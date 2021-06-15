@@ -49,7 +49,9 @@ guide the learner’s interaction with the component.
 
 **\_isRandom** (boolean): Setting this value to `true` will cause the `_items` to appear in a random order each time the component is loaded. The default is `false`.   
 
-**\_questionWeight** (number): A number which reflects the significance of the question in relation to the other questions in the course. This number is used in calculations of the final score reported to the LMS.  
+**\_isItemScoring** (boolean): When `false`, this question scores 0 for incorrect and 'Question Weight' for correct. When `true`, this question scores by summing the `_score` of the selected items.  
+
+**\_questionWeight** (number): When '_isItemScoring' is `false`, this is the question score for a correct response. This number is used in calculations of the final score reported to the LMS.  
 
 **\_selectable** (integer): Defines the number of **\_items**, or answers, that can be selected. If the value of **\_selectable** is `1`, **\_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number must match or exceed the number of **\_items** whose **\_shouldBeSelected** is set to `true`. The default is `1`.
 
@@ -68,6 +70,8 @@ guide the learner’s interaction with the component.
 >**\_shouldBeSelected** (boolean): Determines whether the *item* must be selected for the answer to be correct. Value can be `true` or `false`. The value of **\_selectable** must correspond to the total number of **\_items** where **\_shouldBeSelected** is set to `true`.  
 
 >**feedback** (string): This attribute is used only when the value for **\_selectable** is set to `1` (i.e., radio button style questions). This text will be shown if the learner selects this item, and it is an incorrect answer. 
+
+>**\_score** (boolean): If 'Item Scoring' is `true`, when selected, item scores are summed to give the question score.  
 
 **\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these various texts will be displayed depending on the submitted answer. **\_feedback**
 contains values for three types of answers: **correct**, **\_incorrect**, and **\_partlyCorrect**. Some attributes are optional. If they are not supplied, the default that is noted below will be used.

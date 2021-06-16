@@ -110,7 +110,7 @@
             "title": "Score",
             "inputType": "Number",
             "validators": ["required", "number"],
-            "help": "If 'Item Scoring' is enabled, when selected, item scores are summed to give the question score."
+            "help": "If item scoring is enabled, selected item scores are summed to give the question score."
           }
         }
       }

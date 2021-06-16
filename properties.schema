@@ -178,7 +178,7 @@
       "type": "boolean",
       "required": false,
       "default": false,
-      "title": "Item Scoring",
+      "title": "Enable item scoring",
       "inputType": "Checkbox",
       "validators": [],
       "help": "When disabled, this question scores 0 for incorrect and 'Question Weight' for correct. When enabled, this question scores by summing the scores of the selected options."

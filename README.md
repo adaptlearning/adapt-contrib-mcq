@@ -71,7 +71,7 @@ guide the learner’s interaction with the component.
 
 >**feedback** (string): This attribute is used only when the value for **\_selectable** is set to `1` (i.e., radio button style questions). This text will be shown if the learner selects this item, and it is an incorrect answer. 
 
->**\_score** (boolean): If 'Item Scoring' is `true`, when selected, item scores are summed to give the question score.  
+>**\_score** (number): If `_hasItemScoring` is `true`, when selected, item scores are summed to give the question score.  
 
 **\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these various texts will be displayed depending on the submitted answer. **\_feedback**
 contains values for three types of answers: **correct**, **\_incorrect**, and **\_partlyCorrect**. Some attributes are optional. If they are not supplied, the default that is noted below will be used.

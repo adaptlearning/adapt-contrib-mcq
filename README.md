@@ -49,9 +49,9 @@ guide the learner’s interaction with the component.
 
 **\_isRandom** (boolean): Setting this value to `true` will cause the `_items` to appear in a random order each time the component is loaded. The default is `false`.   
 
-**\_isItemScoring** (boolean): When `false`, this question scores 0 for incorrect and 'Question Weight' for correct. When `true`, this question scores by summing the `_score` of the selected items.  
+**\_hasItemScoring** (boolean): When `false`, this question scores 0 for incorrect and 'Question Weight' for correct. When `true`, this question scores by summing the `_score` of the selected items.  
 
-**\_questionWeight** (number): When '_isItemScoring' is `false`, this is the question score for a correct response. This number is used in calculations of the final score reported to the LMS.  
+**\_questionWeight** (number): When '_hasItemScoring' is `false`, this is the question score for a correct response. This number is used in calculations of the final score reported to the LMS.  
 
 **\_selectable** (integer): Defines the number of **\_items**, or answers, that can be selected. If the value of **\_selectable** is `1`, **\_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number must match or exceed the number of **\_items** whose **\_shouldBeSelected** is set to `true`. The default is `1`.
 

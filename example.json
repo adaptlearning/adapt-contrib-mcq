@@ -12,7 +12,7 @@
         "_attempts": 1,
         "_shouldDisplayAttempts": false,
         "_isRandom": false,
-        "_isItemScoring": false,
+        "_hasItemScoring": false,
         "_questionWeight": 1,
         "_selectable": 1,
         "_canShowModelAnswer": true,

@@ -174,7 +174,7 @@
       "validators": [],
       "help": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only."
     },
-    "_isItemScoring": {
+    "_hasItemScoring": {
       "type": "boolean",
       "required": false,
       "default": false,

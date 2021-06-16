@@ -190,7 +190,7 @@
       "title": "Question Weight",
       "inputType": "Number",
       "validators": ["number"],
-      "help": "When 'Item Scoring' is disabled, this is the question score for a correct response."
+      "help": "When item scoring is disabled, this is the question score for a correct response."
     },
     "_selectable": {
       "type": "number",

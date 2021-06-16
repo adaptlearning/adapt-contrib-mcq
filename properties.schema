@@ -107,7 +107,7 @@
             "type": "number",
             "required": false,
             "default": 0,
-            "title": "Attempts",
+            "title": "Score",
             "inputType": "Number",
             "validators": ["required", "number"],
             "help": "If 'Item Scoring' is enabled, when selected, item scores are summed to give the question score."

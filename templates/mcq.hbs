@@ -1,8 +1,8 @@
-<div class="component__inner mcq__inner">
+<div class="component__inner mcq__inner" role="{{#if _isRadio}}radiogroup{{else}}group{{/if}}" {{#any displayTitle body instruction}}aria-labelledby="{{_id}}-header"{{/any}}>
 
   {{> component this}}
 
-  <div class="component__widget mcq__widget{{#unless _isEnabled}} is-disabled{{#if _isInteractionComplete}} is-complete is-submitted show-user-answer{{#if _isCorrect}} is-correct{{/if}}{{/if}}{{/unless}}" role="{{#if _isRadio}}radiogroup{{else}}group{{/if}}">
+  <div class="component__widget mcq__widget{{#unless _isEnabled}} is-disabled{{#if _isInteractionComplete}} is-complete is-submitted show-user-answer{{#if _isCorrect}} is-correct{{/if}}{{/if}}{{/unless}}">
 
     {{#each _items}}
     <div class="mcq__item js-mcq-item item-{{@index}}{{#unless ../_isEnabled}}{{#if ../_canShowMarking}}{{#if _isCorrect}} is-correct{{else}} is-incorrect{{/if}}{{/if}}{{/unless}}">

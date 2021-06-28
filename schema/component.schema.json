@@ -63,6 +63,12 @@
                   "translatable": true
                 },
                 "_backboneForms": "TextArea"
+              },
+              "_score": {
+                "type": "number",
+                "title": "Score",
+                "description": "If item scoring is enabled, selected item scores are summed to give the question score",
+                "default": 0
               }
             }
           }
@@ -105,10 +111,16 @@
           "description": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only",
           "default": true
         },
+        "_hasItemScoring": {
+          "type": "boolean",
+          "title": "Enable item scoring",
+          "description": "When disabled, this question scores 0 for incorrect and 'Question weight' for correct. When enabled, this question scores by summing the scores of the selected options",
+          "default": false
+        },
         "_questionWeight": {
           "type": "number",
           "title": "Question weight",
-          "description": "How much this question is worth",
+          "description": "When item scoring is disabled, this is the question score for a correct response",
           "default": 1
         },
         "_selectable": {

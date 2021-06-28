@@ -54,6 +54,11 @@
                 "title": "Mark this option as correct",
                 "default": false
               },
+              "_isPartlyCorrect": {
+                "type": "boolean",
+                "title": "Mark this option as partly correct",
+                "default": false
+              },
               "feedback": {
                 "type": "string",
                 "title": "Answer-specific feedback",

@@ -5,6 +5,7 @@
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
   "component" : "mcq",
+  "targetAttribute": "_mcq",
   "displayName" : "Multiple Choice Question",
   "description": "A multiple choice question component",
   "main": "/js/adapt-contrib-mcq.js",

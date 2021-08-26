@@ -1,6 +1,6 @@
 import Adapt from 'core/js/adapt';
-import McqView from './mcqView';
-import McqModel from './mcqModel';
+import McqView from './McqView';
+import McqModel from './McqModel';
 
 export default Adapt.register('mcq', {
   model: McqModel,

@@ -1,0 +1,34 @@
+{
+  "$anchor": "mcq-course",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$patch": {
+    "source": {
+      "$ref": "course"
+    },
+    "with": {
+      "properties": {
+        "_globals": {
+          "type": "object",
+          "default": {},
+          "properties": {
+            "_mcq": {
+              "type": "object",
+              "default": {},
+              "properties": {
+                "ariaRegion": {
+                  "type": "string",
+                  "title": "ARIA region",
+                  "default": "Multiple choice question",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

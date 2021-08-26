@@ -1,0 +1,358 @@
+{
+  "$anchor": "mcq-component",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$merge": {
+    "source": {
+      "$ref": "component"
+    },
+    "with": {
+      "required": [
+        "_attempts",
+        "_selectable"
+      ],
+      "properties": {
+        "_supportedLayout": {
+          "type": "string",
+          "title": "Supported layout",
+          "default": "half-width",
+          "enum": [
+            "full-width",
+            "half-width",
+            "both"
+          ],
+          "_adapt": {
+            "editorOnly": true
+          }
+        },
+        "instruction": {
+          "type": "string",
+          "title": "Instruction",
+          "default": "",
+          "_adapt": {
+            "translatable": true
+          }
+        },
+        "_items": {
+          "type": "array",
+          "title": "Items",
+          "description": "The possible answers available to the learner",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "title": "Text",
+                "description": "This text will display as the answer text",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                }
+              },
+              "_shouldBeSelected": {
+                "type": "boolean",
+                "title": "Mark this option as correct",
+                "default": false
+              },
+              "_isPartlyCorrect": {
+                "type": "boolean",
+                "title": "Mark this option as partly correct",
+                "default": false
+              },
+              "feedback": {
+                "type": "string",
+                "title": "Answer-specific feedback",
+                "description": "When 'Selectable items' is set to 1, this can be used to give the user feedback specific to the answer they selected - if incorrect",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                },
+                "_backboneForms": "TextArea"
+              },
+              "_score": {
+                "type": "number",
+                "title": "Score",
+                "description": "If item scoring is enabled, selected item scores are summed to give the question score",
+                "default": 0
+              }
+            }
+          }
+        },
+        "_attempts": {
+          "type": "number",
+          "title": "Allowed attempts",
+          "description": "How many attempts the learner is allowed",
+          "default": 1
+        },
+        "_canShowModelAnswer": {
+          "type": "boolean",
+          "title": "Enable correct answer toggle",
+          "description": "Allow the user to view the 'model answer' if they answer the question incorrectly",
+          "default": true
+        },
+        "_canShowFeedback": {
+          "type": "boolean",
+          "title": "Enable feedback",
+          "default": true
+        },
+        "_canShowMarking": {
+          "type": "boolean",
+          "title": "Enable marking",
+          "default": true
+        },
+        "_shouldDisplayAttempts": {
+          "type": "boolean",
+          "title": "Show number of remaining attempts",
+          "default": false
+        },
+        "_isRandom": {
+          "type": "boolean",
+          "title": "Randomise answers",
+          "default": false
+        },
+        "_recordInteraction": {
+          "type": "boolean",
+          "title": "Record interaction",
+          "description": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only",
+          "default": true
+        },
+        "_hasItemScoring": {
+          "type": "boolean",
+          "title": "Enable item scoring",
+          "description": "When disabled, this question scores 0 for incorrect and 'Question weight' for correct. When enabled, this question scores by summing the scores of the selected options",
+          "default": false
+        },
+        "_questionWeight": {
+          "type": "number",
+          "title": "Question weight",
+          "description": "When item scoring is disabled, this is the question score for a correct response",
+          "default": 1
+        },
+        "_selectable": {
+          "type": "number",
+          "title": "Selectable items",
+          "description": "How many items are selectable",
+          "default": 1
+        },
+        "_feedback": {
+          "type": "object",
+          "title": "Feedback",
+          "default": {},
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "description": "Leave blank to have the component's title shown instead",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "correct": {
+              "type": "string",
+              "title": "Correct feedback",
+              "description": "Correct answer feedback for this question",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            },
+            "_incorrect": {
+              "type": "object",
+              "title": "Incorrect",
+              "default": {},
+              "properties": {
+                "final": {
+                  "type": "string",
+                  "title": "Default incorrect feedback",
+                  "description": "Incorrect answer feedback for the final attempt",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                },
+                "notFinal": {
+                  "type": "string",
+                  "title": "Retry feedback",
+                  "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the default incorrect feedback will be used instead",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                }
+              }
+            },
+            "_partlyCorrect": {
+              "type": "object",
+              "title": "Partly correct",
+              "default": {},
+              "properties": {
+                "final": {
+                  "type": "string",
+                  "title": "Default partly correct feedback",
+                  "description": "Partly correct answer feedback for the final attempt. If you leave this blank, the default incorrect feedback will be used instead",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                },
+                "notFinal": {
+                  "type": "string",
+                  "title": "Retry feedback",
+                  "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the default partly correct feedback will be used instead",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                }
+              }
+            }
+          }
+        },
+        "_buttons": {
+          "type": "object",
+          "title": "Button overrides",
+          "default": {},
+          "properties": {
+            "_submit": {
+              "type": "object",
+              "title": "Submit",
+              "default": {},
+              "properties": {
+                "buttonText": {
+                  "type": "string",
+                  "title": "Button text",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "ariaLabel": {
+                  "type": "string",
+                  "title": "ARIA label",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            },
+            "_reset": {
+              "type": "object",
+              "title": "Reset",
+              "default": {},
+              "properties": {
+                "buttonText": {
+                  "type": "string",
+                  "title": "Button text",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "ariaLabel": {
+                  "type": "string",
+                  "title": "ARIA label",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            },
+            "_showCorrectAnswer": {
+              "type": "object",
+              "title": "Show correct answer",
+              "default": {},
+              "properties": {
+                "buttonText": {
+                  "type": "string",
+                  "title": "Button text",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "ariaLabel": {
+                  "type": "string",
+                  "title": "ARIA label",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            },
+            "_hideCorrectAnswer": {
+              "type": "object",
+              "title": "Hide correct answer",
+              "default": {},
+              "properties": {
+                "buttonText": {
+                  "type": "string",
+                  "title": "Button text",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "ariaLabel": {
+                  "type": "string",
+                  "title": "ARIA label",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            },
+            "_showFeedback": {
+              "type": "object",
+              "title": "Show feedback",
+              "default": {},
+              "properties": {
+                "buttonText": {
+                  "type": "string",
+                  "title": "Button text",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "ariaLabel": {
+                  "type": "string",
+                  "title": "ARIA label",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                }
+              }
+            },
+            "remainingAttemptsText": {
+              "type": "string",
+              "title": "Remaining attempts label",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "remainingAttemptText": {
+              "type": "string",
+              "title": "Final attempt label",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

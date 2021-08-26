@@ -3,7 +3,7 @@
   "version": "4.3.0",
   "framework": ">=5",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
-  "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
+  "bugs": "https://github.com/adaptlearning/adapt-contrib-mcq/issues",
   "component" : "mcq",
   "targetAttribute": "_mcq",
   "displayName" : "Multiple Choice Question",

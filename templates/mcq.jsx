@@ -39,7 +39,7 @@ export default function Mcq(props) {
           _isCorrect && 'is-correct'
         ])}
         role={_isRadio ? 'radiogroup' : 'group'}
-        ariaLabelledBy={(displayTitle || body || instruction) && `${_id}-header`}
+        aria-labelledby={(displayTitle || body || instruction) && `${_id}-header`}
       >
 
         {props._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>

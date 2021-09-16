@@ -23,7 +23,7 @@ export default function Mcq(props) {
     isInteractive
   } = props;
 
-  const shouldShowMarking = isInteractive() && _canShowMarking;
+  const shouldShowMarking = !isInteractive() && _canShowMarking;
 
   return (
     <div className='component__inner mcq__inner'>

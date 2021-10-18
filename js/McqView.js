@@ -10,10 +10,6 @@ class McqView extends QuestionView {
     super.initialize(...args);
   }
 
-  resetQuestionOnRevisit() {
-    this.resetQuestion();
-  }
-
   setupQuestion() {
     this.model.setupRandomisation();
   }
@@ -64,16 +60,7 @@ class McqView extends QuestionView {
 
   // Used by the question view to reset the look and feel of the component.
   resetQuestion() {
-    this.model.resetActiveItems();
     this.model.resetItems();
-  }
-
-  showCorrectAnswer() {
-    this.model.set('_isCorrectAnswerShown', true);
-  }
-
-  hideCorrectAnswer() {
-    this.model.set('_isCorrectAnswerShown', false);
   }
 
 }

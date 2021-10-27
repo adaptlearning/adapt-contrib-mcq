@@ -22,20 +22,24 @@
         "_items": [
             {
                 "text": "This is option 1 (Correct)",
-                "_shouldBeSelected": true
+                "_shouldBeSelected": true,
+                "_isPartlyCorrect": false
             },
             {
                 "text": "This is option 2",
                 "_shouldBeSelected": false,
-                "feedback": "Option two incorrect feedback"
+                "feedback": "Option two incorrect feedback",
+                "_isPartlyCorrect": false
             },
             {
                 "text": "This is option 3",
-                "_shouldBeSelected": false
+                "_shouldBeSelected": false,
+                "_isPartlyCorrect": false
             },
             {
                 "text": "This is option 4",
-                "_shouldBeSelected": false
+                "_shouldBeSelected": false,
+                "_isPartlyCorrect": false
             }
         ],
         "_feedback":{

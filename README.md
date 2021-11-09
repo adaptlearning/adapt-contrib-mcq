@@ -53,7 +53,7 @@ guide the learner’s interaction with the component.
 
 **\_questionWeight** (number): When `_hasItemScoring` is `false`, this is the question score for a correct response. This number is used in calculations of the final score reported to the LMS.  
 
-**\_selectable** (integer): Defines the number of **\_items**, or answers, that can be selected. If the value of **\_selectable** is `1`, **\_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number must match or exceed the number of **\_items** whose **\_shouldBeSelected** is set to `true`. The default is `1`.
+**\_selectable** (integer): Defines the number of **\_items**, or answers, that can be selected. If the value of **\_selectable** is `1`, **\_items** will be presented with HTML radio buttons. If the value is greater than `1`, they will be presented with HTML checkboxes. This number can be smaller, match or exceed the number of **\_items** whose **\_shouldBeSelected** is set to `true`. The default is `1`.
 
 **\_canShowModelAnswer** (boolean): Setting this to `false` prevents the [**_showCorrectAnswer** button](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons) from being displayed. The default is `true`.
 
@@ -67,7 +67,7 @@ guide the learner’s interaction with the component.
 
 >**text** (string): Text that comprises the multiple choice option.  
 
->**\_shouldBeSelected** (boolean): Determines whether the *item* must be selected for the answer to be correct. Value can be `true` or `false`. The value of **\_selectable** must correspond to the total number of **\_items** where **\_shouldBeSelected** is set to `true`.  
+>**\_shouldBeSelected** (boolean): Determines whether the *item* must be selected for the answer to be correct. Value can be `true` or `false`. The value of **\_selectable** can be smaller, match or exceed the total number of **\_items** where **\_shouldBeSelected** is set to `true`.  
 
 >**\_isPartlyCorrect** (boolean): Determines whether the *item* when selected marks the question as partly correct. Value can be `true` or `false`. Default is `false`.  
 

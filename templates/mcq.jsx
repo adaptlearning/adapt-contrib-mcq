@@ -46,7 +46,7 @@ export default function Mcq(props) {
 
           <div
             className={classes([
-              `mcq__item item-${index}`,
+              `mcq-item item-${index}`,
               shouldShowMarking && _shouldBeSelected && 'is-correct',
               shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
@@ -54,7 +54,7 @@ export default function Mcq(props) {
           >
 
             <input
-              className='mcq__item-input'
+              className='mcq-item__input'
               id={`${_id}-${index}-input`}
               name={_isRadio ? `${_id}-item` : null}
               type={_isRadio ? 'radio' : 'checkbox'}
@@ -71,7 +71,7 @@ export default function Mcq(props) {
 
             <label
               className={classes([
-                'mcq__item-label',
+                'mcq-item__label',
                 !_isEnabled && 'is-disabled',
                 _isHighlighted && 'is-highlighted',
                 (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
@@ -81,11 +81,11 @@ export default function Mcq(props) {
               data-adapt-index={_index}
             >
 
-              <div className='mcq__item-state'>
+              <div className='mcq-item__state'>
                 <div
                   className={classes([
-                    'mcq__item-icon',
-                    'mcq__item-answer-icon',
+                    'mcq-item__icon',
+                    'mcq-item__answer-icon',
                     _isRadio ? 'is-radio' : 'is-checkbox'
                   ])}
                 >
@@ -94,17 +94,17 @@ export default function Mcq(props) {
 
                 </div>
 
-                <div className='mcq__item-icon mcq__item-correct-icon'>
+                <div className='mcq-item__icon mcq-item__correct-icon'>
                   <div className='icon'></div>
                 </div>
 
-                <div className='mcq__item-icon mcq__item-incorrect-icon'>
+                <div className='mcq-item__icon mcq-item__incorrect-icon'>
                   <div className='icon'></div>
                 </div>
               </div>
 
-              <div className='mcq__item-text'>
-                <div className='mcq__item-text-inner'>
+              <div className='mcq-item__text'>
+                <div className='mcq-item__text-inner'>
                   {html(compile(text))}
                 </div>
               </div>

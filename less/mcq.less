@@ -1,9 +1,37 @@
 .mcq {
-  &__item {
-    position: relative;
+  // Class to show the selection icons until the component is complete
+  // --------------------------------------------------
+  &__widget:not(.is-complete) &-item__answer-icon {
+    display: block;
   }
 
-  &__item-input {
+  // Class to show the users selection
+  // --------------------------------------------------
+  &__widget.show-user-answer .is-correct .is-selected &-item__correct-icon,
+  &__widget.show-user-answer .is-incorrect .is-selected &-item__incorrect-icon {
+    display: block;
+  }
+
+  &__widget.show-user-answer &-item:not(.is-correct):not(.is-incorrect) .is-selected &-item__answer-icon {
+    display: block;
+  }
+
+  // Class to show the correct answers
+  // --------------------------------------------------
+  &__widget.show-correct-answer .is-correct .is-selected &-item__correct-icon,
+  &__widget.show-correct-answer .is-incorrect .is-selected &-item__correct-icon {
+    display: block;
+  }
+
+  &__widget.show-correct-answer &-item:not(.is-correct):not(.is-incorrect) .is-selected &-item__answer-icon {
+    display: block;
+  }
+}
+
+.mcq-item {
+  position: relative;
+
+  &__input {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -12,70 +40,42 @@
     .transform(translate(-50%, -50%));
   }
 
-  &__item-label {
+  &__label {
     display: block;
     z-index: 1;
   }
 
-  &__item-label:not(.is-disabled) {
+  &__label:not(.is-disabled) {
     cursor: pointer;
   }
 
-  &__item-icon {
+  &__icon {
     display: none;
   }
 
   // MCQ item icons
   // --------------------------------------------------
-  &__item-answer-icon.is-radio .icon {
+  &__answer-icon.is-radio .icon {
     .icon-radio-unchecked;
   }
 
-  &__item-answer-icon.is-checkbox .icon {
+  &__answer-icon.is-checkbox .icon {
     .icon-checkbox-unchecked;
   }
 
-  &__item-label.is-selected &__item-answer-icon.is-radio .icon {
+  &__label.is-selected &__answer-icon.is-radio .icon {
     .icon-radio-checked;
   }
 
-  &__item-label.is-selected &__item-answer-icon.is-checkbox .icon {
+  &__label.is-selected &__answer-icon.is-checkbox .icon {
     .icon-checkbox-checked;
   }
 
-  &__item-correct-icon .icon {
+  &__correct-icon .icon {
     .icon-tick;
   }
 
-  &__item-incorrect-icon .icon {
+  &__incorrect-icon .icon {
     .icon-cross;
-  }
-
-  // Class to show the selection icons until the component is complete
-  // --------------------------------------------------
-  &__widget:not(.is-complete) &__item-answer-icon {
-    display: block;
-  }
-
-  // Class to show the users selection
-  // --------------------------------------------------
-  &__widget.show-user-answer .is-correct .is-selected &__item-correct-icon,
-  &__widget.show-user-answer .is-incorrect .is-selected &__item-incorrect-icon {
-    display: block;
-  }
-
-  &__widget.show-user-answer &__item:not(.is-correct):not(.is-incorrect) .is-selected &__item-answer-icon {
-    display: block;
-  }
-
-  // Class to show the correct answers
-  // --------------------------------------------------
-  &__widget.show-correct-answer .is-correct .is-selected &__item-correct-icon,
-  &__widget.show-correct-answer .is-incorrect .is-selected &__item-correct-icon {
-    display: block;
-  }
-
-  &__widget.show-correct-answer &__item:not(.is-correct):not(.is-incorrect) .is-selected &__item-answer-icon {
-    display: block;
   }
 }

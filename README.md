@@ -108,8 +108,8 @@ These ARIA labels are not visible elements; they are used by assistive technolog
 No known limitations.
 
 ----------------------------
-**Version number:**  5.0.3   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
-**Framework versions:** 5.17.2+  
+**Version number:**  6.0.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
+**Framework versions:** 5.18.0+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-mcq/graphs/contributors)  
 **Accessibility support:** WAI AA  
 **RTL support:** Yes  

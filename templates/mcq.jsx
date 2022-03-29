@@ -65,7 +65,7 @@ export default function Mcq(props) {
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${Adapt.a11y.normalize(text)}`}
               data-adapt-index={_index}
               onKeyPress={onKeyPress}
-              onChange={onItemSelect}
+              onClick={onItemSelect}
               onFocus={onItemFocus}
               onBlur={onItemBlur}
             />

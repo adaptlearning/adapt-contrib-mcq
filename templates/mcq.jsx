@@ -57,12 +57,14 @@ export default function Mcq(props) {
               name={_isRadio ? `${_id}-item` : null}
               type={_isRadio ? 'radio' : 'checkbox'}
               disabled={!_isEnabled}
+              checked={_isActive}
               aria-label={!_shouldShowMarking ?
                 a11y.normalize(text) :
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
+              checked={_isActive}
               data-adapt-index={_index}
               onKeyPress={onKeyPress}
-              onChange={onItemSelect}
+              onClick={onItemSelect}
               onFocus={onItemFocus}
               onBlur={onItemBlur}
             />

@@ -68,6 +68,7 @@ export default function Mcq(props) {
               onClick={onItemSelect}
               onFocus={onItemFocus}
               onBlur={onItemBlur}
+              readOnly={true}
             />
 
             <label

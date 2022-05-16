@@ -17,6 +17,7 @@ export default function Mcq(props) {
     displayTitle,
     body,
     instruction,
+    ariaQuestion,
     onKeyPress,
     onItemSelect,
     onItemFocus,
@@ -37,7 +38,8 @@ export default function Mcq(props) {
           _isCorrect && 'is-correct'
         ])}
         role={_isRadio ? 'radiogroup' : 'group'}
-        aria-labelledby={(displayTitle || body || instruction) && `${_id}-header`}
+        aria-labelledby={ariaQuestion ? null : (displayTitle || body || instruction) && `${_id}-header`}
+        aria-label={ariaQuestion || null}
       >
 
         {props._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>

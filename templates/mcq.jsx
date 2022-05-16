@@ -1,6 +1,7 @@
 import Adapt from 'core/js/adapt';
+import a11y from 'core/js/a11y';
 import React from 'react';
-import { templates, classes, html, compile } from 'core/js/reactHelpers';
+import { templates, classes, compile } from 'core/js/reactHelpers';
 
 export default function Mcq(props) {
   const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
@@ -11,7 +12,7 @@ export default function Mcq(props) {
     _isInteractionComplete,
     _isCorrect,
     _isCorrectAnswerShown,
-    _canShowMarking,
+    _shouldShowMarking,
     _isRadio,
     displayTitle,
     body,
@@ -19,11 +20,8 @@ export default function Mcq(props) {
     onKeyPress,
     onItemSelect,
     onItemFocus,
-    onItemBlur,
-    isInteractive
+    onItemBlur
   } = props;
-
-  const shouldShowMarking = !isInteractive() && _canShowMarking;
 
   return (
     <div className='component__inner mcq__inner'>
@@ -47,8 +45,8 @@ export default function Mcq(props) {
           <div
             className={classes([
               `mcq-item item-${index}`,
-              shouldShowMarking && _shouldBeSelected && 'is-correct',
-              shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
+              _shouldShowMarking && _shouldBeSelected && 'is-correct',
+              _shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
             key={_index}
           >
@@ -60,9 +58,9 @@ export default function Mcq(props) {
               type={_isRadio ? 'radio' : 'checkbox'}
               disabled={!_isEnabled}
               defaultChecked={_isActive}
-              aria-label={!shouldShowMarking ?
-                Adapt.a11y.normalize(text) :
-                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${Adapt.a11y.normalize(text)}`}
+              aria-label={!_shouldShowMarking ?
+                a11y.normalize(text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
               data-adapt-index={_index}
               onKeyPress={onKeyPress}
               onChange={onItemSelect}
@@ -105,8 +103,7 @@ export default function Mcq(props) {
               </div>
 
               <div className='mcq-item__text'>
-                <div className='mcq-item__text-inner'>
-                  {html(compile(text))}
+                <div className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
                 </div>
               </div>
 

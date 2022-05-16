@@ -1,8 +1,8 @@
-import Adapt from 'core/js/adapt';
+import components from 'core/js/components';
 import McqView from './McqView';
 import McqModel from './McqModel';
 
-export default Adapt.register('mcq', {
+export default components.register('mcq', {
   model: McqModel,
   view: McqView
 });

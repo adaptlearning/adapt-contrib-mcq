@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-mcq",
-  "version": "6.0.2",
-  "framework": ">=5.18.0",
+  "version": "7.0.0",
+  "framework": ">=5.19.1",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-mcq",
   "bugs": "https://github.com/adaptlearning/adapt-contrib-mcq/issues",
   "component" : "mcq",

@@ -9,6 +9,7 @@
         "displayTitle": "MCQ",
         "body": "Which of the following options would you consider to be correct?",
         "instruction": "",
+        "ariaQuestion": "Question text specifically for screen readers.",
         "_attempts": 1,
         "_shouldDisplayAttempts": false,
         "_isRandom": false,

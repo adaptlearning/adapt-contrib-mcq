@@ -82,8 +82,8 @@ export default function Mcq(props) {
               data-adapt-index={_index}
             >
 
-              <div className='mcq-item__state'>
-                <div
+              <span className='mcq-item__state'>
+                <span
                   className={classes([
                     'mcq-item__icon',
                     'mcq-item__answer-icon',
@@ -91,23 +91,23 @@ export default function Mcq(props) {
                   ])}
                 >
 
-                  <div className='icon'></div>
+                  <span className='icon'></span>
 
-                </div>
+                </span>
 
-                <div className='mcq-item__icon mcq-item__correct-icon'>
-                  <div className='icon'></div>
-                </div>
+                <span className='mcq-item__icon mcq-item__correct-icon'>
+                  <span className='icon'></span>
+                </span>
 
-                <div className='mcq-item__icon mcq-item__incorrect-icon'>
-                  <div className='icon'></div>
-                </div>
-              </div>
+                <span className='mcq-item__icon mcq-item__incorrect-icon'>
+                  <span className='icon'></span>
+                </span>
+              </span>
 
-              <div className='mcq-item__text'>
-                <div className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
-                </div>
-              </div>
+              <span className='mcq-item__text'>
+                <span className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
+                </span>
+              </span>
 
             </label>
 

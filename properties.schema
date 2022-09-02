@@ -66,6 +66,15 @@
       "help": "This is the instruction text",
       "translatable": true
     },
+    "ariaQuestion": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the ariaQuestion text",
+      "translatable": true
+    },
     "_items": {
       "type": "array",
       "required": true,

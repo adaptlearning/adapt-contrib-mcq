@@ -33,6 +33,14 @@
             "translatable": true
           }
         },
+        "ariaQuestion": {
+          "type": "string",
+          "title": "ariaQuestion",
+          "default": "",
+          "_adapt": {
+            "translatable": true
+          }
+        },
         "_items": {
           "type": "array",
           "title": "Items",

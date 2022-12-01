@@ -60,7 +60,7 @@
     "instruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.",
       "inputType": "Text",
       "validators": [],
       "help": "This is the instruction text",

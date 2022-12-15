@@ -8,7 +8,7 @@
         "title": "MCQ",
         "displayTitle": "MCQ",
         "body": "Which of the following options would you consider to be correct?",
-        "instruction": "",
+        "instruction": "Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.",
         "ariaQuestion": "Question text specifically for screen readers.",
         "_attempts": 1,
         "_shouldDisplayAttempts": false,

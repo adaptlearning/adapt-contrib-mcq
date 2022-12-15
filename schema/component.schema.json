@@ -28,7 +28,7 @@
         "instruction": {
           "type": "string",
           "title": "Instruction",
-          "default": "",
+          "default": "Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.",
           "_adapt": {
             "translatable": true
           }

@@ -35,7 +35,7 @@
         },
         "ariaQuestion": {
           "type": "string",
-          "title": "Aria question",
+          "title": "ARIA question",
           "description": "This will be read out by screen readers instead of reading the 'Display title', 'Body' & 'Instruction' fields when focusing on the options. To be clear and concise, ensure the text encompasses only the question associated.",
           "default": "",
           "_adapt": {

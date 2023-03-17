@@ -12,16 +12,23 @@
           "type": "object",
           "default": {},
           "properties": {
-            "_mcq": {
+            "_components": {
               "type": "object",
               "default": {},
               "properties": {
-                "ariaRegion": {
-                  "type": "string",
-                  "title": "ARIA region",
-                  "default": "Multiple choice question",
-                  "_adapt": {
-                    "translatable": true
+                "_mcq": {
+                  "type": "object",
+                  "title": "MCQ",
+                  "default": {},
+                  "properties": {
+                    "ariaRegion": {
+                      "type": "string",
+                      "title": "ARIA region",
+                      "default": "Multiple choice question",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
                   }
                 }
               }

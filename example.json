@@ -45,6 +45,7 @@
         ],
         "_feedback":{
             "title": "Feedback",
+            "altTitle": "Alt feedback title text",
             "correct": "Congratulations, this is the correct feedback.",
             "_incorrect": {
                 "notFinal": "",

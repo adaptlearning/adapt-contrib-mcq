@@ -151,7 +151,16 @@
             "title": {
               "type": "string",
               "title": "Title",
-              "description": "Leave blank to have the component's title shown instead",
+              "description": "Title text for the feedback",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "altTitle": {
+              "type": "string",
+              "title": "Alternative Feedback Title",
+              "description": "Text read out by screen readers if no visual title is included",
               "default": "",
               "_adapt": {
                 "translatable": true

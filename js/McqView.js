@@ -26,7 +26,10 @@ class McqView extends QuestionView {
 
   onItemFocus(event) {
     if (!this.model.isInteractive()) return;
-
+    if (this.model.get('_isRadio')) {
+      this.onItemSelect(event);
+      return;
+    }
     const index = parseInt($(event.currentTarget).data('adapt-index'));
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', true);

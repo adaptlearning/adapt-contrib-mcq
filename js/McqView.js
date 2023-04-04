@@ -30,7 +30,6 @@ class McqView extends QuestionView {
       this.onItemSelect(event);
       return;
     }
-
     const index = parseInt($(event.currentTarget).data('adapt-index'));
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', true);

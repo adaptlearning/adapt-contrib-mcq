@@ -31,15 +31,6 @@
 .mcq-item {
   position: relative;
 
-  &__input {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    opacity: 0;
-    z-index: -1;
-    .transform(translate(-50%, -50%));
-  }
-
   &__label {
     display: block;
     z-index: 1;
@@ -53,8 +44,12 @@
     display: none;
   }
 
+  &__input {
+    display: none;
+  }
+
   &__text {
-    display: block;
+    display: inline-block;
   }
 
   // MCQ item icons

@@ -47,38 +47,43 @@ export default function Mcq(props) {
           <div
             className={classes([
               `mcq-item item-${index}`,
-              _isHighlighted && 'is-highlighted',
               _shouldShowMarking && _shouldBeSelected && 'is-correct',
               _shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
             key={_index}
           >
+
+            <input
+              className='mcq-item__input'
+              id={`${_id}-${index}-input`}
+              name={_isRadio ? `${_id}-item` : null}
+              type={_isRadio ? 'radio' : 'checkbox'}
+              disabled={!_isEnabled}
+              checked={_isActive}
+              aria-label={!_shouldShowMarking ?
+                a11y.normalize(text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
+              data-adapt-index={_index}
+              onKeyPress={onKeyPress}
+              onChange={onItemSelect}
+              onFocus={onItemFocus}
+              onBlur={onItemBlur}
+            />
+
             <label
               className={classes([
                 'mcq-item__label',
                 'u-no-select',
                 !_isEnabled && 'is-disabled',
+                _isHighlighted && 'is-highlighted',
                 (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
+              aria-hidden={true}
+              htmlFor={`${_id}-${index}-input`}
               data-adapt-index={_index}
             >
-              <input
-                className='mcq-item__input'
-                name={_isRadio ? `${_id}-item` : null}
-                type={_isRadio ? 'radio' : 'checkbox'}
-                disabled={!_isEnabled}
-                checked={_isActive}
-                aria-label={!_shouldShowMarking ?
-                  a11y.normalize(text) :
-                  `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
-                data-adapt-index={_index}
-                onKeyPress={onKeyPress}
-                onChange={onItemSelect}
-                onFocus={onItemFocus}
-                onBlur={onItemBlur}
-              />
 
-              <span className='mcq-item__state' aria-hidden="true">
+              <span className='mcq-item__state'>
                 <span
                   className={classes([
                     'mcq-item__icon',
@@ -87,20 +92,20 @@ export default function Mcq(props) {
                   ])}
                 >
 
-                  <span className='icon' aria-hidden="true"></span>
+                  <span className='icon'></span>
 
                 </span>
 
                 <span className='mcq-item__icon mcq-item__correct-icon'>
-                  <span className='icon' aria-hidden="true"></span>
+                  <span className='icon'></span>
                 </span>
 
                 <span className='mcq-item__icon mcq-item__incorrect-icon'>
-                  <span className='icon' aria-hidden="true"></span>
+                  <span className='icon'></span>
                 </span>
               </span>
 
-              <span className='mcq-item__text' aria-hidden="true">
+              <span className='mcq-item__text'>
                 <span className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
                 </span>
               </span>

@@ -60,19 +60,17 @@ export default function Mcq(props) {
                 !_isEnabled && 'is-disabled',
                 (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
-              htmlFor={`${_id}-${index}-input`}
               data-adapt-index={_index}
-              aria-label={!_shouldShowMarking ?
-                a11y.normalize(text) :
-                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
             >
               <input
                 className='mcq-item__input'
-                id={`${_id}-${index}-input`}
                 name={_isRadio ? `${_id}-item` : null}
                 type={_isRadio ? 'radio' : 'checkbox'}
                 disabled={!_isEnabled}
                 checked={_isActive}
+                aria-label={!_shouldShowMarking ?
+                  a11y.normalize(text) :
+                  `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
                 data-adapt-index={_index}
                 onKeyPress={onKeyPress}
                 onChange={onItemSelect}

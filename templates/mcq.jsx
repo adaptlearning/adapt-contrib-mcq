@@ -60,9 +60,11 @@ export default function Mcq(props) {
                 !_isEnabled && 'is-disabled',
                 (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
-              aria-hidden={true}
               htmlFor={`${_id}-${index}-input`}
               data-adapt-index={_index}
+              aria-label={!_shouldShowMarking ?
+                a11y.normalize(text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
             >
               <input
                 className='mcq-item__input'
@@ -71,9 +73,6 @@ export default function Mcq(props) {
                 type={_isRadio ? 'radio' : 'checkbox'}
                 disabled={!_isEnabled}
                 checked={_isActive}
-                aria-label={!_shouldShowMarking ?
-                  a11y.normalize(text) :
-                  `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
                 data-adapt-index={_index}
                 onKeyPress={onKeyPress}
                 onChange={onItemSelect}
@@ -81,7 +80,7 @@ export default function Mcq(props) {
                 onBlur={onItemBlur}
               />
 
-              <span className='mcq-item__state'>
+              <span className='mcq-item__state' aria-hidden="true">
                 <span
                   className={classes([
                     'mcq-item__icon',
@@ -90,20 +89,20 @@ export default function Mcq(props) {
                   ])}
                 >
 
-                  <span className='icon'></span>
+                  <span className='icon' aria-hidden="true"></span>
 
                 </span>
 
                 <span className='mcq-item__icon mcq-item__correct-icon'>
-                  <span className='icon'></span>
+                  <span className='icon' aria-hidden="true"></span>
                 </span>
 
                 <span className='mcq-item__icon mcq-item__incorrect-icon'>
-                  <span className='icon'></span>
+                  <span className='icon' aria-hidden="true"></span>
                 </span>
               </span>
 
-              <span className='mcq-item__text'>
+              <span className='mcq-item__text' aria-hidden="true">
                 <span className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
                 </span>
               </span>

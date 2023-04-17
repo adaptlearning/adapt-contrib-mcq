@@ -1,5 +1,4 @@
 import QuestionView from 'core/js/views/questionView';
-import device from 'core/js/device';
 
 class McqView extends QuestionView {
 
@@ -26,7 +25,6 @@ class McqView extends QuestionView {
   }
 
   onItemFocus(event) {
-    if (device.touch) return;
     if (!this.model.isInteractive()) return;
     if (this.model.get('_isRadio')) {
       this.onItemSelect(event);
@@ -38,7 +36,6 @@ class McqView extends QuestionView {
   }
 
   onItemBlur(event) {
-    if (device.touch) return;
     const index = $(event.currentTarget).data('adapt-index');
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', false);

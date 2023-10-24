@@ -23,6 +23,7 @@
         "_items": [
             {
                 "text": "This is option 1 (Correct)",
+                "altText": "",
                 "_shouldBeSelected": true,
                 "_isPartlyCorrect": false
             },

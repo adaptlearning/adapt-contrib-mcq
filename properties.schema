@@ -94,6 +94,15 @@
             "help": "This text will display as the answer text",
             "translatable": true
           },
+          "altText": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "inputType": "Text",
+            "validators": [],
+            "help": "This will be read out by screen readers instead of reading 'text'. Optional for providing alternative text, for example, to specify how a word should be pronounced.",
+            "translatable": true
+          },
           "_shouldBeSelected": {
             "type": "boolean",
             "required": true,

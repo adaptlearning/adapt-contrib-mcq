@@ -61,8 +61,8 @@ export default function Mcq(props) {
               disabled={!_isEnabled}
               checked={_isActive}
               aria-label={!_shouldShowMarking ?
-                altText || a11y.normalize(text) :
-                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${altText} || ${a11y.normalize(text)}`}
+                a11y.normalize(altText || text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(altText || text)}`}
               data-adapt-index={_index}
               onKeyPress={onKeyPress}
               onChange={onItemSelect}

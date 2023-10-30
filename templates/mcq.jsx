@@ -42,7 +42,7 @@ export default function Mcq(props) {
         aria-label={ariaQuestion || null}
       >
 
-        {props._items.map(({ text, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
+        {props._items.map(({ text, altText, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
 
           <div
             className={classes([
@@ -61,8 +61,8 @@ export default function Mcq(props) {
               disabled={!_isEnabled}
               checked={_isActive}
               aria-label={!_shouldShowMarking ?
-                a11y.normalize(text) :
-                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(text)}`}
+                a11y.normalize(altText || text) :
+                `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(altText || text)}`}
               data-adapt-index={_index}
               onKeyPress={onKeyPress}
               onChange={onItemSelect}

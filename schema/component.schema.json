@@ -58,6 +58,14 @@
                   "translatable": true
                 }
               },
+              "altText": {
+                "type": "string",
+                "description": "This will be read out by screen readers instead of reading 'text'. Optional for providing alternative text, for example, to specify how a word should be pronounced.",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                }
+              },
               "_shouldBeSelected": {
                 "type": "boolean",
                 "title": "Mark this option as correct",

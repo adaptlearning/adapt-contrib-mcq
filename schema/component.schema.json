@@ -60,6 +60,7 @@
               },
               "altText": {
                 "type": "string",
+                "title": "Alternative text",
                 "description": "This will be read out by screen readers instead of reading 'text'. Optional for providing alternative text, for example, to specify how a word should be pronounced.",
                 "default": "",
                 "_adapt": {

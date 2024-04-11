@@ -15,7 +15,7 @@ describe('Multiple Choice Question', function () {
 
       cy.get('.mcq-item').should('have.length', mcqComponent._items.length);
       mcqComponent._items.forEach(item => {
-        cy.testContainsOrNotExists('.mcq-item__text', item.text);
+        cy.testContainsOrNotExists('.mcq-item__text', stripHtml(item.text));
       });
 
       // Make sure the current component is tested before moving to the next one

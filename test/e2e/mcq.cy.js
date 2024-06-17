@@ -6,9 +6,9 @@ describe('Multiple Choice Question', function () {
 
   it('should display the mcq component', function () {
     const mcqComponents = this.data.components.filter(component => component._component === 'mcq');
+    const stripHtml = cy.helpers.stripHtml;
     mcqComponents.forEach(mcqComponent => {
       cy.visit(`/#/preview/${mcqComponent._id}`);
-      const stripHtml = cy.helpers.stripHtml;
       cy.testContainsOrNotExists('.mcq__body', stripHtml(mcqComponent.body));
       cy.testContainsOrNotExists('.mcq__title', stripHtml(mcqComponent.displayTitle));
       cy.testContainsOrNotExists('.mcq__instruction', stripHtml(mcqComponent.instruction));

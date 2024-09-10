@@ -95,18 +95,20 @@ export default function Mcq(props) {
                   <span className='icon'></span>
 
                 </span>
+              </span>
 
+              <span className='mcq-item__text'>
+                <span className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
+                </span>
+              </span>
+
+              <span className='mcq-item__state mcq-item__state-correctness'>
                 <span className='mcq-item__icon mcq-item__correct-icon'>
                   <span className='icon'></span>
                 </span>
 
                 <span className='mcq-item__icon mcq-item__incorrect-icon'>
                   <span className='icon'></span>
-                </span>
-              </span>
-
-              <span className='mcq-item__text'>
-                <span className='mcq-item__text-inner' dangerouslySetInnerHTML={{ __html: compile(text) }}>
                 </span>
               </span>
 

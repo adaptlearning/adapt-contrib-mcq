@@ -28,6 +28,21 @@
   }
 }
 
+.mcq.can-show-correctness {
+  // Always show selection
+  // --------------------------------------------------
+  .mcq__widget .mcq-item__answer-icon {
+    display: block;
+  }
+
+  // Class to show the users selection
+  // --------------------------------------------------
+  .mcq__widget .is-correct .mcq-item__correct-icon,
+  .mcq__widget .is-incorrect .mcq-item__incorrect-icon {
+    display: block;
+  }
+}
+
 .mcq-item {
   position: relative;
 

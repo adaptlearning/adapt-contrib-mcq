@@ -37,7 +37,7 @@ export default function Mcq(props) {
           'mcq__widget',
           !_isEnabled && 'is-disabled',
           _isInteractionComplete && 'is-complete is-submitted',
-          _isInteractionComplete && !_isCorrectAnswerShown && 'show-user-answer',
+          _isInteractionComplete && !_canShowCorrectness && !_isCorrectAnswerShown && 'show-user-answer',
           _isInteractionComplete && _canShowModelAnswer && _isCorrectAnswerShown && 'show-correct-answer',
           _isInteractionComplete && _canShowCorrectness && 'show-correctness',
           _isCorrect && 'is-correct'

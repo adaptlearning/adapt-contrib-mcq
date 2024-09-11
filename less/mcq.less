@@ -26,19 +26,18 @@
   &__widget.show-correct-answer &-item:not(.is-correct):not(.is-incorrect) .is-selected &-item__answer-icon {
     display: block;
   }
-}
 
-.mcq.can-show-correctness {
+
   // Always show selection
   // --------------------------------------------------
-  .mcq__widget .mcq-item__answer-icon {
+  &__widget.show-correctness .mcq-item__answer-icon {
     display: block;
   }
 
-  // Class to show the users selection
+  // Class to show the item correctness
   // --------------------------------------------------
-  .mcq__widget .is-correct .mcq-item__correct-icon,
-  .mcq__widget .is-incorrect .mcq-item__incorrect-icon {
+  &__widget.show-correctness .is-correct .mcq-item__correct-icon,
+  &__widget.show-correctness .is-incorrect .mcq-item__incorrect-icon {
     display: block;
   }
 }

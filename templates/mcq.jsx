@@ -13,6 +13,8 @@ export default function Mcq(props) {
     _isCorrect,
     _isCorrectAnswerShown,
     _shouldShowMarking,
+    _canShowModelAnswer,
+    _canShowCorrectness,
     _isRadio,
     displayTitle,
     body,
@@ -34,7 +36,10 @@ export default function Mcq(props) {
           'component__widget',
           'mcq__widget',
           !_isEnabled && 'is-disabled',
-          _isInteractionComplete && 'is-complete is-submitted show-user-answer',
+          _isInteractionComplete && 'is-complete is-submitted',
+          _isInteractionComplete && !_isCorrectAnswerShown && 'show-user-answer',
+          _isInteractionComplete && _canShowModelAnswer && _isCorrectAnswerShown && 'show-correct-answer',
+          _isInteractionComplete && _canShowCorrectness && 'show-correctness',
           _isCorrect && 'is-correct'
         ])}
         role={_isRadio ? 'radiogroup' : 'group'}

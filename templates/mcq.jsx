@@ -63,7 +63,7 @@ export default function Mcq(props) {
               id={`${_id}-${index}-input`}
               name={_isRadio ? `${_id}-item` : null}
               type={_isRadio ? 'radio' : 'checkbox'}
-              disabled={!_isEnabled}
+              aria-disabled={!_isEnabled}
               checked={_isActive}
               aria-label={!_shouldShowMarking ?
                 a11y.normalize(altText || text) :

@@ -1,4 +1,5 @@
 import QuestionView from 'core/js/views/questionView';
+import Adapt from 'core/js/adapt';
 
 class McqView extends QuestionView {
 
@@ -33,12 +34,18 @@ class McqView extends QuestionView {
     const index = parseInt($(event.currentTarget).data('adapt-index'));
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', true);
+    setTimeout(() => {
+      Adapt.trigger('mcq:itemFocus')
+    }, 1);
   }
 
   onItemBlur(event) {
     const index = $(event.currentTarget).data('adapt-index');
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', false);
+    setTimeout(() => {
+      Adapt.trigger('mcq:itemFocus')
+    }, 1);
   }
 
   onItemSelect(event) {

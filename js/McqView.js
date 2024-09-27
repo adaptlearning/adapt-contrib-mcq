@@ -31,21 +31,11 @@ class McqView extends QuestionView {
       this.onItemSelect(event);
       return;
     }
-    const index = parseInt($(event.currentTarget).data('adapt-index'));
-    const item = this.model.getChildren().findWhere({ _index: index });
-    item.set('_isHighlighted', true);
-    setTimeout(() => {
-      Adapt.trigger('mcq:itemFocus')
-    }, 1);
+    event.currentTarget.classList.add('is-highlighted')
   }
 
   onItemBlur(event) {
-    const index = $(event.currentTarget).data('adapt-index');
-    const item = this.model.getChildren().findWhere({ _index: index });
-    item.set('_isHighlighted', false);
-    setTimeout(() => {
-      Adapt.trigger('mcq:itemFocus')
-    }, 1);
+    event.currentTarget.classList.remove('is-highlighted')
   }
 
   onItemSelect(event) {

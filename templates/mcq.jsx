@@ -42,7 +42,7 @@ export default function Mcq(props) {
         aria-label={ariaQuestion || null}
       >
 
-        {props._items.map(({ text, altText, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
+        {props._items.map(({ text, altText, _index, _isActive, _shouldBeSelected }, index) =>
 
           <div
             className={classes([
@@ -75,7 +75,6 @@ export default function Mcq(props) {
                 'mcq-item__label',
                 'u-no-select',
                 !_isEnabled && 'is-disabled',
-                _isHighlighted && 'is-highlighted',
                 (_isCorrectAnswerShown ? _shouldBeSelected : _isActive) && 'is-selected'
               ])}
               aria-hidden={true}

@@ -1,5 +1,4 @@
 import QuestionView from 'core/js/views/questionView';
-import Adapt from 'core/js/adapt';
 
 class McqView extends QuestionView {
 

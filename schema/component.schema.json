@@ -108,6 +108,12 @@
           "description": "Allow the user to view the 'model answer' if they answer the question incorrectly",
           "default": true
         },
+        "_canShowCorrectness": {
+          "type": "boolean",
+          "title": "Enable items to display correctness",
+          "description": "If enabled, this replaces the associated 'model answer' toggle button and displays correctness directly on the component items.",
+          "default": false
+        },
         "_canShowFeedback": {
           "type": "boolean",
           "title": "Enable feedback",

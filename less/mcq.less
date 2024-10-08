@@ -26,6 +26,20 @@
   &__widget.show-correct-answer &-item:not(.is-correct):not(.is-incorrect) .is-selected &-item__answer-icon {
     display: block;
   }
+
+
+  // Always show selection
+  // --------------------------------------------------
+  &__widget.show-correctness &-item__answer-icon {
+    display: block;
+  }
+
+  // Class to show the item correctness
+  // --------------------------------------------------
+  &__widget.show-correctness .is-correct &-item__correct-icon,
+  &__widget.show-correctness .is-incorrect &-item__incorrect-icon {
+    display: block;
+  }
 }
 
 .mcq-item {

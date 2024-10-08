@@ -59,6 +59,8 @@ guide the learner’s interaction with the component.
 
 **\_canShowModelAnswer** (boolean): Setting this to `false` prevents the [**_showCorrectAnswer** button](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons) from being displayed. The default is `true`.
 
+**\_canShowCorrectness** (boolean): Setting this to `true` replaces the associated `_canShowModelAnswer` toggle button and displays correctness directly on the component items. The default is `false`.
+
 **\_canShowFeedback** (boolean): Setting this to `false` disables feedback, so it is not shown to the user. The default is `true`.
 
 **\_canShowMarking** (boolean): Setting this to `false` prevents ticks and crosses being displayed on question completion. The default is `true`.

@@ -160,6 +160,15 @@
       "validators": [],
       "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
     },
+    "_canShowCorrectness": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Display item correctness",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, this replaces the associated 'model answer' toggle button and displays correctness directly on the component items."
+    },
     "_canShowFeedback": {
       "type": "boolean",
       "required": true,

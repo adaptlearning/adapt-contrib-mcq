@@ -19,8 +19,7 @@ class McqView extends QuestionView {
   }
 
   onKeyPress(event) {
-    if (![13, 32].includes(event.which)) return;
-    // <ENTER> or <SPACE> keypress
+    if (!['Enter', ' '].includes(event.key)) return;
     this.onItemSelect(event);
   }
 

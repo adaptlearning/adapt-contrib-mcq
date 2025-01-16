@@ -20,7 +20,7 @@ export default function Mcq(props) {
     body,
     instruction,
     ariaQuestion,
-    onKeyPress,
+    onKeyDown,
     onItemSelect,
     onItemFocus,
     onItemBlur
@@ -69,7 +69,7 @@ export default function Mcq(props) {
                 a11y.normalize(altText || text) :
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(altText || text)}`}
               data-adapt-index={_index}
-              onKeyPress={onKeyPress}
+              onKeyDown={onKeyDown}
               onChange={onItemSelect}
               onFocus={onItemFocus}
               onBlur={onItemBlur}

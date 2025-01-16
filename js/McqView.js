@@ -3,7 +3,7 @@ import QuestionView from 'core/js/views/questionView';
 class McqView extends QuestionView {
 
   initialize(...args) {
-    this.onKeyPress = this.onKeyPress.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.onItemSelect = this.onItemSelect.bind(this);
     this.onItemFocus = this.onItemFocus.bind(this);
     this.onItemBlur = this.onItemBlur.bind(this);
@@ -18,7 +18,7 @@ class McqView extends QuestionView {
     this.setReadyStatus();
   }
 
-  onKeyPress(event) {
+  onKeyDown(event) {
     if (!['Enter', ' '].includes(event.key)) return;
     this.onItemSelect(event);
   }

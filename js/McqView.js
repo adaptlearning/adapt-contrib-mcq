@@ -19,17 +19,13 @@ class McqView extends QuestionView {
   }
 
   onKeyPress(event) {
-    if (event.which !== 13) return;
-    // <ENTER> keypress
+    if (![13, 32].includes(event.which)) return;
+    // <ENTER> or <SPACE> keypress
     this.onItemSelect(event);
   }
 
   onItemFocus(event) {
     if (!this.model.isInteractive()) return;
-    if (this.model.get('_isRadio')) {
-      this.onItemSelect(event);
-      return;
-    }
     const index = parseInt($(event.currentTarget).data('adapt-index'));
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', true);

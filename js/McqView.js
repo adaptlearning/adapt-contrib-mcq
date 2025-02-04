@@ -1,9 +1,14 @@
+import logging from 'core/js/logging';
 import QuestionView from 'core/js/views/questionView';
 
 class McqView extends QuestionView {
 
   initialize(...args) {
-    this.onKeyPress = this.onKeyPress.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.onKeyPress = (...args) => {
+      logging.deprecated('McqView onKeyPress is deprecated, please change to onKeyDown');
+      this.onKeyDown(...args);
+    };
     this.onItemSelect = this.onItemSelect.bind(this);
     this.onItemFocus = this.onItemFocus.bind(this);
     this.onItemBlur = this.onItemBlur.bind(this);
@@ -18,18 +23,14 @@ class McqView extends QuestionView {
     this.setReadyStatus();
   }
 
-  onKeyPress(event) {
-    if (event.which !== 13) return;
-    // <ENTER> keypress
+  onKeyDown(event) {
+    if (!['Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
     this.onItemSelect(event);
   }
 
   onItemFocus(event) {
     if (!this.model.isInteractive()) return;
-    if (this.model.get('_isRadio')) {
-      this.onItemSelect(event);
-      return;
-    }
     const index = parseInt($(event.currentTarget).data('adapt-index'));
     const item = this.model.getChildren().findWhere({ _index: index });
     item.set('_isHighlighted', true);

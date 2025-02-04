@@ -25,6 +25,7 @@ class McqView extends QuestionView {
 
   onKeyDown(event) {
     if (!['Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
     this.onItemSelect(event);
   }
 

@@ -16,7 +16,7 @@ describe('MCQ - v7.2.1 to v7.3.0', async () => {
     });
     return true;
   });
-  mutateContent('MCQ - add ariaQuestion attribute to _items', async (content) => {
+  mutateContent('MCQ - add ariaQuestion attribute', async (content) => {
     MCQs.forEach(MCQ => {
       MCQ.ariaQuestion = '';
     });

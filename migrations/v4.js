@@ -1,4 +1,4 @@
-import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
+import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin, getComponents, getCourse, testStopWhere, testSuccessWhere } from 'adapt-migrations';
 import _ from 'lodash';
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v4.0.0...v4.0.1
@@ -7,12 +7,12 @@ describe('MCQ - v4.0.0 to v4.0.1', async () => {
   const originalAriaRegion = 'Multiple choice question. Select your option and then submit.';
   whereFromPlugin('MCQ - from v4.0.0', { name: 'adapt-contrib-mcq', version: '<4.0.1' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add globals if missing', async (content) => {
-    course = content.find(({ _type }) => _type === 'course');
-    if (!_.has(course, '_globals._components._mcq')) _.set(course, '_globals._components._mcq', {});
+    course = getCourse();
+    if (!_.has(course, '_globals._components._mcq.ariaRegion')) _.set(course, '_globals._components._mcq.ariaRegion', originalAriaRegion);
     courseMCQGlobals = course._globals._components._mcq;
     return true;
   });
@@ -32,6 +32,42 @@ describe('MCQ - v4.0.0 to v4.0.1', async () => {
   });
 
   updatePlugin('MCQ - update to v4.0.1', { name: 'adapt-contrib-mcq', version: '4.0.1', framework: '>=5.0.0' });
+
+  testSuccessWhere('mcq components with empty course', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.0' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course' }
+    ]
+  });
+
+  testSuccessWhere('mcq components and course with globals', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.0' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course', _globals: { _components: { _mcq: { ariaRegion: originalAriaRegion } } } }
+    ]
+  });
+
+  testSuccessWhere('mcq components and course with custom globals', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.0' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course', _globals: { _components: { _mcq: { ariaRegion: 'Custom aria region' } } } }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.1' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.0' }],
+    content: [{ _component: 'other' }]
+  });
 });
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v4.0.1...v4.1.0
@@ -39,11 +75,11 @@ describe('MCQ - v4.0.1 to v4.1.0', async () => {
   let course, courseMCQGlobals, MCQs;
   whereFromPlugin('MCQ - from v4.0.1', { name: 'adapt-contrib-mcq', version: '<4.1.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add globals if missing', async (content) => {
-    course = content.find(({ _type }) => _type === 'course');
+    course = getCourse();
     if (!_.has(course, '_globals._components._mcq')) _.set(course, '_globals._components._mcq', {});
     courseMCQGlobals = course._globals._components._mcq;
     return true;
@@ -91,6 +127,33 @@ describe('MCQ - v4.0.1 to v4.1.0', async () => {
   });
 
   updatePlugin('MCQ - update to v4.1.0', { name: 'adapt-contrib-mcq', version: '4.1.0', framework: '>=5.0.0' });
+
+  testSuccessWhere('mcq components with empty course', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course' }
+    ]
+  });
+
+  testSuccessWhere('mcq components and course with globals', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course', _globals: { _components: { _mcq: { } } } }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.1.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.0.1' }],
+    content: [{ _component: 'other' }]
+  });
 });
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v4.1.0...v4.2.0
@@ -98,7 +161,7 @@ describe('MCQ - v4.1.0 to v4.2.0', async () => {
   let MCQs;
   whereFromPlugin('MCQ - from v4.1.0', { name: 'adapt-contrib-mcq', version: '<4.2.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add _hasItemScoring attribute', async (content) => {
@@ -143,4 +206,21 @@ describe('MCQ - v4.1.0 to v4.2.0', async () => {
     return true;
   });
   updatePlugin('MCQ - update to v4.2.0', { name: 'adapt-contrib-mcq', version: '4.2.0', framework: '>=5.0.0' });
+
+  testSuccessWhere('mcq components with/without feedback', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.1.0' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq' },
+      { _id: 'c-105', _component: 'mcq' }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.2.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '4.1.0' }],
+    content: [{ _component: 'other' }]
+  });
 });

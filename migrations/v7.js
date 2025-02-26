@@ -1,4 +1,4 @@
-import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
+import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin, getComponents, testStopWhere, testSuccessWhere } from 'adapt-migrations';
 import _ from 'lodash';
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v7.2.1...v7.3.0
@@ -7,12 +7,13 @@ describe('MCQ - v7.2.1 to v7.3.0', async () => {
   const originalInstruction = '';
   whereFromPlugin('MCQ - from v7.2.1', { name: 'adapt-contrib-mcq', version: '<7.3.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - modify instruction attribute', async (content) => {
     MCQs.forEach(MCQ => {
-      if (MCQ.instruction === originalInstruction) MCQ.instruction = 'Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.';
+      if (MCQ.instruction !== originalInstruction) return;
+      MCQ.instruction = 'Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.';
     });
     return true;
   });
@@ -33,6 +34,24 @@ describe('MCQ - v7.2.1 to v7.3.0', async () => {
     return true;
   });
   updatePlugin('MCQ - update to v7.3.0', { name: 'adapt-contrib-mcq', version: '7.3.0', framework: '>=5.19.1' });
+
+  testSuccessWhere('mcq components with/custom/no instruction', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.2.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', instruction: originalInstruction },
+      { _id: 'c-105', _component: 'mcq', instruction: 'custom instruction' },
+      { _id: 'c-110', _component: 'mcq' }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.2.1' }],
+    content: [{ _component: 'other' }]
+  });
 });
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v7.3.11...v7.4.0
@@ -40,7 +59,7 @@ describe('MCQ - v7.3.11 to v7.4.0', async () => {
   let MCQs;
   whereFromPlugin('MCQ - from v7.3.11', { name: 'adapt-contrib-mcq', version: '<7.4.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add altText attribute to _items', async (content) => {
@@ -59,6 +78,23 @@ describe('MCQ - v7.3.11 to v7.4.0', async () => {
     return true;
   });
   updatePlugin('MCQ - update to v7.4.0', { name: 'adapt-contrib-mcq', version: '7.4.0', framework: '>=5.19.1' });
+
+  testSuccessWhere('correct version mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.11' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ title: 'item 1' }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ title: 'item 2' }] }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.4.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.11' }],
+    content: [{ _component: 'other' }]
+  });
 });
 
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v7.4.3...v7.5.0
@@ -66,7 +102,7 @@ describe('MCQ - v7.4.3 to v7.5.0', async () => {
   let MCQs;
   whereFromPlugin('MCQ - from v7.4.3', { name: 'adapt-contrib-mcq', version: '<7.5.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add _canShowCorrectness attribute', async (content) => {
@@ -81,4 +117,21 @@ describe('MCQ - v7.4.3 to v7.5.0', async () => {
     return true;
   });
   updatePlugin('MCQ - update to v7.6.0', { name: 'adapt-contrib-mcq', version: '7.5.0', framework: '>=5.19.1' });
+
+  testSuccessWhere('correct version mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.4.3' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq' },
+      { _id: 'c-105', _component: 'mcq' }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.5.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.4.3' }],
+    content: [{ _component: 'other' }]
+  });
 });

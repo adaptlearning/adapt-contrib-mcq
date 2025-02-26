@@ -1,4 +1,4 @@
-import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
+import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin, getComponents, getCourse, testStopWhere, testSuccessWhere } from 'adapt-migrations';
 import _ from 'lodash';
 
 describe('MCQ - v2.2.1 to v3.0.0', async () => {
@@ -6,12 +6,12 @@ describe('MCQ - v2.2.1 to v3.0.0', async () => {
   const originalAriaRegion = 'This is a multiple choice question. Once you have selected an option, select the submit button below';
   whereFromPlugin('MCQ - from v2.2.1', { name: 'adapt-contrib-mcq', version: '<3.0.0' });
   whereContent('MCQ - where MCQ', async (content) => {
-    MCQs = content.filter(({ _component }) => _component === 'mcq');
+    MCQs = getComponents('mcq');
     return MCQs.length;
   });
   mutateContent('MCQ - add globals if missing', async (content) => {
-    course = content.find(({ _type }) => _type === 'course');
-    if (!_.has(course, '_globals._components._mcq')) _.set(course, '_globals._components._mcq', {});
+    course = getCourse();
+    if (!_.has(course, '_globals._components._mcq.ariaRegion')) _.set(course, '_globals._components._mcq.ariaRegion', originalAriaRegion);
     courseMCQGlobals = course._globals._components._mcq;
     return true;
   });
@@ -31,4 +31,40 @@ describe('MCQ - v2.2.1 to v3.0.0', async () => {
   });
 
   updatePlugin('MCQ - update to v3.0.0', { name: 'adapt-contrib-mcq', version: '3.0.0', framework: '>=4.0.0' });
+
+  testSuccessWhere('mcq components with empty course', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '2.2.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course' }
+    ]
+  });
+
+  testSuccessWhere('mcq components and course with globals', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '2.2.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course', _globals: { _components: { _mcq: { ariaRegion: originalAriaRegion } } } }
+    ]
+  });
+
+  testSuccessWhere('mcq components and course with custom globals', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '2.2.1' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _id: 'c-105', _component: 'mcq', _items: [{ _graphic: {} }] },
+      { _type: 'course', _globals: { _components: { _mcq: { ariaRegion: 'Custom aria region' } } } }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '2.3.0' }]
+  });
+
+  testStopWhere('no mcq components', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '2.2.1' }],
+    content: [{ _component: 'other' }]
+  });
 });

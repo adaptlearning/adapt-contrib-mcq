@@ -107,7 +107,7 @@ describe('MCQ - v7.4.3 to v7.5.0', async () => {
   });
   mutateContent('MCQ - add _canShowCorrectness attribute', async (content) => {
     MCQs.forEach(MCQ => {
-      MCQ._canShowCorrectness = false;
+      MCQ._canShowCorrectness = MCQ._showMarking !== undefined ? MCQ._showMarking : false;
     });
     return true;
   });

@@ -4,7 +4,7 @@
   "type": "object",
   "$merge": {
     "source": {
-      "$ref": "component"
+      "$ref": "items-question-component"
     },
     "with": {
       "required": [

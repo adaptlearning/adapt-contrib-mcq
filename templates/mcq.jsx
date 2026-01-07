@@ -52,8 +52,8 @@ export default function Mcq(props) {
           <div
             className={classes([
               `mcq-item item-${index}`,
-              _shouldShowMarking && _shouldBeSelected && 'is-correct',
-              _shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
+              _canShowCorrectness && _shouldShowMarking && _shouldBeSelected && 'is-correct',
+              _canShowCorrectness && _shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
             key={_index}
           >

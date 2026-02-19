@@ -21,7 +21,9 @@ export default function Mcq(props) {
     instruction,
     ariaQuestion,
     onKeyDown,
-    onItemSelect
+    onItemSelect,
+    onItemFocus,
+    onItemBlur
   } = props;
 
   return (
@@ -45,7 +47,7 @@ export default function Mcq(props) {
         aria-label={ariaQuestion || null}
       >
 
-        {props._items.map(({ text, altText, _index, _isActive, _shouldBeSelected }, index) =>
+        {props._items.map(({ text, altText, _index, _isActive, _shouldBeSelected, _isHighlighted }, index) =>
 
           <div
             className={classes([
@@ -69,6 +71,8 @@ export default function Mcq(props) {
               data-adapt-index={_index}
               onKeyDown={onKeyDown}
               onChange={onItemSelect}
+              onFocus={onItemFocus}
+              onBlur={onItemBlur}
             />
 
             <label

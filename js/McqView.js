@@ -10,6 +10,8 @@ class McqView extends QuestionView {
       this.onKeyDown(...args);
     };
     this.onItemSelect = this.onItemSelect.bind(this);
+    this.onItemFocus = this.onItemFocus.bind(this);
+    this.onItemBlur = this.onItemBlur.bind(this);
     super.initialize(...args);
   }
 
@@ -25,6 +27,19 @@ class McqView extends QuestionView {
     if (!['Enter', ' '].includes(event.key)) return;
     event.preventDefault();
     this.onItemSelect(event);
+  }
+
+  onItemFocus(event) {
+    if (!this.model.isInteractive()) return;
+    const index = parseInt($(event.currentTarget).data('adapt-index'));
+    const item = this.model.getChildren().findWhere({ _index: index });
+    item.set('_isHighlighted', true);
+  }
+
+  onItemBlur(event) {
+    const index = $(event.currentTarget).data('adapt-index');
+    const item = this.model.getChildren().findWhere({ _index: index });
+    item.set('_isHighlighted', false);
   }
 
   onItemSelect(event) {

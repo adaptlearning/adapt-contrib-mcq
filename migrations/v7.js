@@ -54,6 +54,47 @@ describe('MCQ - v7.2.1 to v7.3.0', async () => {
   });
 });
 
+// https://github.com/adaptlearning/adapt-contrib-mcq/commit/4f789793248c5f40529897f5a990cee79758c1b7
+describe('MCQ - v7.3.7 to v7.3.8', async () => {
+  let MCQs;
+  whereFromPlugin('MCQ - from v7.3.7', { name: 'adapt-contrib-mcq', version: '<7.3.8' });
+  whereContent('MCQ - where MCQ with _feedback', async (content) => {
+    MCQs = getComponents('mcq').filter(MCQ => _.has(MCQ, '_feedback') && !_.has(MCQ._feedback, 'altTitle'));
+    return MCQs.length;
+  });
+  mutateContent('MCQ - add altTitle to _feedback', async (content) => {
+    MCQs.forEach(MCQ => {
+      MCQ._feedback.altTitle = '';
+    });
+    return true;
+  });
+  checkContent('MCQ - check _feedback altTitle attribute', async (content) => {
+    const isValid = MCQs.every(MCQ => _.has(MCQ._feedback, 'altTitle'));
+    if (!isValid) throw new Error('MCQ - no _feedback altTitle found');
+    return true;
+  });
+  updatePlugin('MCQ - update to v7.3.8', { name: 'adapt-contrib-mcq', version: '7.3.8', framework: '>=5.19.1' });
+
+  testSuccessWhere('mcq components with _feedback', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.7' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq', _feedback: { correct: 'Correct!' } },
+      { _id: 'c-105', _component: 'mcq', _feedback: { correct: '' } }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.8' }]
+  });
+
+  testStopWhere('no mcq components with _feedback', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.3.7' }],
+    content: [
+      { _id: 'c-100', _component: 'mcq' }
+    ]
+  });
+});
+
 // https://github.com/adaptlearning/adapt-contrib-mcq/compare/v7.3.11...v7.4.0
 describe('MCQ - v7.3.11 to v7.4.0', async () => {
   let MCQs;

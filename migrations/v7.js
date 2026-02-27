@@ -182,7 +182,11 @@ describe('MCQ - v7.5.0 to @@RELEASE_VERSION', async () => {
   let MCQs;
   whereFromPlugin('MCQ - from v7.5.0', { name: 'adapt-contrib-mcq', version: '<@@RELEASE_VERSION' });
   whereContent('MCQ - where MCQ with legacy feedback', async (content) => {
-    MCQs = getComponents('mcq').filter(MCQ => _.has(MCQ, '_feedback.correct'));
+    MCQs = getComponents('mcq').filter(MCQ =>
+      _.has(MCQ, '_feedback.correct') ||
+      _.has(MCQ, '_feedback._incorrect') ||
+      _.has(MCQ, '_feedback._partlyCorrect')
+    );
     return MCQs.length;
   });
   mutateContent('MCQ - convert _feedback.correct to _feedback._correct object', async (content) => {

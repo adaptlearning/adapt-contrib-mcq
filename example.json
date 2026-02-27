@@ -47,11 +47,13 @@
             },
             {
                 "text": "This is option 3",
+                "altText": "",
                 "_shouldBeSelected": false,
                 "_isPartlyCorrect": false
             },
             {
                 "text": "This is option 4",
+                "altText": "",
                 "_shouldBeSelected": false,
                 "_isPartlyCorrect": false
             }

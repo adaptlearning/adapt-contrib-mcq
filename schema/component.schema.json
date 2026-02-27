@@ -78,14 +78,90 @@
                 "default": false
               },
               "feedback": {
-                "type": "string",
+                "type": "object",
                 "title": "Answer-specific feedback",
-                "description": "When 'Selectable items' is set to 1, this can be used to give the user feedback specific to the answer they selected - if incorrect",
-                "default": "",
-                "_adapt": {
-                  "translatable": true
-                },
-                "_backboneForms": "TextArea"
+                "description": "When 'Selectable items' is set to 1, this gives the user feedback specific to the answer they selected - if incorrect. Overrides the component-level _feedback state for this item.",
+                "default": {},
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "title": "Title",
+                    "description": "Feedback title for this item. Overrides the component-level _feedback.title.",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    }
+                  },
+                  "altTitle": {
+                    "type": "string",
+                    "title": "Alternative title",
+                    "description": "Alternative title read by screen readers if no visual title is included.",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    }
+                  },
+                  "body": {
+                    "type": "string",
+                    "title": "Body",
+                    "description": "Feedback body text for this item.",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    },
+                    "_backboneForms": "TextArea"
+                  },
+                  "_classes": {
+                    "type": "string",
+                    "title": "Classes",
+                    "description": "CSS class name(s) for this item's feedback panel.",
+                    "default": ""
+                  },
+                  "_imageAlignment": {
+                    "type": "string",
+                    "title": "Image alignment",
+                    "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                    "default": "right",
+                    "enum": [
+                      "left",
+                      "right"
+                    ]
+                  },
+                  "_graphic": {
+                    "type": "object",
+                    "title": "Graphic",
+                    "default": {},
+                    "properties": {
+                      "_src": {
+                        "type": "string",
+                        "title": "Source",
+                        "default": "",
+                        "_backboneForms": {
+                          "type": "Asset",
+                          "media": "image"
+                        }
+                      },
+                      "alt": {
+                        "type": "string",
+                        "title": "Alternative text",
+                        "description": "A description of the image for screen readers",
+                        "default": "",
+                        "_adapt": {
+                          "translatable": true
+                        }
+                      },
+                      "attribution": {
+                        "type": "string",
+                        "title": "Attribution",
+                        "description": "Text to be displayed as an attribution",
+                        "default": "",
+                        "_adapt": {
+                          "translatable": true
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "_score": {
                 "type": "number",
@@ -161,6 +237,7 @@
         "_feedback": {
           "type": "object",
           "title": "Feedback",
+          "description": "Feedback configuration for the component. Uses per-state objects (_correct, _incorrectFinal, etc.) to support body text, title overrides, CSS classes, and an optional graphic per state.",
           "default": {},
           "properties": {
             "title": {
@@ -181,67 +258,439 @@
                 "translatable": true
               }
             },
-            "correct": {
+            "_classes": {
               "type": "string",
-              "title": "Correct feedback",
-              "description": "Correct answer feedback for this question",
-              "default": "",
-              "_adapt": {
-                "translatable": true
-              },
-              "_backboneForms": "TextArea"
+              "title": "Classes",
+              "description": "CSS class name(s) to be applied to the feedback panel for all states. Separate multiple classes with a space.",
+              "default": ""
             },
-            "_incorrect": {
+            "_correct": {
               "type": "object",
-              "title": "Incorrect",
+              "title": "Correct feedback",
+              "description": "Feedback shown when the answer is correct.",
               "default": {},
               "properties": {
-                "final": {
+                "title": {
                   "type": "string",
-                  "title": "Default incorrect feedback",
-                  "description": "Incorrect answer feedback for the final attempt",
+                  "title": "Title",
+                  "description": "Feedback title for this state. Overrides the top-level _feedback.title for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "altTitle": {
+                  "type": "string",
+                  "title": "Alternative title",
+                  "description": "Alternative title read by screen readers if no visual title is included. Overrides the top-level _feedback.altTitle for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "body": {
+                  "type": "string",
+                  "title": "Body",
+                  "description": "Feedback body text for this state.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
                   },
                   "_backboneForms": "TextArea"
                 },
-                "notFinal": {
+                "_classes": {
                   "type": "string",
-                  "title": "Retry feedback",
-                  "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the default incorrect feedback will be used instead",
-                  "default": "",
-                  "_adapt": {
-                    "translatable": true
-                  },
-                  "_backboneForms": "TextArea"
+                  "title": "Classes",
+                  "description": "CSS class name(s) for this state only. Overrides the top-level _feedback._classes for this state.",
+                  "default": ""
+                },
+                "_imageAlignment": {
+                  "type": "string",
+                  "title": "Image alignment",
+                  "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                  "default": "right",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "_graphic": {
+                  "type": "object",
+                  "title": "Graphic",
+                  "default": {},
+                  "properties": {
+                    "_src": {
+                      "type": "string",
+                      "title": "Source",
+                      "default": "",
+                      "_backboneForms": {
+                        "type": "Asset",
+                        "media": "image"
+                      }
+                    },
+                    "alt": {
+                      "type": "string",
+                      "title": "Alternative text",
+                      "description": "A description of the image for screen readers",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "title": "Attribution",
+                      "description": "Text to be displayed as an attribution",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
+                  }
                 }
               }
             },
-            "_partlyCorrect": {
+            "_incorrectFinal": {
               "type": "object",
-              "title": "Partly correct",
+              "title": "Incorrect feedback (final attempt)",
+              "description": "Feedback shown when the answer is incorrect on the final attempt.",
               "default": {},
               "properties": {
-                "final": {
+                "title": {
                   "type": "string",
-                  "title": "Default partly correct feedback",
-                  "description": "Partly correct answer feedback for the final attempt. If you leave this blank, the default incorrect feedback will be used instead",
+                  "title": "Title",
+                  "description": "Feedback title for this state. Overrides the top-level _feedback.title for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "altTitle": {
+                  "type": "string",
+                  "title": "Alternative title",
+                  "description": "Alternative title read by screen readers if no visual title is included. Overrides the top-level _feedback.altTitle for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "body": {
+                  "type": "string",
+                  "title": "Body",
+                  "description": "Feedback body text for this state.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
                   },
                   "_backboneForms": "TextArea"
                 },
-                "notFinal": {
+                "_classes": {
                   "type": "string",
-                  "title": "Retry feedback",
-                  "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the default partly correct feedback will be used instead",
+                  "title": "Classes",
+                  "description": "CSS class name(s) for this state only. Overrides the top-level _feedback._classes for this state.",
+                  "default": ""
+                },
+                "_imageAlignment": {
+                  "type": "string",
+                  "title": "Image alignment",
+                  "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                  "default": "right",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "_graphic": {
+                  "type": "object",
+                  "title": "Graphic",
+                  "default": {},
+                  "properties": {
+                    "_src": {
+                      "type": "string",
+                      "title": "Source",
+                      "default": "",
+                      "_backboneForms": {
+                        "type": "Asset",
+                        "media": "image"
+                      }
+                    },
+                    "alt": {
+                      "type": "string",
+                      "title": "Alternative text",
+                      "description": "A description of the image for screen readers",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "title": "Attribution",
+                      "description": "Text to be displayed as an attribution",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_incorrectNotFinal": {
+              "type": "object",
+              "title": "Incorrect feedback (not final attempt)",
+              "description": "Feedback shown when the answer is incorrect and attempts remain. Falls back to _incorrectFinal if omitted.",
+              "default": {},
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Title",
+                  "description": "Feedback title for this state. Overrides the top-level _feedback.title for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "altTitle": {
+                  "type": "string",
+                  "title": "Alternative title",
+                  "description": "Alternative title read by screen readers if no visual title is included. Overrides the top-level _feedback.altTitle for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "body": {
+                  "type": "string",
+                  "title": "Body",
+                  "description": "Feedback body text for this state.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
                   },
                   "_backboneForms": "TextArea"
+                },
+                "_classes": {
+                  "type": "string",
+                  "title": "Classes",
+                  "description": "CSS class name(s) for this state only. Overrides the top-level _feedback._classes for this state.",
+                  "default": ""
+                },
+                "_imageAlignment": {
+                  "type": "string",
+                  "title": "Image alignment",
+                  "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                  "default": "right",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "_graphic": {
+                  "type": "object",
+                  "title": "Graphic",
+                  "default": {},
+                  "properties": {
+                    "_src": {
+                      "type": "string",
+                      "title": "Source",
+                      "default": "",
+                      "_backboneForms": {
+                        "type": "Asset",
+                        "media": "image"
+                      }
+                    },
+                    "alt": {
+                      "type": "string",
+                      "title": "Alternative text",
+                      "description": "A description of the image for screen readers",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "title": "Attribution",
+                      "description": "Text to be displayed as an attribution",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_partlyCorrectFinal": {
+              "type": "object",
+              "title": "Partly correct feedback (final attempt)",
+              "description": "Feedback shown when the answer is partly correct on the final attempt. Falls back to _incorrectFinal if omitted.",
+              "default": {},
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Title",
+                  "description": "Feedback title for this state. Overrides the top-level _feedback.title for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "altTitle": {
+                  "type": "string",
+                  "title": "Alternative title",
+                  "description": "Alternative title read by screen readers if no visual title is included. Overrides the top-level _feedback.altTitle for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "body": {
+                  "type": "string",
+                  "title": "Body",
+                  "description": "Feedback body text for this state.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                },
+                "_classes": {
+                  "type": "string",
+                  "title": "Classes",
+                  "description": "CSS class name(s) for this state only. Overrides the top-level _feedback._classes for this state.",
+                  "default": ""
+                },
+                "_imageAlignment": {
+                  "type": "string",
+                  "title": "Image alignment",
+                  "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                  "default": "right",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "_graphic": {
+                  "type": "object",
+                  "title": "Graphic",
+                  "default": {},
+                  "properties": {
+                    "_src": {
+                      "type": "string",
+                      "title": "Source",
+                      "default": "",
+                      "_backboneForms": {
+                        "type": "Asset",
+                        "media": "image"
+                      }
+                    },
+                    "alt": {
+                      "type": "string",
+                      "title": "Alternative text",
+                      "description": "A description of the image for screen readers",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "title": "Attribution",
+                      "description": "Text to be displayed as an attribution",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_partlyCorrectNotFinal": {
+              "type": "object",
+              "title": "Partly correct feedback (not final attempt)",
+              "description": "Feedback shown when the answer is partly correct and attempts remain. Falls back to _partlyCorrectFinal, then _incorrectFinal if omitted.",
+              "default": {},
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Title",
+                  "description": "Feedback title for this state. Overrides the top-level _feedback.title for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "altTitle": {
+                  "type": "string",
+                  "title": "Alternative title",
+                  "description": "Alternative title read by screen readers if no visual title is included. Overrides the top-level _feedback.altTitle for this state only.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  }
+                },
+                "body": {
+                  "type": "string",
+                  "title": "Body",
+                  "description": "Feedback body text for this state.",
+                  "default": "",
+                  "_adapt": {
+                    "translatable": true
+                  },
+                  "_backboneForms": "TextArea"
+                },
+                "_classes": {
+                  "type": "string",
+                  "title": "Classes",
+                  "description": "CSS class name(s) for this state only. Overrides the top-level _feedback._classes for this state.",
+                  "default": ""
+                },
+                "_imageAlignment": {
+                  "type": "string",
+                  "title": "Image alignment",
+                  "description": "Alignment of the graphic relative to the feedback text. Defaults to 'right'.",
+                  "default": "right",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "_graphic": {
+                  "type": "object",
+                  "title": "Graphic",
+                  "default": {},
+                  "properties": {
+                    "_src": {
+                      "type": "string",
+                      "title": "Source",
+                      "default": "",
+                      "_backboneForms": {
+                        "type": "Asset",
+                        "media": "image"
+                      }
+                    },
+                    "alt": {
+                      "type": "string",
+                      "title": "Alternative text",
+                      "description": "A description of the image for screen readers",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "title": "Attribution",
+                      "description": "Text to be displayed as an attribution",
+                      "default": "",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
+                  }
                 }
               }
             }

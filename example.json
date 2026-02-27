@@ -31,7 +31,18 @@
             {
                 "text": "This is option 2",
                 "_shouldBeSelected": false,
-                "feedback": "Option two incorrect feedback",
+                "feedback": {
+                    "title": "Option two feedback title",
+                    "altTitle": "",
+                    "body": "Option two incorrect feedback",
+                    "_classes": "",
+                    "_imageAlignment": "right",
+                    "_graphic": {
+                        "_src": "",
+                        "alt": "",
+                        "attribution": ""
+                    }
+                },
                 "_isPartlyCorrect": false
             },
             {
@@ -45,17 +56,71 @@
                 "_isPartlyCorrect": false
             }
         ],
-        "_feedback":{
+        "_feedback": {
             "title": "Feedback",
             "altTitle": "Alt feedback title text",
-            "correct": "Congratulations, this is the correct feedback.",
-            "_incorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered the question incorrectly."
+            "_classes": "",
+            "_correct": {
+                "title": "",
+                "altTitle": "",
+                "body": "Congratulations, this is the correct feedback.",
+                "_classes": "",
+                "_imageAlignment": "right",
+                "_graphic": {
+                    "_src": "",
+                    "alt": "",
+                    "attribution": ""
+                }
             },
-            "_partlyCorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered the question correctly."
+            "_incorrectFinal": {
+                "title": "",
+                "altTitle": "",
+                "body": "This feedback will appear if you answered the question incorrectly.",
+                "_classes": "",
+                "_imageAlignment": "right",
+                "_graphic": {
+                    "_src": "",
+                    "alt": "",
+                    "attribution": ""
+                }
+            },
+            "_incorrectNotFinal": {
+                "_comment": "Optional. If omitted or body is empty, _incorrectFinal is shown instead.",
+                "title": "",
+                "altTitle": "",
+                "body": "",
+                "_classes": "",
+                "_imageAlignment": "right",
+                "_graphic": {
+                    "_src": "",
+                    "alt": "",
+                    "attribution": ""
+                }
+            },
+            "_partlyCorrectFinal": {
+                "title": "",
+                "altTitle": "",
+                "body": "This feedback will appear if you answered the question partly correctly.",
+                "_classes": "",
+                "_imageAlignment": "right",
+                "_graphic": {
+                    "_src": "",
+                    "alt": "",
+                    "attribution": ""
+                }
+            },
+            "_partlyCorrectNotFinal": {
+                "_comment": "Optional. If omitted or body is empty, _partlyCorrectFinal is shown instead; if that is also absent, _incorrectFinal is used.",
+                "title": "",
+                "altTitle": "",
+                "body": "",
+                "_classes": "",
+                "_imageAlignment": "right",
+                "_graphic": {
+                    "_src": "",
+                    "alt": "",
+                    "attribution": ""
+                }
             }
         },
         "_comment": "You only need to include _buttons if you want to override the button labels that are set in course.json",

@@ -121,14 +121,95 @@
             "validators": []
           },
           "feedback": {
-            "type": "string",
+            "type": "object",
             "required": false,
-            "default": "",
             "title": "Answer-specific feedback",
-            "inputType": "TextArea",
+            "inputType": "Object",
             "validators": [],
-            "help": "When 'Selectable Items' is set to 1, this can be used to give the user feedback specific to the answer they selected - if incorrect.",
-            "translatable": true
+            "help": "When 'Selectable Items' is set to 1, this gives the user feedback specific to the answer they selected - if incorrect. Overrides the component-level _feedback state for this item.",
+            "properties": {
+              "title": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Title",
+                "inputType": "Text",
+                "validators": [],
+                "translatable": true
+              },
+              "altTitle": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Alternative Title",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Text read out by screen readers if no visual title is included.",
+                "translatable": true
+              },
+              "body": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Body",
+                "inputType": "TextArea",
+                "validators": [],
+                "translatable": true
+              },
+              "_classes": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Classes",
+                "inputType": "Text",
+                "validators": []
+              },
+              "_imageAlignment": {
+                "type": "string",
+                "required": false,
+                "default": "right",
+                "title": "Image Alignment",
+                "inputType": "Select",
+                "enum": ["left", "right"],
+                "validators": [],
+                "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+              },
+              "_graphic": {
+                "type": "object",
+                "required": false,
+                "title": "Graphic",
+                "inputType": "Object",
+                "validators": [],
+                "properties": {
+                  "_src": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "title": "Source",
+                    "inputType": "Asset:image",
+                    "validators": []
+                  },
+                  "alt": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "title": "Alternative Text",
+                    "inputType": "Text",
+                    "validators": [],
+                    "translatable": true
+                  },
+                  "attribution": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "title": "Attribution",
+                    "inputType": "Text",
+                    "validators": [],
+                    "translatable": true
+                  }
+                }
+              }
+            }
           },
           "_score": {
             "type": "number",
@@ -252,66 +333,462 @@
           "help": "Leave blank to have the component's title shown instead.",
           "translatable": true
         },
-        "correct": {
+        "altTitle": {
           "type": "string",
           "required": false,
           "default": "",
-          "title": "Correct",
-          "inputType": "TextArea",
+          "title": "Alternative Feedback Title",
+          "inputType": "Text",
           "validators": [],
-          "help": "Correct answer feedback for this question",
+          "help": "Text read out by screen readers if no visual title is included.",
           "translatable": true
         },
-        "_incorrect": {
+        "_classes": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "title": "Feedback Classes",
+          "inputType": "Text",
+          "validators": [],
+          "help": "CSS class name(s) to be applied to the feedback panel for all states. Separate multiple classes with a space."
+        },
+        "_correct": {
           "type": "object",
           "required": false,
-          "title": "Incorrect Feedback",
+          "title": "Correct Feedback",
+          "help": "Feedback shown when the answer is correct.",
           "properties": {
-            "final": {
+            "title": {
               "type": "string",
               "required": false,
               "default": "",
-              "title": "Incorrect Final",
-              "inputType": "TextArea",
+              "title": "Title",
+              "inputType": "Text",
               "validators": [],
-              "help": "Incorrect answer feedback for the final attempt",
               "translatable": true
             },
-            "notFinal": {
+            "altTitle": {
               "type": "string",
               "required": false,
               "default": "",
-              "title": "Incorrect Not Final",
+              "title": "Alternative Title",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text read out by screen readers if no visual title is included.",
+              "translatable": true
+            },
+            "body": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Body",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
+            },
+            "_classes": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Classes",
+              "inputType": "Text",
+              "validators": []
+            },
+            "_imageAlignment": {
+              "type": "string",
+              "required": false,
+              "default": "right",
+              "title": "Image Alignment",
+              "inputType": "Select",
+              "enum": ["left", "right"],
+              "validators": [],
+              "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+            },
+            "_graphic": {
+              "type": "object",
+              "required": false,
+              "title": "Graphic",
+              "properties": {
+                "_src": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Source",
+                  "inputType": "Asset:image",
+                  "validators": []
+                },
+                "alt": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A description of the image for screen readers.",
+                  "translatable": true
+                },
+                "attribution": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Attribution",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": true
+                }
+              }
             }
           }
         },
-        "_partlyCorrect": {
+        "_incorrectFinal": {
           "type": "object",
           "required": false,
+          "title": "Incorrect Feedback - Final Attempt",
+          "help": "Feedback shown when the answer is incorrect on the final attempt.",
           "properties": {
-            "final": {
+            "title": {
               "type": "string",
               "required": false,
               "default": "",
-              "title": "Partly Correct Final",
-              "inputType": "TextArea",
+              "title": "Title",
+              "inputType": "Text",
               "validators": [],
-              "help": "Partly correct answer feedback for the final attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             },
-            "notFinal": {
+            "altTitle": {
               "type": "string",
               "required": false,
               "default": "",
-              "title": "Partly Correct Not Final",
+              "title": "Alternative Title",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text read out by screen readers if no visual title is included.",
+              "translatable": true
+            },
+            "body": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Body",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Partly Correct Final' feedback will be used instead.",
               "translatable": true
+            },
+            "_classes": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Classes",
+              "inputType": "Text",
+              "validators": []
+            },
+            "_imageAlignment": {
+              "type": "string",
+              "required": false,
+              "default": "right",
+              "title": "Image Alignment",
+              "inputType": "Select",
+              "enum": ["left", "right"],
+              "validators": [],
+              "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+            },
+            "_graphic": {
+              "type": "object",
+              "required": false,
+              "title": "Graphic",
+              "properties": {
+                "_src": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Source",
+                  "inputType": "Asset:image",
+                  "validators": []
+                },
+                "alt": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A description of the image for screen readers.",
+                  "translatable": true
+                },
+                "attribution": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Attribution",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": true
+                }
+              }
+            }
+          }
+        },
+        "_incorrectNotFinal": {
+          "type": "object",
+          "required": false,
+          "title": "Incorrect Feedback - Not Final Attempt",
+          "help": "Feedback shown when the answer is incorrect and attempts remain. If omitted, 'Incorrect Feedback - Final Attempt' is used instead.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Title",
+              "inputType": "Text",
+              "validators": [],
+              "translatable": true
+            },
+            "altTitle": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Alternative Title",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text read out by screen readers if no visual title is included.",
+              "translatable": true
+            },
+            "body": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Body",
+              "inputType": "TextArea",
+              "validators": [],
+              "translatable": true
+            },
+            "_classes": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Classes",
+              "inputType": "Text",
+              "validators": []
+            },
+            "_imageAlignment": {
+              "type": "string",
+              "required": false,
+              "default": "right",
+              "title": "Image Alignment",
+              "inputType": "Select",
+              "enum": ["left", "right"],
+              "validators": [],
+              "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+            },
+            "_graphic": {
+              "type": "object",
+              "required": false,
+              "title": "Graphic",
+              "properties": {
+                "_src": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Source",
+                  "inputType": "Asset:image",
+                  "validators": []
+                },
+                "alt": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A description of the image for screen readers.",
+                  "translatable": true
+                },
+                "attribution": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Attribution",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": true
+                }
+              }
+            }
+          }
+        },
+        "_partlyCorrectFinal": {
+          "type": "object",
+          "required": false,
+          "title": "Partly Correct Feedback - Final Attempt",
+          "help": "Feedback shown when the answer is partly correct on the final attempt. If omitted, 'Incorrect Feedback - Final Attempt' is used instead.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Title",
+              "inputType": "Text",
+              "validators": [],
+              "translatable": true
+            },
+            "altTitle": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Alternative Title",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text read out by screen readers if no visual title is included.",
+              "translatable": true
+            },
+            "body": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Body",
+              "inputType": "TextArea",
+              "validators": [],
+              "translatable": true
+            },
+            "_classes": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Classes",
+              "inputType": "Text",
+              "validators": []
+            },
+            "_imageAlignment": {
+              "type": "string",
+              "required": false,
+              "default": "right",
+              "title": "Image Alignment",
+              "inputType": "Select",
+              "enum": ["left", "right"],
+              "validators": [],
+              "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+            },
+            "_graphic": {
+              "type": "object",
+              "required": false,
+              "title": "Graphic",
+              "properties": {
+                "_src": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Source",
+                  "inputType": "Asset:image",
+                  "validators": []
+                },
+                "alt": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A description of the image for screen readers.",
+                  "translatable": true
+                },
+                "attribution": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Attribution",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": true
+                }
+              }
+            }
+          }
+        },
+        "_partlyCorrectNotFinal": {
+          "type": "object",
+          "required": false,
+          "title": "Partly Correct Feedback - Not Final Attempt",
+          "help": "Feedback shown when the answer is partly correct and attempts remain. If omitted, 'Partly Correct Feedback - Final Attempt' is used instead.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Title",
+              "inputType": "Text",
+              "validators": [],
+              "translatable": true
+            },
+            "altTitle": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Alternative Title",
+              "inputType": "Text",
+              "validators": [],
+              "help": "Text read out by screen readers if no visual title is included.",
+              "translatable": true
+            },
+            "body": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Body",
+              "inputType": "TextArea",
+              "validators": [],
+              "translatable": true
+            },
+            "_classes": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Classes",
+              "inputType": "Text",
+              "validators": []
+            },
+            "_imageAlignment": {
+              "type": "string",
+              "required": false,
+              "default": "right",
+              "title": "Image Alignment",
+              "inputType": "Select",
+              "enum": ["left", "right"],
+              "validators": [],
+              "help": "Alignment of the graphic relative to the feedback text. Defaults to \"right\"."
+            },
+            "_graphic": {
+              "type": "object",
+              "required": false,
+              "title": "Graphic",
+              "properties": {
+                "_src": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Source",
+                  "inputType": "Asset:image",
+                  "validators": []
+                },
+                "alt": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Alternative Text",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A description of the image for screen readers.",
+                  "translatable": true
+                },
+                "attribution": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "Attribution",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": true
+                }
+              }
             }
           }
         }

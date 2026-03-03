@@ -243,7 +243,7 @@
             "title": {
               "type": "string",
               "title": "Title",
-              "description": "Title text for the feedback",
+              "description": "Default title shown in the feedback modal header. Per-state objects can override this with their own 'title' field; if a state's 'title' is empty or absent, this value is used as the fallback.",
               "default": "",
               "_adapt": {
                 "translatable": true

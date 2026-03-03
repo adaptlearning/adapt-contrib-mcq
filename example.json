@@ -60,10 +60,10 @@
     ],
     "_feedback": {
       "title": "Feedback",
-      "altTitle": "Alt feedback title text",
+      "altTitle": "",
       "_classes": "",
       "_correct": {
-        "title": "",
+        "title": "Feedback",
         "altTitle": "",
         "body": "Congratulations, this is the correct feedback.",
         "_classes": "",
@@ -75,7 +75,7 @@
         }
       },
       "_incorrectFinal": {
-        "title": "",
+        "title": "Feedback",
         "altTitle": "",
         "body": "This feedback will appear if you answered the question incorrectly.",
         "_classes": "",
@@ -88,7 +88,7 @@
       },
       "_incorrectNotFinal": {
         "_comment": "Optional. If omitted or body is empty, _incorrectFinal is shown instead.",
-        "title": "",
+        "title": "Feedback",
         "altTitle": "",
         "body": "",
         "_classes": "",
@@ -100,7 +100,7 @@
         }
       },
       "_partlyCorrectFinal": {
-        "title": "",
+        "title": "Feedback",
         "altTitle": "",
         "body": "This feedback will appear if you answered the question partly correctly.",
         "_classes": "",
@@ -113,7 +113,7 @@
       },
       "_partlyCorrectNotFinal": {
         "_comment": "Optional. If omitted or body is empty, _partlyCorrectFinal is shown instead; if that is also absent, _incorrectFinal is used.",
-        "title": "",
+        "title": "Feedback",
         "altTitle": "",
         "body": "",
         "_classes": "",

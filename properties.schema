@@ -330,7 +330,7 @@
           "title": "Feedback Title",
           "inputType": "Text",
           "validators": [],
-          "help": "Leave blank to have the component's title shown instead.",
+          "help": "Default title shown in the feedback modal header. Per-state objects can override this with their own 'title' field; if a state's 'title' is empty or absent, this value is used as the fallback.",
           "translatable": true
         },
         "altTitle": {

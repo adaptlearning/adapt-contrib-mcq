@@ -100,38 +100,17 @@ Optional for providing alternative text, for example, to specify how a word shou
 
 >**\_score** (number): If `_hasItemScoring` is `true`, when selected, item scores are summed to give the question score.
 
-**\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these various texts will be displayed depending on the submitted answer. **\_feedback** supports two formats that can be used independently or in combination:
+**\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these texts will be displayed depending on the submitted answer.
 
-- **Flat string format** (legacy, still supported): Uses `correct`, `_incorrect`, and `_partlyCorrect` string properties.
-- **Expanded object format** (preferred): Uses per-state objects (`_correct`, `_incorrectFinal`, etc.) which additionally support a graphic and per-state CSS classes.
-
-The two formats are mutually exclusive. If any of `correct`, `_incorrect`, or `_partlyCorrect` are present in `_feedback`, the flat format is used for all states and the expanded objects are ignored entirely.
-
->**title** (string): Title text for the feedback that will be displayed when the question is submitted.
+>**title** (string): Default title text shown in the feedback modal header. Per-state objects can override this with their own `title` field; if a state's `title` is empty or absent, this value is used as the fallback.
 
 >**altTitle** (string): This will be read out by screen readers as an alternative title if no visual title is included.
 
 >**\_classes** (string): CSS class name(s) to be applied to the feedback panel for all states. Separate multiple classes with a space.
 
-**Flat string format properties** (backward compatible):
+**Per-state feedback properties:**
 
->**correct** (string): Text that will be displayed when the submitted answer is correct.
-
->**\_incorrect** (object): Texts that will be displayed when the submitted answer is incorrect. It contains values that are displayed under differing conditions: **final** and **notFinal**.
-
->>**final** (string): Text that will be displayed when the submitted answer is incorrect and no more attempts are permitted.
-
->>**notFinal** (string): Text that will be displayed when the submitted answer is incorrect while more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.final** feedback will be shown instead.
-
->**\_partlyCorrect** (object): Texts that will be displayed when the submitted answer is partially correct. It contains values that are displayed under differing conditions: **final** and **notFinal**.
-
->>**final** (string): Text that will be displayed when the submitted answer is partly correct and no more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.final** feedback will be shown instead.
-
->>**notFinal** (string): Text that will be displayed when the submitted answer is partly correct while more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.notFinal** feedback will be shown instead.
-
-**Expanded object format properties** (preferred, supports graphic):
-
-Each of the five per-state properties below (**\_correct**, **\_incorrectFinal**, **\_incorrectNotFinal**, **\_partlyCorrectFinal**, **\_partlyCorrectNotFinal**) accepts the same feedback state object, and takes precedence over the corresponding flat string if both are set.
+Each of the five properties below accepts the same feedback state object:
 
 >**\_correct** (object): Feedback displayed when the submitted answer is correct.
 
@@ -145,7 +124,7 @@ Each of the five per-state properties below (**\_correct**, **\_incorrectFinal**
 
 Each feedback state object accepts the following properties:
 
->>**title** (string): Title text for this feedback state. Overrides the top-level `title` for this state.
+>>**title** (string): Title text for this feedback state. When non-empty, overrides the top-level `title`. When empty or absent, the top-level `title` is used as a fallback.
 
 >>**altTitle** (string): Alternative title text read out by screen readers if no visual title is included.
 

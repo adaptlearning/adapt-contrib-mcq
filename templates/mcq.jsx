@@ -12,7 +12,7 @@ export default function Mcq(props) {
     _isInteractionComplete,
     _isCorrect,
     _isCorrectAnswerShown,
-    _canShowMarking,
+    _shouldShowMarking,
     _canShowModelAnswer,
     _canShowCorrectness,
     _isRadio,
@@ -52,8 +52,8 @@ export default function Mcq(props) {
           <div
             className={classes([
               `mcq-item item-${index}`,
-              _canShowMarking && _shouldBeSelected && 'is-correct',
-              _canShowMarking && !_shouldBeSelected && 'is-incorrect'
+              _shouldShowMarking && _shouldBeSelected && 'is-correct',
+              _shouldShowMarking && !_shouldBeSelected && 'is-incorrect'
             ])}
             key={_index}
           >
@@ -65,7 +65,7 @@ export default function Mcq(props) {
               type={_isRadio ? 'radio' : 'checkbox'}
               aria-disabled={!_isEnabled}
               checked={_isActive}
-              aria-label={!_canShowMarking ?
+              aria-label={!_shouldShowMarking ?
                 a11y.normalize(altText || text) :
                 `${_shouldBeSelected ? ariaLabels.correct : ariaLabels.incorrect}, ${_isActive ? ariaLabels.selectedAnswer : ariaLabels.unselectedAnswer}. ${a11y.normalize(altText || text)}`}
               data-adapt-index={_index}

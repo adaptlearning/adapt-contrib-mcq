@@ -67,7 +67,7 @@ guide the learner’s interaction with the component.
 
 **\_recordInteraction** (boolean) Determines whether or not the learner's answers will be recorded to the LMS via cmi.interactions. Default is `true`. For further information, see the entry for `_shouldRecordInteractions` in the README for [adapt-contrib-spoor](https://github.com/adaptlearning/adapt-contrib-spoor).
 
-**\_items** (array): Each *item* represents one choice for the multiple choice question and contains values for **text**, **\_shouldBeSelected**, and **feedback**.
+**\_items** (array): Each *item* represents one choice for the multiple choice question and contains values for **text**, **\_shouldBeSelected**, and optionally **feedback**.
 
 >**text** (string): Text that comprises the multiple choice option.
 
@@ -78,30 +78,69 @@ Optional for providing alternative text, for example, to specify how a word shou
 
 >**\_isPartlyCorrect** (boolean): Determines whether the *item* when selected marks the question as partly correct. Value can be `true` or `false`. Default is `false`.
 
->**feedback** (string): This attribute is used only when the value for **\_selectable** is set to `1` (i.e., radio button style questions). This text will be shown if the learner selects this item, and it is an incorrect answer.
+>**feedback** (object): Used only when **\_selectable** is set to `1` (radio button style). When the learner selects this item and it is an incorrect answer, this object overrides the component-level **\_feedback** state. A plain string is also accepted (legacy) and is used as the body text only.
+
+>>**title** (string): Feedback title for this item. Overrides the component-level `_feedback.title`.
+
+>>**altTitle** (string): Alternative title read by screen readers if no visual title is included.
+
+>>**body** (string): The feedback body text for this item.
+
+>>**\_classes** (string): CSS class name(s) to be applied to the feedback panel for this item.
+
+>>**\_imageAlignment** (string): Alignment of the graphic relative to the feedback text. Acceptable values are `left` and `right`. Defaults to `right`.
+
+>>**\_graphic** (object): An optional image to display in the feedback panel for this item.
+
+>>>**\_src** (string): File path (relative to the `course` folder) to the image.
+
+>>>**alt** (string): A description of the image for screen readers.
+
+>>>**attribution** (string): Optional text to be displayed as an attribution.
 
 >**\_score** (number): If `_hasItemScoring` is `true`, when selected, item scores are summed to give the question score.
 
-**\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these various texts will be displayed depending on the submitted answer. **\_feedback**
-contains values for three types of answers: **correct**, **\_incorrect**, and **\_partlyCorrect**. Some attributes are optional. If they are not supplied, the default that is noted below will be used.
+**\_feedback** (object): If the [**Tutor** extension](https://github.com/adaptlearning/adapt-contrib-tutor) is enabled, these texts will be displayed depending on the submitted answer.
 
->**title** (string): Title text for the feedback that will be displayed when the question is submitted.
+>**title** (string): Default title text shown in the feedback modal header. Per-state objects can override this with their own `title` field; if a state's `title` is empty or absent, this value is used as the fallback.
 
 >**altTitle** (string): This will be read out by screen readers as an alternative title if no visual title is included.
 
->**correct** (string): Text that will be displayed when the submitted answer is correct.
+>**\_classes** (string): CSS class name(s) to be applied to the feedback panel for all states. Separate multiple classes with a space.
 
->**\_incorrect** (object): Texts that will be displayed when the submitted answer is incorrect. It contains values that are displayed under differing conditions: **final** and **notFinal**.
+**Per-state feedback properties:**
 
->>**final** (string): Text that will be displayed when the submitted answer is incorrect and no more attempts are permitted.
+Each of the five properties below accepts the same feedback state object:
 
->>**notFinal** (string): Text that will be displayed when the submitted answer is incorrect while more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.final** feedback will be shown instead.
+>**\_correct** (object): Feedback displayed when the submitted answer is correct.
 
->**\_partlyCorrect** (object): Texts that will be displayed when the submitted answer is partially correct. It contains values that are displayed under differing conditions: **final** and **notFinal**.
+>**\_incorrectFinal** (object): Feedback displayed when the submitted answer is incorrect and no more attempts are permitted.
 
->>**final** (string): Text that will be displayed when the submitted answer is partly correct and no more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.final** feedback will be shown instead.
+>**\_incorrectNotFinal** (object): Feedback displayed when the submitted answer is incorrect and attempts remain. If omitted, **\_incorrectFinal** is used instead.
 
->>**notFinal** (string): Text that will be displayed when the submitted answer is partly correct while more attempts are permitted. This is optional&mdash;if you do not supply it, the **\_incorrect.notFinal** feedback will be shown instead.
+>**\_partlyCorrectFinal** (object): Feedback displayed when the submitted answer is partly correct and no more attempts are permitted. If omitted, **\_incorrectFinal** is used instead.
+
+>**\_partlyCorrectNotFinal** (object): Feedback displayed when the submitted answer is partly correct and attempts remain. If omitted, **\_partlyCorrectFinal** is used instead.
+
+Each feedback state object accepts the following properties:
+
+>>**title** (string): Title text for this feedback state. When non-empty, overrides the top-level `title`. When empty or absent, the top-level `title` is used as a fallback.
+
+>>**altTitle** (string): Alternative title text read out by screen readers if no visual title is included.
+
+>>**body** (string): The feedback body text for this state.
+
+>>**\_classes** (string): CSS class name(s) to be applied to the feedback panel for this state only. Separate multiple classes with a space.
+
+>>**\_imageAlignment** (string): The alignment of the graphic relative to the feedback text. Acceptable values are `left` and `right`. Defaults to `right`.
+
+>>**\_graphic** (object): An optional image to display in the feedback panel for this state.
+
+>>>**\_src** (string): File path (relative to the `course` folder) to the image. Best practice is to include the file extension.
+
+>>>**alt** (string): A description of the image for screen readers.
+
+>>>**attribution** (string): Optional text to be displayed as an attribution.
 
 ### Accessibility
 **Multiple Choice Question** has been assigned a descriptive label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion**.

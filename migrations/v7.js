@@ -157,7 +157,7 @@ describe('MCQ - v7.4.3 to v7.5.0', async () => {
     if (!isValid) throw new Error('MCQ - no _canShowCorrectness attribute found');
     return true;
   });
-  updatePlugin('MCQ - update to v7.6.0', { name: 'adapt-contrib-mcq', version: '7.5.0', framework: '>=5.19.1' });
+  updatePlugin('MCQ - update to v7.5.0', { name: 'adapt-contrib-mcq', version: '7.5.0', framework: '>=5.19.1' });
 
   testSuccessWhere('correct version mcq components', {
     fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.4.3' }],
@@ -174,5 +174,97 @@ describe('MCQ - v7.4.3 to v7.5.0', async () => {
   testStopWhere('no mcq components', {
     fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.4.3' }],
     content: [{ _component: 'other' }]
+  });
+});
+
+// https://github.com/adaptlearning/adapt-contrib-mcq/issues/251
+describe('MCQ - v7.5.0 to @@RELEASE_VERSION', async () => {
+  let MCQs;
+  whereFromPlugin('MCQ - from v7.5.0', { name: 'adapt-contrib-mcq', version: '<@@RELEASE_VERSION' });
+  whereContent('MCQ - where MCQ with legacy feedback', async (content) => {
+    MCQs = getComponents('mcq').filter(MCQ =>
+      _.has(MCQ, '_feedback.correct') ||
+      _.has(MCQ, '_feedback._incorrect') ||
+      _.has(MCQ, '_feedback._partlyCorrect')
+    );
+    return MCQs.length;
+  });
+  mutateContent('MCQ - convert _feedback.correct to _feedback._correct object', async (content) => {
+    MCQs.forEach(MCQ => {
+      MCQ._feedback._correct = { body: MCQ._feedback.correct };
+      _.unset(MCQ._feedback, 'correct');
+    });
+    return true;
+  });
+  mutateContent('MCQ - convert _feedback._incorrect to _feedback._incorrectFinal/_incorrectNotFinal objects', async (content) => {
+    MCQs.forEach(MCQ => {
+      if (!_.has(MCQ, '_feedback._incorrect')) return;
+      MCQ._feedback._incorrectFinal = { body: MCQ._feedback._incorrect.final ?? '' };
+      MCQ._feedback._incorrectNotFinal = { body: MCQ._feedback._incorrect.notFinal ?? '' };
+      _.unset(MCQ._feedback, '_incorrect');
+    });
+    return true;
+  });
+  mutateContent('MCQ - convert _feedback._partlyCorrect to _feedback._partlyCorrectFinal/_partlyCorrectNotFinal objects', async (content) => {
+    MCQs.forEach(MCQ => {
+      if (!_.has(MCQ, '_feedback._partlyCorrect')) return;
+      MCQ._feedback._partlyCorrectFinal = { body: MCQ._feedback._partlyCorrect.final ?? '' };
+      MCQ._feedback._partlyCorrectNotFinal = { body: MCQ._feedback._partlyCorrect.notFinal ?? '' };
+      _.unset(MCQ._feedback, '_partlyCorrect');
+    });
+    return true;
+  });
+  checkContent('MCQ - check legacy _feedback keys removed', async (content) => {
+    const isValid = MCQs.every(MCQ =>
+      !_.has(MCQ, '_feedback.correct') &&
+      !_.has(MCQ, '_feedback._incorrect') &&
+      !_.has(MCQ, '_feedback._partlyCorrect')
+    );
+    if (!isValid) throw new Error('MCQ - legacy _feedback keys still present');
+    return true;
+  });
+  checkContent('MCQ - check _feedback._correct.body present', async (content) => {
+    const isValid = MCQs.every(MCQ => _.has(MCQ, '_feedback._correct.body'));
+    if (!isValid) throw new Error('MCQ - _feedback._correct.body not found');
+    return true;
+  });
+  updatePlugin('MCQ - update to @@RELEASE_VERSION', { name: 'adapt-contrib-mcq', version: '@@RELEASE_VERSION', framework: '>=5.19.1' });
+
+  testSuccessWhere('mcq components with legacy flat string feedback', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.5.0' }],
+    content: [
+      {
+        _id: 'c-100',
+        _component: 'mcq',
+        _feedback: {
+          correct: 'Well done.',
+          _incorrect: { final: 'Sorry, that is wrong.', notFinal: 'Try again.' },
+          _partlyCorrect: { final: 'Nearly!', notFinal: 'Almost there.' }
+        }
+      },
+      {
+        _id: 'c-105',
+        _component: 'mcq',
+        _feedback: {
+          correct: 'Correct!',
+          _incorrect: { final: 'Incorrect.' }
+        }
+      }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '@@RELEASE_VERSION' }]
+  });
+
+  testStopWhere('no mcq components with legacy feedback', {
+    fromPlugins: [{ name: 'adapt-contrib-mcq', version: '7.5.0' }],
+    content: [
+      {
+        _id: 'c-100',
+        _component: 'mcq',
+        _feedback: { _correct: { body: 'Well done.' } }
+      }
+    ]
   });
 });

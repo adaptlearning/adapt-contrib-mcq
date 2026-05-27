@@ -1,89 +1,156 @@
-    {
-        "_id": "c-05",
-        "_parentId": "b-05",
-        "_type": "component",
-        "_component": "mcq",
+  {
+    "_id": "c-05",
+    "_parentId": "b-05",
+    "_type": "component",
+    "_component": "mcq",
+    "_classes": "",
+    "_layout": "left",
+    "title": "MCQ",
+    "displayTitle": "MCQ",
+    "body": "Which of the following options would you consider to be correct?",
+    "instruction": "Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.",
+    "ariaQuestion": "",
+    "_attempts": 1,
+    "_shouldDisplayAttempts": false,
+    "_isRandom": false,
+    "_hasItemScoring": false,
+    "_questionWeight": 1,
+    "_selectable": 1,
+    "_canShowModelAnswer": true,
+    "_canShowCorrectness": false,
+    "_canShowFeedback": true,
+    "_canShowMarking": true,
+    "_recordInteraction": true,
+    "_items": [
+      {
+        "text": "This is option 1 (Correct)",
+        "altText": "",
+        "_shouldBeSelected": true,
+        "_isPartlyCorrect": false
+      },
+      {
+        "text": "This is option 2",
+        "_shouldBeSelected": false,
+        "feedback": {
+          "title": "Option two feedback title",
+          "altTitle": "",
+          "body": "Option two incorrect feedback",
+          "_classes": "",
+          "_imageAlignment": "right",
+          "_graphic": {
+            "_src": "",
+            "alt": "",
+            "attribution": ""
+          }
+        },
+        "_isPartlyCorrect": false
+      },
+      {
+        "text": "This is option 3",
+        "altText": "",
+        "_shouldBeSelected": false,
+        "_isPartlyCorrect": false
+      },
+      {
+        "text": "This is option 4",
+        "altText": "",
+        "_shouldBeSelected": false,
+        "_isPartlyCorrect": false
+      }
+    ],
+    "_feedback": {
+      "title": "Feedback",
+      "altTitle": "",
+      "_classes": "",
+      "_correct": {
+        "title": "Feedback",
+        "altTitle": "",
+        "body": "Congratulations, this is the correct feedback.",
         "_classes": "",
-        "_layout": "left",
-        "title": "MCQ",
-        "displayTitle": "MCQ",
-        "body": "Which of the following options would you consider to be correct?",
-        "instruction": "Choose {{#if _isRadio}}one option{{else}}one or more options{{/if}} then select Submit.",
-        "ariaQuestion": "",
-        "_attempts": 1,
-        "_shouldDisplayAttempts": false,
-        "_isRandom": false,
-        "_hasItemScoring": false,
-        "_questionWeight": 1,
-        "_selectable": 1,
-        "_canShowModelAnswer": true,
-        "_canShowCorrectness": false,
-        "_canShowFeedback": true,
-        "_canShowMarking": true,
-        "_recordInteraction": true,
-        "_items": [
-            {
-                "text": "This is option 1 (Correct)",
-                "altText": "",
-                "_shouldBeSelected": true,
-                "_isPartlyCorrect": false
-            },
-            {
-                "text": "This is option 2",
-                "_shouldBeSelected": false,
-                "feedback": "Option two incorrect feedback",
-                "_isPartlyCorrect": false
-            },
-            {
-                "text": "This is option 3",
-                "_shouldBeSelected": false,
-                "_isPartlyCorrect": false
-            },
-            {
-                "text": "This is option 4",
-                "_shouldBeSelected": false,
-                "_isPartlyCorrect": false
-            }
-        ],
-        "_feedback":{
-            "title": "Feedback",
-            "altTitle": "Alt feedback title text",
-            "correct": "Congratulations, this is the correct feedback.",
-            "_incorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered the question incorrectly."
-            },
-            "_partlyCorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered the question correctly."
-            }
-        },
-        "_comment": "You only need to include _buttons if you want to override the button labels that are set in course.json",
-        "_buttons": {
-            "_submit": {
-                "buttonText": "Submit",
-                "ariaLabel": "Select here to submit your answer."
-            },
-            "_reset": {
-                "buttonText": "Reset",
-                "ariaLabel": ""
-            },
-            "_showCorrectAnswer": {
-                "buttonText": "Correct Answer",
-                "ariaLabel": ""
-            },
-            "_hideCorrectAnswer": {
-                "buttonText": "My Answer",
-                "ariaLabel": ""
-            },
-            "_showFeedback": {
-                "buttonText": "Show feedback",
-                "ariaLabel": ""
-            },
-            "remainingAttemptsText": "attempts remaining",
-            "remainingAttemptText": "final attempt"
-        },
-        "_pageLevelProgress": {
-            "_isEnabled": true
+        "_imageAlignment": "right",
+        "_graphic": {
+          "_src": "",
+          "alt": "",
+          "attribution": ""
         }
+      },
+      "_incorrectFinal": {
+        "title": "Feedback",
+        "altTitle": "",
+        "body": "This feedback will appear if you answered the question incorrectly.",
+        "_classes": "",
+        "_imageAlignment": "right",
+        "_graphic": {
+          "_src": "",
+          "alt": "",
+          "attribution": ""
+        }
+      },
+      "_incorrectNotFinal": {
+        "_comment": "Optional. If omitted or body is empty, _incorrectFinal is shown instead.",
+        "title": "Feedback",
+        "altTitle": "",
+        "body": "",
+        "_classes": "",
+        "_imageAlignment": "right",
+        "_graphic": {
+          "_src": "",
+          "alt": "",
+          "attribution": ""
+        }
+      },
+      "_partlyCorrectFinal": {
+        "title": "Feedback",
+        "altTitle": "",
+        "body": "This feedback will appear if you answered the question partly correctly.",
+        "_classes": "",
+        "_imageAlignment": "right",
+        "_graphic": {
+          "_src": "",
+          "alt": "",
+          "attribution": ""
+        }
+      },
+      "_partlyCorrectNotFinal": {
+        "_comment": "Optional. If omitted or body is empty, _partlyCorrectFinal is shown instead; if that is also absent, _incorrectFinal is used.",
+        "title": "Feedback",
+        "altTitle": "",
+        "body": "",
+        "_classes": "",
+        "_imageAlignment": "right",
+        "_graphic": {
+            "_src": "",
+            "alt": "",
+            "attribution": ""
+        }
+      }
+    },
+    "_comment": "You only need to include _buttons if you want to override the button labels that are set in course.json",
+    "_buttons": {
+      "_submit": {
+        "buttonText": "Submit",
+        "ariaLabel": "Select here to submit your answer."
+      },
+      "_reset": {
+        "buttonText": "Reset",
+        "ariaLabel": ""
+      },
+      "_showCorrectAnswer": {
+        "buttonText": "Correct Answer",
+        "ariaLabel": ""
+      },
+      "_hideCorrectAnswer": {
+        "buttonText": "My Answer",
+        "ariaLabel": ""
+      },
+      "_showFeedback": {
+        "buttonText": "Show feedback",
+        "ariaLabel": ""
+      },
+      "remainingAttemptsText": "attempts remaining",
+      "remainingAttemptText": "final attempt"
+    },
+    "_pageLevelProgress": {
+        "_isEnabled": true
     }
+  }

@@ -172,7 +172,7 @@ describe('MCQ - v4.1.0 to v4.2.0', async () => {
   });
   mutateContent('MCQ - add item _isPartlyCorrect attribute', async (content) => {
     MCQs.forEach(MCQ => {
-      MCQ._items.forEach(item => {
+      MCQ._items?.forEach(item => {
         item._isPartlyCorrect = false;
       });
     });
@@ -180,7 +180,7 @@ describe('MCQ - v4.1.0 to v4.2.0', async () => {
   });
   mutateContent('MCQ - add item _score attribute', async (content) => {
     MCQs.forEach(MCQ => {
-      MCQ._items.forEach(item => {
+      MCQ._items?.forEach(item => {
         item._score = 0;
       });
     });
@@ -193,14 +193,14 @@ describe('MCQ - v4.1.0 to v4.2.0', async () => {
   });
   checkContent('MCQ - check item _isPartlyCorrect attribute', async(content) => {
     const isValid = MCQs.every(MCQ => {
-      return MCQ._items.every(item => _.has(item, '_isPartlyCorrect'));
+      return (MCQ._items ?? []).every(item => _.has(item, '_isPartlyCorrect'));
     });
     if (!isValid) throw new Error('MCQ - no item _isPartlyCorrect found');
     return true;
   });
   checkContent('MCQ - check item _score attribute', async(content) => {
     const isValid = MCQs.every(MCQ => {
-      return MCQ._items.every(item => _.has(item, '_score'));
+      return (MCQ._items ?? []).every(item => _.has(item, '_score'));
     });
     if (!isValid) throw new Error('MCQ - no item _score found');
     return true;

@@ -105,7 +105,7 @@ describe('MCQ - v7.3.11 to v7.4.0', async () => {
   });
   mutateContent('MCQ - add altText attribute to _items', async (content) => {
     MCQs.forEach(MCQ => {
-      MCQ._items.forEach(item => {
+      MCQ._items?.forEach(item => {
         item.altText = '';
       });
     });
@@ -113,7 +113,7 @@ describe('MCQ - v7.3.11 to v7.4.0', async () => {
   });
   checkContent('MCQ - check item altText attribute', async (content) => {
     const isValid = MCQs.every(MCQ => {
-      return MCQ._items.every(item => _.has(item, 'altText'));
+      return (MCQ._items ?? []).every(item => _.has(item, 'altText'));
     });
     if (!isValid) throw new Error('MCQ - no item altText found');
     return true;
